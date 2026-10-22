@@ -3,7 +3,7 @@
 Safe-by-default Playwright Java + TestNG automation framework for the Raddatz PWA.
 
 - Page Object Model structure for reusable UI flows
-- TestNG read-only smoke suite (live execution disabled by default)
+- TestNG read-only smoke suite (local execution disabled by default)
 - ExtentReports HTML with Playwright-based PDF export
 - Log4j2 structured console/file logging and failure screenshots
 

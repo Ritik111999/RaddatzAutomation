@@ -8,7 +8,7 @@ public final class LoginPage extends BasePage {
     }
 
     public LoginPage open(String baseUrl) {
-        page.navigate(baseUrl + "/");
+        page.navigate(baseUrl);
         assertVisible(page.getByLabel("Email address", new Page.GetByLabelOptions().setExact(true)));
         return this;
     }

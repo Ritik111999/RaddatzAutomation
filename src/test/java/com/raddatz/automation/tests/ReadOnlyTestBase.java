@@ -18,14 +18,14 @@ public abstract class ReadOnlyTestBase implements HasPage {
     private PlaywrightSession session;
 
     @BeforeMethod(alwaysRun = true)
-    public void startReadOnlySession() {
+    public void startLocalReadOnlySession() {
         config = AutomationConfig.load();
-        if (!config.runLive()) {
-            throw new SkipException("Live tests are disabled. Run with -Draddatz.run.live=true and environment credentials.");
+        if (!config.runLocal()) {
+            throw new SkipException("Local tests are disabled. Run with -Draddatz.run.local=true and environment credentials.");
         }
-        config.requireLiveCredentials();
+        config.requireLocalCredentials();
         session = PlaywrightSession.start(config);
-        logger.info("Launching read-only test against {}", config.baseUrl());
+        logger.info("Launching local read-only test against {}", config.baseUrl());
     }
 
     protected DashboardPage signIn() {
@@ -41,7 +41,7 @@ public abstract class ReadOnlyTestBase implements HasPage {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void closeReadOnlySession(ITestResult result) {
+    public void closeLocalReadOnlySession(ITestResult result) {
         if (session != null) {
             if (result.getStatus() == ITestResult.FAILURE) {
                 var tracePath = config.artifactDirectory()

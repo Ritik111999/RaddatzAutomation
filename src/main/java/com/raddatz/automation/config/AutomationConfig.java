@@ -10,25 +10,25 @@ public record AutomationConfig(
         String password,
         String browser,
         boolean headless,
-        boolean runLive,
+        boolean runLocal,
         boolean generatePdf,
         Path artifactDirectory) {
 
     public static AutomationConfig load() {
         return new AutomationConfig(
-                value("raddatz.base.url", "RADDATZ_BASE_URL", "https://app.raddatz-law.com"),
+                value("raddatz.base.url", "RADDATZ_BASE_URL", "http://192.168.1.12:8000/login"),
                 value("raddatz.username", "RADDATZ_USERNAME", ""),
                 value("raddatz.password", "RADDATZ_PASSWORD", ""),
                 value("raddatz.browser", "RADDATZ_BROWSER", "chromium").toLowerCase(Locale.ROOT),
                 booleanValue("raddatz.headless", "RADDATZ_HEADLESS", true),
-                booleanValue("raddatz.run.live", "RADDATZ_RUN_LIVE", false),
+                booleanValue("raddatz.run.local", "RADDATZ_RUN_LOCAL", false),
                 booleanValue("raddatz.report.pdf", "RADDATZ_REPORT_PDF", true),
                 Path.of(value("raddatz.artifacts.dir", "RADDATZ_ARTIFACTS_DIR", "target/automation-artifacts")));
     }
 
-    public void requireLiveCredentials() {
+    public void requireLocalCredentials() {
         if (username.isBlank() || password.isBlank()) {
-            throw new IllegalStateException("Set RADDATZ_USERNAME and RADDATZ_PASSWORD before enabling live tests.");
+            throw new IllegalStateException("Set RADDATZ_USERNAME and RADDATZ_PASSWORD before enabling local tests.");
         }
     }
 

@@ -62,7 +62,7 @@ page.locator("[id='react-aria123']");
 
 ## Failure evidence and triage
 
-On every failed live test, `ReadOnlyTestBase` writes a trace to:
+On every failed local test, `ReadOnlyTestBase` writes a trace to:
 
 ```text
 target/automation-artifacts/traces/<TestClass>-<testMethod>.zip

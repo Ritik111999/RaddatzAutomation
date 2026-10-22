@@ -7,9 +7,9 @@ description: Build and maintain the Raddatz PWA Java Playwright, TestNG, Page Ob
 
 ## Operating constraints
 
-- Treat shared Raddatz environments as read-only unless the user explicitly authorizes a specific data-changing flow.
+- Treat the shared local Raddatz environment as read-only unless the user explicitly authorizes a specific data-changing flow.
 - Never persist credentials, cookies, trace files, screenshots, or generated reports in Git. Use environment variables for secrets.
-- Default live execution stays off. Require `raddatz.run.live=true` and external credentials to contact the application.
+- Default local execution stays off. Require `raddatz.run.local=true` and external credentials to contact the application.
 - Consult `docs/RADDATZ_PWA_SCREEN_MAP.md` before covering a new screen and update it after a verified UI change.
 
 ## Locator workflow
@@ -31,7 +31,7 @@ description: Build and maintain the Raddatz PWA Java Playwright, TestNG, Page Ob
 ## Diagnosing failures
 
 1. Preserve the HTML/PDF Extent report and Log4j output.
-2. Open `target/automation-artifacts/traces/*.zip` in Playwright Trace Viewer for failed tests.
+2. Open `target/automation-artifacts/traces/*.zip` in Playwright Trace Viewer for failed local tests.
 3. Classify the failure as application regression, locator drift, environment/authentication issue, or test defect before changing selectors.
 4. Correct the smallest responsible page object or test, then run the affected test and the read-only smoke suite.
 
@@ -41,6 +41,6 @@ description: Build and maintain the Raddatz PWA Java Playwright, TestNG, Page Ob
 - [ ] Test makes no unapproved data change.
 - [ ] New assertions are user-visible and deterministic.
 - [ ] Failure evidence is available and ignored by Git.
-- [ ] `mvn -q test` passes with live runs disabled; run the affected live suite only when authorized.
+- [ ] `mvn -q test` passes with local runs disabled; run the affected local suite only when authorized.
 
 For reliability rationale and operating policy, read [AUTOMATION_RESILIENCE_PLAYBOOK.md](../../../docs/AUTOMATION_RESILIENCE_PLAYBOOK.md).

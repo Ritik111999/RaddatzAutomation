@@ -74,7 +74,7 @@
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <raddatz.run.live>${raddatz.run.live}</raddatz.run.live>
+                        <raddatz.run.local>${raddatz.run.local}</raddatz.run.local>
                         <raddatz.browser>${raddatz.browser}</raddatz.browser>
                         <raddatz.headless>${raddatz.headless}</raddatz.headless>
                         <raddatz.report.pdf>${raddatz.report.pdf}</raddatz.report.pdf>

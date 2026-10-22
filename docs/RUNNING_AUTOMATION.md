@@ -2,7 +2,13 @@
 
 ## Safety model
 
-The included suite is deliberately **read-only**.  It does not use create, update, delete, send, upload, generate, import, reset, void or billing-allocation controls.  Live browser tests are disabled by default so `mvn test` is safe to run in a fresh checkout.
+The included suite is deliberately **read-only**. It does not use create, update, delete, send, upload, generate, import, reset, void or billing-allocation controls. Local browser tests are disabled by default so `mvn test` is safe to run in a fresh checkout.
+
+The default target is the shared local environment: `http://192.168.1.12:8000/login`. Override it only when a different local server is explicitly supplied:
+
+```zsh
+mvn test -Draddatz.run.local=true -Draddatz.base.url=http://<host>:<port>/login
+```
 
 Keep credentials out of source control.  Set them only in the calling shell or CI secret store:
 
@@ -10,15 +16,15 @@ Keep credentials out of source control.  Set them only in the calling shell or C
 export RADDATZ_USERNAME='your-automation-account@example.com'
 export RADDATZ_PASSWORD='your-secret'
 mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args='install chromium'
-mvn test -Draddatz.run.live=true
+mvn test -Draddatz.run.local=true
 ```
 
 Useful optional flags:
 
 ```zsh
-mvn test -Draddatz.run.live=true -Draddatz.headless=false
-mvn test -Draddatz.run.live=true -Draddatz.browser=firefox
-mvn test -Draddatz.run.live=true -Draddatz.report.pdf=false
+mvn test -Draddatz.run.local=true -Draddatz.headless=false
+mvn test -Draddatz.run.local=true -Draddatz.browser=firefox
+mvn test -Draddatz.run.local=true -Draddatz.report.pdf=false
 ```
 
 `target/automation-artifacts/run_<timestamp>/extent-report.html` is always produced.  When Chromium is available, the listener also renders `extent-report.pdf`.  Failure screenshots and Log4j2 logs are stored under `target/automation-artifacts`.
