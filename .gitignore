@@ -1,0 +1,8 @@
+target/
+.idea/
+.vscode/
+*.iml
+.env
+playwright/.cache/
+test-output/
+/.playwright-cli/

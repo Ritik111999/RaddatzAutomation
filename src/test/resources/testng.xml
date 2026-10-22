@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz PWA Automation" parallel="none">
+    <listeners>
+        <listener class-name="com.raddatz.automation.reports.ExtentTestListener"/>
+    </listeners>
+    <test name="Read-only smoke tests">
+        <groups>
+            <run>
+                <include name="readonly"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.raddatz.automation.tests.ReadOnlySmokeTest"/>
+        </classes>
+    </test>
+</suite>
