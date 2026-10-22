@@ -3,10 +3,10 @@
     <listeners>
         <listener class-name="com.raddatz.automation.reports.ExtentTestListener"/>
     </listeners>
-    <test name="Read-only smoke tests">
+    <test name="Admin-panel read-only smoke tests">
         <groups>
             <run>
-                <include name="readonly"/>
+                <include name="admin-readonly"/>
             </run>
         </groups>
         <classes>

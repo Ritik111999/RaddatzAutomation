@@ -7,7 +7,7 @@ description: Build and maintain the Raddatz PWA Java Playwright, TestNG, Page Ob
 
 ## Operating constraints
 
-- Treat the shared local Raddatz environment as read-only unless the user explicitly authorizes a specific data-changing flow.
+- Treat the shared local Raddatz environment as read-only unless the user explicitly authorizes a specific data-changing flow. When authorized, create and use only the current scenario's owned Company → Property → Matter → Task/Event chain.
 - Never persist credentials, cookies, trace files, screenshots, or generated reports in Git. Use environment variables for secrets.
 - Default local execution stays off. Require `raddatz.run.local=true` and external credentials to contact the application.
 - Consult `docs/RADDATZ_PWA_SCREEN_MAP.md` before covering a new screen and update it after a verified UI change.
@@ -26,7 +26,7 @@ description: Build and maintain the Raddatz PWA Java Playwright, TestNG, Page Ob
 - Keep each TestNG method independent. `PlaywrightSession` must create one browser context per test.
 - Page objects expose user intent and page state; tests hold business assertions and must not contain selectors.
 - Wait on Playwright locators, URL patterns, or explicit UI state. Never add a fixed sleep.
-- Use read-only navigation and assertions for shared-admin coverage. Put any approved create/update/delete flow in an opt-in suite with cleanup and a unique disposable record.
+- Use read-only navigation and assertions for shared-admin coverage. Put approved creation in an opt-in suite guarded by `raddatz.allow.mutation=true`; do not alter any pre-existing record. Use realistic field-appropriate values and `@knoxweb.us` email addresses.
 
 ## Diagnosing failures
 

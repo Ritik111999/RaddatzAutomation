@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeMethod;
 public abstract class ReadOnlyTestBase implements HasPage {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
     protected AutomationConfig config;
+    private DashboardPage dashboard;
     private PlaywrightSession session;
 
     @BeforeMethod(alwaysRun = true)
@@ -23,13 +24,22 @@ public abstract class ReadOnlyTestBase implements HasPage {
         if (!config.runLocal()) {
             throw new SkipException("Local tests are disabled. Run with -Draddatz.run.local=true and environment credentials.");
         }
+        if (requiresMutationPermission()) {
+            config.requireMutationPermission();
+        }
         config.requireLocalCredentials();
         session = PlaywrightSession.start(config);
         logger.info("Launching local read-only test against {}", config.baseUrl());
+        dashboard = new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
     }
 
-    protected DashboardPage signIn() {
-        return new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
+    /** Authentication is a fixture; no test is dedicated to validating a user-login journey. */
+    protected DashboardPage dashboard() {
+        return dashboard;
+    }
+
+    protected boolean requiresMutationPermission() {
+        return false;
     }
 
     @Override
@@ -52,6 +62,7 @@ public abstract class ReadOnlyTestBase implements HasPage {
             }
             session.close();
             session = null;
+            dashboard = null;
         }
     }
 

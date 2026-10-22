@@ -11,6 +11,7 @@ public record AutomationConfig(
         String browser,
         boolean headless,
         boolean runLocal,
+        boolean allowMutation,
         boolean generatePdf,
         Path artifactDirectory) {
 
@@ -22,6 +23,7 @@ public record AutomationConfig(
                 value("raddatz.browser", "RADDATZ_BROWSER", "chromium").toLowerCase(Locale.ROOT),
                 booleanValue("raddatz.headless", "RADDATZ_HEADLESS", true),
                 booleanValue("raddatz.run.local", "RADDATZ_RUN_LOCAL", false),
+                booleanValue("raddatz.allow.mutation", "RADDATZ_ALLOW_MUTATION", false),
                 booleanValue("raddatz.report.pdf", "RADDATZ_REPORT_PDF", true),
                 Path.of(value("raddatz.artifacts.dir", "RADDATZ_ARTIFACTS_DIR", "target/automation-artifacts")));
     }
@@ -29,6 +31,13 @@ public record AutomationConfig(
     public void requireLocalCredentials() {
         if (username.isBlank() || password.isBlank()) {
             throw new IllegalStateException("Set RADDATZ_USERNAME and RADDATZ_PASSWORD before enabling local tests.");
+        }
+    }
+
+    public void requireMutationPermission() {
+        if (!allowMutation) {
+            throw new IllegalStateException(
+                    "Data-changing admin scenarios are disabled. Set -Draddatz.allow.mutation=true only for owned test data.");
         }
     }
 

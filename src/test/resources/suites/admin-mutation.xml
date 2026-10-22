@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz Local Admin Mutation Automation" parallel="none">
+    <listeners>
+        <listener class-name="com.raddatz.automation.reports.ExtentTestListener"/>
+    </listeners>
+    <test name="Owned Company creation">
+        <groups>
+            <run>
+                <include name="admin-mutation"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminCompanyCreationTest"/>
+        </classes>
+    </test>
+</suite>
