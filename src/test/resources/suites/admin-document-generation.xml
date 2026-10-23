@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz owned document variable generation" parallel="none">
+    <parameter name="reuseBrowser" value="true"/>
+    <listeners><listener class-name="com.raddatz.automation.reports.ExtentTestListener"/></listeners>
+    <test name="Owned custom variable substitution"><classes>
+        <class name="com.raddatz.automation.tests.AdminDocumentVariableGenerationTest"/>
+    </classes></test>
+</suite>

@@ -14,11 +14,17 @@ import java.io.IOException;
 
 /** Owns one isolated browser context per TestNG test method. */
 public final class PlaywrightSession implements AutoCloseable {
+    private static Playwright sharedPlaywright;
+    private static Browser sharedBrowser;
+    private static Thread sharedOwner;
+    private static String authenticatedState;
     private final Playwright playwright;
     private final Browser browser;
     private final BrowserContext context;
     private final Page page;
     private boolean tracing;
+    private boolean shared;
+    private boolean restoredAuthentication;
 
     private PlaywrightSession(Playwright playwright, Browser browser, BrowserContext context, Page page) {
         this.playwright = playwright;
@@ -28,6 +34,13 @@ public final class PlaywrightSession implements AutoCloseable {
     }
 
     public static PlaywrightSession start(AutomationConfig config) {
+        return start(config, Boolean.getBoolean("raddatz.reuse.browser"));
+    }
+
+    public static PlaywrightSession start(AutomationConfig config, boolean reuseBrowser) {
+        if (reuseBrowser) {
+            return startShared(config);
+        }
         Playwright playwright = Playwright.create();
         BrowserType browserType = switch (config.browser()) {
             case "firefox" -> playwright.firefox();
@@ -40,6 +53,53 @@ public final class PlaywrightSession implements AutoCloseable {
         PlaywrightSession session = new PlaywrightSession(playwright, browser, context, context.newPage());
         session.startTracing();
         return session;
+    }
+
+    /** One browser for a serial suite, with a fresh context and trace for every scenario. */
+    private static synchronized PlaywrightSession startShared(AutomationConfig config) {
+        if (sharedOwner != null && sharedOwner != Thread.currentThread()) {
+            throw new IllegalStateException("Shared-browser suites must run on one TestNG thread.");
+        }
+        if (sharedBrowser == null) {
+            sharedOwner = Thread.currentThread();
+            sharedPlaywright = Playwright.create();
+            BrowserType type = switch (config.browser()) {
+                case "firefox" -> sharedPlaywright.firefox();
+                case "webkit" -> sharedPlaywright.webkit();
+                case "chromium" -> sharedPlaywright.chromium();
+                default -> throw new IllegalArgumentException("Unsupported browser: " + config.browser());
+            };
+            sharedBrowser = type.launch(new BrowserType.LaunchOptions().setHeadless(config.headless()));
+        }
+        Browser.NewContextOptions options = new Browser.NewContextOptions().setViewportSize(1440, 1000);
+        if (authenticatedState != null) options.setStorageState(authenticatedState);
+        BrowserContext context = sharedBrowser.newContext(options);
+        PlaywrightSession session = new PlaywrightSession(sharedPlaywright, sharedBrowser, context, context.newPage());
+        session.shared = true;
+        session.restoredAuthentication = authenticatedState != null;
+        session.startTracing();
+        return session;
+    }
+
+    public static synchronized void closeSharedBrowser() {
+        try {
+            if (sharedBrowser != null) sharedBrowser.close();
+        } finally {
+            sharedBrowser = null;
+            if (sharedPlaywright != null) sharedPlaywright.close();
+            sharedPlaywright = null;
+            sharedOwner = null;
+            authenticatedState = null;
+        }
+    }
+
+    public boolean hasRestoredAuthentication() {
+        return restoredAuthentication;
+    }
+
+    /** Credentials/session state remain in memory only and are discarded at suite teardown. */
+    public void rememberAuthenticatedSession() {
+        if (shared) authenticatedState = context.storageState();
     }
 
     public Page page() {
@@ -78,7 +138,9 @@ public final class PlaywrightSession implements AutoCloseable {
             tracing = false;
         }
         context.close();
-        browser.close();
-        playwright.close();
+        if (!shared) {
+            browser.close();
+            playwright.close();
+        }
     }
 }

@@ -1,0 +1,7 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz owned invoice-draft lifecycle" parallel="none">
+    <listeners><listener class-name="com.raddatz.automation.reports.ExtentTestListener"/></listeners>
+    <test name="Owned time to draft-invoice lineage"><classes>
+        <class name="com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest"/>
+    </classes></test>
+</suite>

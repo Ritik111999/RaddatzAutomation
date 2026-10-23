@@ -116,7 +116,7 @@ public record AdminScenarioData(
                 + " "
                 + companyLocalities[(int) ((nonce / companyDescriptors.length) % companyLocalities.length)]
                 + " "
-                + companyOperators[(int) ((nonce / companyDescriptors.length) % companyOperators.length)]
+                + companyOperators[(int) ((nonce / (companyDescriptors.length * companyLocalities.length)) % companyOperators.length)]
                 + ", LLC";
         String propertyName = propertyNeighborhoods[(int) ((nonce / 100) % propertyNeighborhoods.length)]
                 + " "
@@ -151,9 +151,9 @@ public record AdminScenarioData(
                 propertyName,
                 "Multifamily Residential",
                 streetAddress + ", Washington, DC 20001",
-                "District of Columbia Basic Business License",
+                streetAddress + ", Washington, DC 20001",
                 "DC-BBL-2026-" + sequence,
-                "Rental Accommodations Division Registration",
+                streetAddress + ", Washington, DC 20001",
                 "RAD-DC-2026-" + sequence,
                 "2027-12-31",
                 "48",
@@ -339,5 +339,25 @@ public record AdminScenarioData(
     public String revisedTaskDescription() {
         return "Prepare the service affidavit and confirm filing readiness for " + caseNumber
                 + ". Scenario reference " + reference + ".";
+    }
+
+    /** A substantive, case-specific event update used only on the current run's Event. */
+    public String revisedEventTitle() {
+        return "Initial Return Hearing: Service Review for " + tenantName + " — Case " + caseNumber;
+    }
+
+    public String revisedEventNotes() {
+        return "Review the lease ledger, service affidavit, and return-hearing preparation with counsel for matter "
+                + caseNumber + ". Scenario reference " + reference + ".";
+    }
+
+    public String initialExpenseDescription() {
+        return "Court filing and certified-service fee for " + propertyName + ", case " + caseNumber
+                + ". Scenario reference " + reference + ".";
+    }
+
+    public String revisedExpenseDescription() {
+        return "Court filing, certified-service, and hearing-notice fee for " + propertyName + ", case "
+                + caseNumber + ". Scenario reference " + reference + ".";
     }
 }

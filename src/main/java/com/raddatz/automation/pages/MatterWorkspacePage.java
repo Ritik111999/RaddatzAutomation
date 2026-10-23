@@ -33,7 +33,7 @@ public final class MatterWorkspacePage extends BasePage {
     public BillingSessionPage openTimeEntry() {
         page.getByRole(AriaRole.LINK,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Add Time Entry$")).setExact(false)).click();
-        page.waitForURL("**/confirm-sensitive-access/billing");
+        page.waitForURL(Pattern.compile(".*/(?:confirm-sensitive-access/billing|time(?:\\?.*)?)$"));
         return new BillingSessionPage(page).assertLoaded();
     }
 

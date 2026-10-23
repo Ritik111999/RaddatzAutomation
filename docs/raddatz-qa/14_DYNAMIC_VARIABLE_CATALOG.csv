@@ -1,5 +1,6 @@
 variable_name_or_token,source,consumer,syntax,status,evidence_id
 Custom template variable,Template Variables section,generated document,UNKNOWN,OBSERVED feature existence only,RAD-E-0011
+Hearing Preparation Instructions,Owned Template Variables section,Generated owned Word document,{{HEARING_PREPARATION_INSTRUCTIONS}},OBSERVED definition persistence and downloaded DOCX substitution in run_20261023_180800 and run_20261023_180949,RAD-E-0014
 Required field count,Template registry,template list,not applicable,OBSERVED,RAD-E-0012
 Matter data,Use Template route,generated document,UNKNOWN,HYPOTHESIS based on template-to-matter entry point,RAD-E-0009
 Tenant data,Template generation,generated document,UNKNOWN,UNKNOWN,

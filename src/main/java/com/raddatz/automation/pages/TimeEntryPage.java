@@ -65,6 +65,15 @@ public final class TimeEntryPage extends BasePage {
         return this;
     }
 
+    public ExpensePage openExpenses() {
+        page.locator("#navbarTabs").getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Billing").setExact(true)).click();
+        page.getByRole(AriaRole.LINK,
+                new Page.GetByRoleOptions().setName("Expenses").setExact(true)).click();
+        page.waitForURL("**/expenses");
+        return new ExpensePage(page).assertLoaded();
+    }
+
     private Locator ownedEntryRow(String description) {
         // The table visually truncates long descriptions, but the application
         // retains the exact owned text in the description element's title.

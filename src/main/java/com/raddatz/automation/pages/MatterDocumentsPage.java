@@ -63,6 +63,7 @@ public final class MatterDocumentsPage extends BasePage {
 
     private Locator ownedDocumentRow(String fileName) {
         return page.getByRole(AriaRole.TABLE).getByRole(AriaRole.ROW)
-                .filter(new Locator.FilterOptions().setHasText(fileName));
+                .filter(new Locator.FilterOptions().setHas(page.getByRole(AriaRole.LINK,
+                        new Page.GetByRoleOptions().setName("View " + fileName).setExact(true))));
     }
 }

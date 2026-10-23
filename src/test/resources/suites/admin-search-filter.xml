@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz read-only search and filter coverage" parallel="none">
+    <listeners>
+        <listener class-name="com.raddatz.automation.reports.ExtentTestListener"/>
+    </listeners>
+    <test name="Read-only search, filtering, workflows, and settings observation">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminSearchFilterTest"/>
+        </classes>
+    </test>
+</suite>

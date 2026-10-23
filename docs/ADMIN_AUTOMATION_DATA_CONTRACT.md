@@ -41,7 +41,7 @@ Use Company Name; contact name/title/email/phones; street/suite/city/state/ZIP; 
 
 ### Property
 
-Use Client; Property Name; rental-office address; business-license descriptor/number; RAD descriptor/number/expiration; total units; contact name/title/email/phones; hourly rate; Notes; and the Active/Client Portal controls. Select only the Company created earlier. Use a plausible multifamily property, office address, valid-looking license/RAD values, formatted contact details, a positive rate, an explicit unit count, and explicit active/portal settings.
+Use Client; Property Name; rental-office address; business-license Address/number; RAD Address/number/expiration; total units; contact name/title/email/phones; hourly rate; and Notes. The backend names the two Address inputs `descriptor`; supply a full street/city/state/ZIP address, not a license description. Select only the Company created earlier. Use a plausible multifamily property, office address, valid-looking license/RAD values, formatted contact details, a positive rate, and an explicit unit count. Preserve portal controls. Quadrant is available on Edit Property; use the address's actual quadrant and verify its saved value in the edit lifecycle.
 
 ### Matter
 

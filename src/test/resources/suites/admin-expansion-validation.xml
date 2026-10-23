@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz local expansion validation - single browser" parallel="none" thread-count="1">
+    <parameter name="reuseBrowser" value="true"/>
+    <listeners><listener class-name="com.raddatz.automation.reports.ExtentTestListener"/></listeners>
+    <test name="Invoice template and read-only expansion" preserve-order="true"><classes>
+        <class name="com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest"/>
+        <class name="com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest"/>
+        <class name="com.raddatz.automation.tests.AdminSearchFilterTest"/>
+    </classes></test>
+</suite>

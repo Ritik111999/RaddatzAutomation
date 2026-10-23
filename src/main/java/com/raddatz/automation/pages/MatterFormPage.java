@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.raddatz.automation.data.AdminScenarioData;
+import com.raddatz.automation.data.OwnedRecordIds;
 
 import java.util.regex.Pattern;
 
@@ -28,8 +29,8 @@ public final class MatterFormPage extends BasePage {
     }
 
     public ClientMatterListPage createOwnedMatter(AdminScenarioData data) {
-        selectOwnedCompany(data.companyName());
-        selectOwnedProperty(data.propertyName());
+        selectOwnedCompany(data);
+        selectOwnedProperty(data);
         fillFirstTenant(data);
         fillMatterCaseDetails(data);
 
@@ -41,8 +42,8 @@ public final class MatterFormPage extends BasePage {
     /** Creates one Matter with two fully populated, distinct tenants. */
     public ClientMatterListPage createOwnedMatterWithAdditionalTenant(
             AdminScenarioData primaryTenant, AdminScenarioData additionalTenant) {
-        selectOwnedCompany(primaryTenant.companyName());
-        selectOwnedProperty(primaryTenant.propertyName());
+        selectOwnedCompany(primaryTenant);
+        selectOwnedProperty(primaryTenant);
         fillFirstTenant(primaryTenant);
         button("+ Add Another Tenant").click();
         fillAdditionalTenant(additionalTenant);
@@ -113,25 +114,27 @@ public final class MatterFormPage extends BasePage {
                 .fill(data.ownershipNote());
     }
 
-    private void selectOwnedCompany(String companyName) {
+    private void selectOwnedCompany(AdminScenarioData data) {
         Locator companySearch = page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Company (Property Management Company)*").setExact(true));
-        companySearch.fill(companyName);
-        Locator exactCandidate = page.locator("#companyDropdown").filter(
-                new Locator.FilterOptions().setHasText(companyName));
+        companySearch.fill(data.companyName());
+        String ownedId = OwnedRecordIds.company(data.contactEmail());
+        Locator exactCandidate = page.locator("#companyDropdown .company-option[data-id='" + ownedId + "']");
         assertVisible(exactCandidate);
+        assertThat(exactCandidate).hasText(data.companyName());
         exactCandidate.click();
-        assertThat(page.locator("#companyIdInput")).hasAttribute("value", Pattern.compile(".+"));
+        assertThat(page.locator("#companyIdInput")).hasValue(OwnedRecordIds.company(data.contactEmail()));
     }
 
-    private void selectOwnedProperty(String propertyName) {
+    private void selectOwnedProperty(AdminScenarioData data) {
         Locator propertySearch = page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Property*").setExact(true));
-        propertySearch.fill(propertyName);
-        Locator exactCandidate = page.locator("#propertyDropdown").filter(
-                new Locator.FilterOptions().setHasText(propertyName));
+        propertySearch.fill(data.propertyName());
+        String ownedId = OwnedRecordIds.property(data.businessLicenseNumber());
+        Locator exactCandidate = page.locator("#propertyDropdown .property-option[data-id='" + ownedId + "']");
         assertVisible(exactCandidate);
+        assertThat(exactCandidate).hasText(data.propertyName());
         exactCandidate.click();
-        assertThat(page.locator("#propertyIdInput")).hasAttribute("value", Pattern.compile(".+"));
+        assertThat(page.locator("#propertyIdInput")).hasValue(OwnedRecordIds.property(data.businessLicenseNumber()));
     }
 }

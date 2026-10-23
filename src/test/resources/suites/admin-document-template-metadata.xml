@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz owned document-template metadata lifecycle" parallel="none">
+    <listeners><listener class-name="com.raddatz.automation.reports.ExtentTestListener"/></listeners>
+    <test name="Owned document template create-upload-edit-download">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest"/>
+        </classes>
+    </test>
+</suite>

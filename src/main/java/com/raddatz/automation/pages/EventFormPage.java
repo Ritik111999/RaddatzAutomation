@@ -5,6 +5,8 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.raddatz.automation.data.AdminScenarioData;
 
+import java.util.regex.Pattern;
+
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** Calendar event form; notification, SMS, invite, recurrence, and upload controls remain off. */
@@ -17,6 +19,13 @@ public final class EventFormPage extends BasePage {
         assertVisible(heading("Add Event"));
         assertVisible(page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Search by tenant name or case type…").setExact(true)));
+        return this;
+    }
+
+    public EventFormPage assertEditLoaded() {
+        assertVisible(heading("Edit Event"));
+        assertVisible(page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Case number Property v. tenant, event type, courtroom").setExact(true)));
         return this;
     }
 
@@ -55,5 +64,19 @@ public final class EventFormPage extends BasePage {
         ).setExact(true)).fill(data.eventNotes());
         button("Save & Close").click();
         return new CalendarPage(page).assertLoaded();
+    }
+
+    /** Updates only title and case-preparation notes; it never changes notification or document controls. */
+    public EventDetailsPage updateOwnedEvent(AdminScenarioData data) {
+        assertEditLoaded();
+        page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Case number Property v. tenant, event type, courtroom").setExact(true))
+                .fill(data.revisedEventTitle());
+        page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName(
+                "Add preparation notes, case context, special instructions, or any other relevant information about this court date..."
+        ).setExact(true)).fill(data.revisedEventNotes());
+        button("Update Event").click();
+        page.waitForURL(Pattern.compile(".*/calendar/\\d+$"));
+        return new EventDetailsPage(page).assertLoaded(data.revisedEventTitle());
     }
 }

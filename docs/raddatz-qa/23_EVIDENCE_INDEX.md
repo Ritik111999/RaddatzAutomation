@@ -56,3 +56,18 @@ The read-only registry exposes search, category and status filters; columns for 
 ## RAD-E-0013 — Company and Property detail
 
 Automation-owned company and property detail views expose overview, properties/cases, notes, documents, contact, and billing-related tabs or panels. Company-to-property and property-to-company links are reciprocal; property exposes active/inactive case grouping. Financial, portal-access, spreadsheet, email, and document-upload controls were not used. `OBSERVED`; confidence high. All values redacted.
+
+## RAD-E-0014 — Owned template persistence and invoice lineage
+
+Local/admin, 2026-10-23. Authorized fictional DOCX template upload/save,
+preview/download, and reopened metadata/variable values were observed through
+Playwright traces and direct owned-template UI inspection. Template registry
+description is clipped and its field-count display does not reflect the retained
+variable. Full substitution/editor-save behavior remains unverified.
+
+Owned invoice creation navigates directly to Invoice Details. The successful
+focused test verifies exact case-linked bill note, 1.50 billed hours, $337.50 time
+and invoice totals, local preview availability and actual downloaded PDF header.
+Report `target/automation-artifacts/run_20261023_174129/extent-report.pdf`.
+`OBSERVED`; high confidence for this scoped path. It leaves its owned draft for
+inspection and does not send or allocate payment.

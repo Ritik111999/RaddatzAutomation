@@ -38,6 +38,29 @@ mvn test -Draddatz.run.local=true -Draddatz.report.pdf=false
 
 ## Framework layout
 
+### Serial regression with one browser
+
+The dedicated regression suite sets `reuseBrowser=true` and `parallel="none"`.
+It keeps one Playwright browser for the suite, opens a fresh context per scenario,
+and closes the browser in suite teardown. It authenticates once and holds normal
+session state in memory, avoiding repeated logins and the server's login throttle.
+Client-side filters/pages are isolated; server-side Billing Mode can persist and
+its session fixture accepts either the password gate or already-active mode.
+Session state is never written to disk and is discarded at suite teardown.
+
+```zsh
+mvn test \
+  -Draddatz.suite.file=src/test/resources/suites/admin-regression-serial.xml \
+  -Draddatz.run.local=true \
+  -Draddatz.execution.mode=NONPROD_APPROVED \
+  -Draddatz.allow.mutation=true
+```
+
+Focused suites can use `-Draddatz.reuse.browser=true` with the same behavior.
+Browser-based PDF rendering happens after the application scenarios finish.
+Invoice/template/search expansion suites remain separate until their live
+verification passes; their presence in source is not a coverage claim.
+
 - `config` — property/environment resolution; no secret persistence
 - `core` — isolated Playwright browser context lifecycle
 - `pages` — POM classes and reusable navigation components

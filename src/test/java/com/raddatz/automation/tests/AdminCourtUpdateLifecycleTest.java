@@ -6,22 +6,27 @@ import org.testng.annotations.Test;
 
 import java.time.Clock;
 
-/** Creates a Court Update only from a current-run Event and Matter; no payment action is used. */
+/** Maintains an owned Court Update only from a current-run Event and Matter; no billing handoff is used. */
 public final class AdminCourtUpdateLifecycleTest extends ReadOnlyTestBase {
     @Override
     protected boolean requiresMutationPermission() {
         return true;
     }
 
-    @Test(groups = "admin-mutation", description = "Administrator creates an owned Court Update from an owned calendar Event.")
-    public void administratorCreatesOwnedCourtUpdate() {
+    @Test(groups = "admin-mutation", description = "Administrator creates, edits, verifies, and deletes an owned Court Update from an owned calendar Event.")
+    public void administratorMaintainsOwnedCourtUpdate() {
         AdminScenarioData data = AdminScenarioData.create(Clock.systemUTC());
+        String revisedNotes = "Reviewed the return-hearing record, service affidavit, and filing status for "
+                + data.caseNumber() + ". Scenario reference " + data.reference() + ".";
         new Sidebar(currentPage()).goToClients().openAddCompany().createOwnedCompany(data)
                 .openAddProperty().createOwnedProperty(data);
         new Sidebar(currentPage()).goToClients().openAddMatter().createOwnedMatter(data);
         new Sidebar(currentPage()).goToDashboard().openAddEvent().createOwnedEvent(data);
         new Sidebar(currentPage()).goToCourtUpdates()
                 .selectCalendarDate(data.eventDate())
-                .createOwnedCourtUpdate(data);
+                .createOwnedCourtUpdate(data)
+                .updateOwnedCourtUpdate(data, revisedNotes)
+                .assertOwnedCourtUpdatePersisted(revisedNotes)
+                .deleteOwnedCourtUpdate(revisedNotes);
     }
 }

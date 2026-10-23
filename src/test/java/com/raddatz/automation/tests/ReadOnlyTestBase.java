@@ -9,8 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.SkipException;
 import org.testng.ITestResult;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
 
 public abstract class ReadOnlyTestBase implements HasPage {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
@@ -19,7 +21,7 @@ public abstract class ReadOnlyTestBase implements HasPage {
     private PlaywrightSession session;
 
     @BeforeMethod(alwaysRun = true)
-    public void startLocalReadOnlySession() {
+    public void startLocalReadOnlySession(ITestContext testContext) {
         config = AutomationConfig.load();
         if (!config.runLocal()) {
             throw new SkipException("Local tests are disabled. Run with -Draddatz.run.local=true and environment credentials.");
@@ -29,9 +31,28 @@ public abstract class ReadOnlyTestBase implements HasPage {
             config.requireMutationPermission();
         }
         config.requireLocalCredentials();
-        session = PlaywrightSession.start(config);
-        logger.info("Launching local read-only test against {}", config.baseUrl());
-        dashboard = new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
+        boolean reuseBrowser = Boolean.getBoolean("raddatz.reuse.browser")
+                || Boolean.parseBoolean(testContext.getSuite().getParameter("reuseBrowser"));
+        session = PlaywrightSession.start(config, reuseBrowser);
+        logger.info("Launching local {} scenario against {}", requiresMutationPermission() ? "owned-data" : "read-only", config.baseUrl());
+        try {
+            if (session.hasRestoredAuthentication()) {
+                currentPage().navigate(config.baseUrl().replaceFirst("/login$", "/dashboard"));
+                currentPage().waitForURL("**/dashboard");
+                dashboard = new DashboardPage(currentPage());
+            } else {
+                dashboard = new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
+                session.rememberAuthenticatedSession();
+            }
+        } catch (RuntimeException | Error failure) {
+            try {
+                session.saveFailureTrace(config.artifactDirectory().resolve("traces")
+                        .resolve(getClass().getSimpleName() + "-session-setup-" + System.nanoTime() + ".zip"));
+            } catch (RuntimeException traceFailure) {
+                failure.addSuppressed(traceFailure);
+            }
+            throw failure;
+        }
     }
 
     /** Authentication is a fixture; no test is dedicated to validating a user-login journey. */
@@ -54,6 +75,9 @@ public abstract class ReadOnlyTestBase implements HasPage {
     @AfterMethod(alwaysRun = true)
     public void closeLocalReadOnlySession(ITestResult result) {
         if (session != null) {
+            if (result.getStatus() == ITestResult.SUCCESS) {
+                session.rememberAuthenticatedSession();
+            }
             if (result.getStatus() == ITestResult.FAILURE) {
                 var tracePath = config.artifactDirectory()
                         .resolve("traces")
@@ -70,5 +94,11 @@ public abstract class ReadOnlyTestBase implements HasPage {
     private String safeFileName(ITestResult result) {
         return (getClass().getSimpleName() + "-" + result.getMethod().getMethodName())
                 .replaceAll("[^A-Za-z0-9._-]", "_");
+    }
+
+    @AfterSuite(alwaysRun = true)
+    public void closeSuiteBrowser() {
+        PlaywrightSession.closeSharedBrowser();
+        com.raddatz.automation.data.OwnedRecordIds.clear();
     }
 }
