@@ -1,7 +1,10 @@
 package com.raddatz.automation.pages;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.AriaRole;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** Task list with a shared modal for scenario-owned task creation. */
 public final class TodoPage extends BasePage {
@@ -25,11 +28,57 @@ public final class TodoPage extends BasePage {
     }
 
     public TodoPage assertTaskListed(String taskName) {
+        assertVisible(ownedTaskRow(taskName));
+        return this;
+    }
+
+    public TodoPage editOwnedTask(String taskName, String revisedTaskName, String revisedDescription) {
+        ownedTaskRow(taskName).getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Edit task").setExact(true)).click();
+        Locator dialog = page.getByRole(AriaRole.DIALOG);
+        assertVisible(dialog.getByRole(AriaRole.HEADING,
+                new Locator.GetByRoleOptions().setName("Edit Task").setExact(true)));
+        labeledTextbox(dialog, "Task Name *").fill(revisedTaskName);
+        labeledTextbox(dialog, "Description").fill(revisedDescription);
+        dialog.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Save Changes").setExact(true)).click();
+        // The application persists in place and leaves the edit modal open.
+        dialog.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Close").setExact(true)).click();
+        assertTaskListed(revisedTaskName);
+        return this;
+    }
+
+    public TodoPage deleteOwnedTask(String taskName) {
+        ownedTaskRow(taskName).getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Delete task").setExact(true)).click();
+        assertVisible(page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Are you sure?").setExact(true)));
+        page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Yes, delete it").setExact(true)).click();
+        searchTasks(taskName);
+        assertThat(page.getByRole(AriaRole.TABLE).getByRole(AriaRole.ROW)
+                .filter(new Locator.FilterOptions().setHasText(taskName))).hasCount(0);
+        return this;
+    }
+
+    private Locator ownedTaskRow(String taskName) {
+        searchTasks(taskName);
+        Locator row = page.getByRole(AriaRole.TABLE).getByRole(AriaRole.ROW)
+                .filter(new Locator.FilterOptions().setHasText(taskName));
+        assertVisible(row);
+        return row;
+    }
+
+    private void searchTasks(String taskName) {
         page.getByRole(AriaRole.TEXTBOX,
                         new Page.GetByRoleOptions().setName("Search tasks").setExact(true))
                 .fill(taskName);
-        assertVisible(page.getByTitle(taskName,
-                new Page.GetByTitleOptions().setExact(true)));
-        return this;
+    }
+
+    private Locator labeledTextbox(Locator container, String label) {
+        return container.getByText(label, new Locator.GetByTextOptions().setExact(true))
+                .locator("..")
+                .getByRole(AriaRole.TEXTBOX);
     }
 }

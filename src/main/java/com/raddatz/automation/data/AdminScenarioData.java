@@ -176,7 +176,7 @@ public record AdminScenarioData(
                 "Lease Compliance Review for " + propertyName,
                 "Review the lease-compliance file and prepare the matter status update for the assigned property.",
                 LocalDate.now(clock).plusDays(7).toString(),
-                "Initial Return Hearing for " + tenantName,
+                "Initial Return Hearing for " + tenantName + " — Case " + "DC-LT-2026-" + sequence,
                 LocalDate.now(clock).plusDays(14).toString(),
                 "09:30",
                 "01:00",
@@ -330,5 +330,14 @@ public record AdminScenarioData(
     public String revisedTimeEntryDescription() {
         return "Reviewed the lease ledger, hearing notice, and service affidavit for the case conference. Scenario reference "
                 + reference + ".";
+    }
+
+    public String revisedTaskName() {
+        return "File Service Affidavit for " + propertyName + " — Case " + caseNumber;
+    }
+
+    public String revisedTaskDescription() {
+        return "Prepare the service affidavit and confirm filing readiness for " + caseNumber
+                + ". Scenario reference " + reference + ".";
     }
 }

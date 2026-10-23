@@ -11,3 +11,4 @@
 | Email/SMS and external communication | RESTRICTED | Third-party communication risk | Existing approved documentation only |
 | Document editor autosave behavior | UNKNOWN | Opening may persist a lock/history/update | Inspect only after a safe observation method is confirmed |
 | Company/property portal-access controls, email, and spreadsheet | RESTRICTED / UNKNOWN | May grant access, communicate externally, or expose/persist shared data | Do not interact; document only at affordance level |
+| Existing-Matter tenant editor | PRODUCT DEFECT / PARTIAL COVERAGE | A second tenant entered through the existing-Matter control did not persist after Save Changes and reload on 2026-10-23. The Create Matter flow does persist both tenants to the Companies & Matters list. | Create both owned tenants through the supported Create Matter flow; retain the failure trace for defect triage and do not claim edit coverage until the workspace persistence/display issue is repaired. |

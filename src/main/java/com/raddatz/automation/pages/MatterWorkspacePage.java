@@ -37,6 +37,7 @@ public final class MatterWorkspacePage extends BasePage {
         return new BillingSessionPage(page).assertLoaded();
     }
 
+
     private com.microsoft.playwright.Locator notesLink() {
         // The UI prepends a presentational icon to the accessible link name.
         return page.getByRole(AriaRole.LINK,

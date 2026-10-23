@@ -73,14 +73,29 @@ public final class ClientMatterListPage extends BasePage {
         return this;
     }
 
+    /** Confirms both owned tenants are displayed on the uniquely identified Matter row. */
+    public ClientMatterListPage assertOwnedMultiTenantMatterListed(
+            AdminScenarioData primaryTenant, AdminScenarioData additionalTenant) {
+        searchFor(primaryTenant.caseNumber());
+        Locator ownedMatterRow = page.getByRole(AriaRole.TABLE).getByRole(AriaRole.ROW)
+                .filter(new Locator.FilterOptions().setHasText(primaryTenant.caseNumber()));
+        assertVisible(ownedMatterRow);
+        Locator matterLink = ownedMatterRow.locator("a[href*='/matters/']");
+        assertVisible(matterLink);
+        assertThat(matterLink).containsText(primaryTenant.tenantName());
+        assertThat(matterLink).containsText(additionalTenant.tenantName());
+        return this;
+    }
+
     /** Opens only the Matter row bound to this run's unique case number. */
     public MatterWorkspacePage openOwnedMatter(String tenantName, String caseNumber) {
         searchFor(caseNumber);
         var ownedMatterRow = page.getByRole(AriaRole.TABLE).getByRole(AriaRole.ROW)
                 .filter(new com.microsoft.playwright.Locator.FilterOptions().setHasText(caseNumber));
         assertVisible(ownedMatterRow);
-        Locator ownedMatterLink = ownedMatterRow.getByRole(AriaRole.LINK,
-                new Locator.GetByRoleOptions().setName(tenantName).setExact(true));
+        // The Case # is plain text and multi-tenant names are composite. Within
+        // the already case-scoped row, this route is the only Matter destination.
+        Locator ownedMatterLink = ownedMatterRow.locator("a[href*='/matters/']");
         assertVisible(ownedMatterLink);
         ownedMatterLink.click();
         page.waitForURL(Pattern.compile(".*/matters/\\d+/general$"));

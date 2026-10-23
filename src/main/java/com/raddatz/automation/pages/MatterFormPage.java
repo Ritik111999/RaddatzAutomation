@@ -30,6 +30,30 @@ public final class MatterFormPage extends BasePage {
     public ClientMatterListPage createOwnedMatter(AdminScenarioData data) {
         selectOwnedCompany(data.companyName());
         selectOwnedProperty(data.propertyName());
+        fillFirstTenant(data);
+        fillMatterCaseDetails(data);
+
+        button("Create Matter").click();
+        page.waitForURL("**/client-and-matter");
+        return new ClientMatterListPage(page).assertLoaded();
+    }
+
+    /** Creates one Matter with two fully populated, distinct tenants. */
+    public ClientMatterListPage createOwnedMatterWithAdditionalTenant(
+            AdminScenarioData primaryTenant, AdminScenarioData additionalTenant) {
+        selectOwnedCompany(primaryTenant.companyName());
+        selectOwnedProperty(primaryTenant.propertyName());
+        fillFirstTenant(primaryTenant);
+        button("+ Add Another Tenant").click();
+        fillAdditionalTenant(additionalTenant);
+        fillMatterCaseDetails(primaryTenant);
+
+        button("Create Matter").click();
+        page.waitForURL("**/client-and-matter");
+        return new ClientMatterListPage(page).assertLoaded();
+    }
+
+    private void fillFirstTenant(AdminScenarioData data) {
         page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Full tenant name").setExact(true)).fill(data.tenantName());
         page.getByRole(AriaRole.TEXTBOX,
@@ -47,6 +71,34 @@ public final class MatterFormPage extends BasePage {
         button("+ Add Email").click();
         page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Email address").setExact(true)).fill(data.tenantEmail());
+    }
+
+    private void fillAdditionalTenant(AdminScenarioData data) {
+        // Tenant #2 is the stable visible heading that scopes duplicated labels.
+        Locator secondTenant = page.getByText("Tenant #2", new Page.GetByTextOptions().setExact(true))
+                .locator("..").locator("..");
+        secondTenant.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("Full tenant name").setExact(true)).fill(data.tenantName());
+        secondTenant.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("Street address").setExact(true)).fill(data.tenantStreetAddress());
+        secondTenant.locator("select").selectOption(data.tenantQuadrant());
+        secondTenant.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("e.g. 4B").setExact(true)).fill(data.tenantUnitNumber());
+        secondTenant.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("City").setExact(true)).fill(data.tenantCity());
+        secondTenant.getByPlaceholder("e.g. 32803 or 32803-1234",
+                new Locator.GetByPlaceholderOptions().setExact(true)).fill(data.tenantZipCode());
+        secondTenant.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("+ Add Phone").setExact(true)).click();
+        secondTenant.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("(202) 555-0100").setExact(true)).fill(data.tenantPhone());
+        secondTenant.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("+ Add Email").setExact(true)).click();
+        secondTenant.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("Email address").setExact(true)).fill(data.tenantEmail());
+    }
+
+    private void fillMatterCaseDetails(AdminScenarioData data) {
         page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Case Number (leave blank to auto-generate)").setExact(true))
                 .fill(data.caseNumber());
@@ -59,10 +111,6 @@ public final class MatterFormPage extends BasePage {
         page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Case Description / Initial Notes").setExact(true))
                 .fill(data.ownershipNote());
-
-        button("Create Matter").click();
-        page.waitForURL("**/client-and-matter");
-        return new ClientMatterListPage(page).assertLoaded();
     }
 
     private void selectOwnedCompany(String companyName) {

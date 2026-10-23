@@ -66,7 +66,9 @@ public final class TimeEntryPage extends BasePage {
     }
 
     private Locator ownedEntryRow(String description) {
-        return page.getByRole(AriaRole.TABLE).getByRole(AriaRole.ROW)
-                .filter(new Locator.FilterOptions().setHasText(description));
+        // The table visually truncates long descriptions, but the application
+        // retains the exact owned text in the description element's title.
+        return page.getByTitle(description, new Page.GetByTitleOptions().setExact(true))
+                .locator("..").locator("..");
     }
 }

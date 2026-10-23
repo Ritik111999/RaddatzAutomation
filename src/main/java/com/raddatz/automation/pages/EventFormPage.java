@@ -23,8 +23,9 @@ public final class EventFormPage extends BasePage {
     public CalendarPage createOwnedEvent(AdminScenarioData data) {
         Locator matterSearch = page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Search by tenant name or case type…").setExact(true));
-        matterSearch.fill(data.tenantName());
-        Locator ownedMatter = page.getByText(data.tenantName(), new Page.GetByTextOptions().setExact(true)).last()
+        // The case number is unique to this run. Tenant names are intentionally realistic and can recur.
+        matterSearch.fill(data.caseNumber());
+        Locator ownedMatter = page.getByText(data.tenantName(), new Page.GetByTextOptions().setExact(true))
                 .locator("..");
         assertVisible(ownedMatter);
         ownedMatter.click();

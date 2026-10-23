@@ -27,8 +27,9 @@ public final class TaskFormModal extends BasePage {
     public void createOwnedTask(AdminScenarioData data) {
         Locator matterSearch = modal.getByRole(AriaRole.TEXTBOX,
                 new Locator.GetByRoleOptions().setName("Matter").setExact(true));
-        matterSearch.fill(data.tenantName());
-        Locator ownedMatter = modal.getByText(data.tenantName(), new Locator.GetByTextOptions().setExact(true)).last()
+        // The unique case number prevents a recurring real-world tenant name from selecting another Matter.
+        matterSearch.fill(data.caseNumber());
+        Locator ownedMatter = modal.getByText(data.tenantName(), new Locator.GetByTextOptions().setExact(true))
                 .locator("..");
         assertVisible(ownedMatter);
         ownedMatter.click();

@@ -3,7 +3,7 @@
 ## Permitted automation candidates
 
 1. **Owned hierarchy visibility** — create an owned company, property, matter, and tenant; verify the exact lineage appears in Companies & Matters and the matter breadcrumb.
-2. **Multi-tenant matter** — create additional tenant only on an owned matter; verify numbered tenant sections and exact display locations.
+2. **Multi-tenant matter** — create two fully populated, owned tenants through the Create Matter flow; verify both names in the exact Companies & Matters row. The existing-Matter tenant editor is tracked separately as a product defect.
 3. **Task propagation** — create an owned task linked to an owned matter; verify matter To-do, all-task list, dashboard, and timeline appearances.
 4. **Event propagation** — create an owned event linked to an owned matter; verify calendar appearance and matter link.
 5. **Note rich text** — create/edit one owned note; verify rendering and timeline impact only if a documented expected behavior exists.

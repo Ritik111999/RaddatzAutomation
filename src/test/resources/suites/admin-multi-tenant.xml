@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz owned multi-tenant Matter lifecycle" parallel="none">
+    <listeners>
+        <listener class-name="com.raddatz.automation.reports.ExtentTestListener"/>
+    </listeners>
+    <test name="Owned Matter tenant lifecycle">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminMultiTenantMatterTest"/>
+        </classes>
+    </test>
+</suite>

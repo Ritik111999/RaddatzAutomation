@@ -29,6 +29,12 @@ public final class Sidebar extends BasePage {
         return new TodoPage(page);
     }
 
+    public CourtUpdatesPage goToCourtUpdates() {
+        navigationLink("Court Updates").click();
+        page.waitForURL("**/court/updates");
+        return new CourtUpdatesPage(page).assertLoaded();
+    }
+
     public CalendarPage goToCalendar() {
         navigationLink("Calendar").click();
         page.waitForURL(Pattern.compile(".*/calendar/view-full-calendar.*"));
