@@ -76,6 +76,7 @@
                     </suiteXmlFiles>
                     <systemPropertyVariables>
                         <raddatz.run.local>${raddatz.run.local}</raddatz.run.local>
+                        <raddatz.execution.mode>${raddatz.execution.mode}</raddatz.execution.mode>
                         <raddatz.allow.mutation>${raddatz.allow.mutation}</raddatz.allow.mutation>
                         <raddatz.browser>${raddatz.browser}</raddatz.browser>
                         <raddatz.headless>${raddatz.headless}</raddatz.headless>

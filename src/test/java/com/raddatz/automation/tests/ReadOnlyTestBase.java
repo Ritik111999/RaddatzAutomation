@@ -24,6 +24,7 @@ public abstract class ReadOnlyTestBase implements HasPage {
         if (!config.runLocal()) {
             throw new SkipException("Local tests are disabled. Run with -Draddatz.run.local=true and environment credentials.");
         }
+        config.requireBrowserExecution(requiresMutationPermission());
         if (requiresMutationPermission()) {
             config.requireMutationPermission();
         }

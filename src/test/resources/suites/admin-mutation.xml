@@ -3,7 +3,7 @@
     <listeners>
         <listener class-name="com.raddatz.automation.reports.ExtentTestListener"/>
     </listeners>
-    <test name="Owned Company creation">
+    <test name="Owned admin workflow coverage">
         <groups>
             <run>
                 <include name="admin-mutation"/>
@@ -11,6 +11,9 @@
         </groups>
         <classes>
             <class name="com.raddatz.automation.tests.AdminCompanyCreationTest"/>
+            <class name="com.raddatz.automation.tests.AdminPropertyCreationTest"/>
+            <class name="com.raddatz.automation.tests.AdminMatterCreationTest"/>
+            <class name="com.raddatz.automation.tests.AdminTaskAndEventCreationTest"/>
         </classes>
     </test>
 </suite>

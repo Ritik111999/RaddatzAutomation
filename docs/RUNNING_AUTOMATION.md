@@ -4,6 +4,8 @@
 
 The included suite is deliberately **read-only**. It does not use create, update, delete, send, upload, generate, import, reset, void or billing-allocation controls. Local browser tests are disabled by default so `mvn test` is safe to run in a fresh checkout.
 
+The execution mode defaults to `DOCS_ONLY`, which also blocks browser startup. An authorized local observation run requires `-Draddatz.execution.mode=PROD_OBSERVE`; approved non-production mutations require `-Draddatz.execution.mode=NONPROD_APPROVED` in addition to the existing explicit mutation switch.
+
 The default target is the shared local environment: `http://192.168.1.12:8000/login`. Override it only when a different local server is explicitly supplied:
 
 ```zsh
