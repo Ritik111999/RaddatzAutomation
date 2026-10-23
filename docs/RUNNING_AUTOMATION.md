@@ -55,11 +55,29 @@ mvn test \
   -Draddatz.allow.mutation=true
 ```
 
-To add a Property below the Company already created by that owned-data scenario, run the separately guarded dependency slice:
+To create an isolated Company → Property scenario, run the separately guarded dependency slice:
 
 ```bash
 mvn test \
   -Draddatz.suite.file=src/test/resources/suites/admin-property.xml \
+  -Draddatz.run.local=true \
+  -Draddatz.allow.mutation=true
+```
+
+To create an isolated Company → Property → Matter scenario, run:
+
+```bash
+mvn test \
+  -Draddatz.suite.file=src/test/resources/suites/admin-matter.xml \
+  -Draddatz.run.local=true \
+  -Draddatz.allow.mutation=true
+```
+
+To create an isolated Company → Property → Matter → Task → Event workflow, run:
+
+```bash
+mvn test \
+  -Draddatz.suite.file=src/test/resources/suites/admin-task-event.xml \
   -Draddatz.run.local=true \
   -Draddatz.allow.mutation=true
 ```

@@ -9,7 +9,7 @@ public final class PropertyDetailsPage extends BasePage {
     }
 
     public PropertyDetailsPage assertLoaded(String propertyName) {
-        assertVisible(page.getByText(propertyName, new Page.GetByTextOptions().setExact(true)));
+        assertVisible(heading(propertyName));
         return this;
     }
 }

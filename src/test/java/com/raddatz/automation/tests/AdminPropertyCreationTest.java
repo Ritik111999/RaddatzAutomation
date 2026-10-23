@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 import java.time.Clock;
 
 /**
- * Creates a Property only beneath the Company created by the owned-data scenario.
- * This is deliberately outside the default suite and needs explicit mutation permission.
+ * Creates an isolated Company → Property chain in the same run. This is deliberately
+ * outside the default suite and needs explicit mutation permission.
  */
 public final class AdminPropertyCreationTest extends ReadOnlyTestBase {
     @Override
@@ -22,7 +22,9 @@ public final class AdminPropertyCreationTest extends ReadOnlyTestBase {
         AdminScenarioData data = AdminScenarioData.create(Clock.systemUTC());
         ClientMatterListPage companies = new Sidebar(currentPage()).goToClients();
 
-        companies.openAddProperty()
+        companies.openAddCompany()
+                .createOwnedCompany(data)
+                .openAddProperty()
                 .createOwnedProperty(data);
     }
 }

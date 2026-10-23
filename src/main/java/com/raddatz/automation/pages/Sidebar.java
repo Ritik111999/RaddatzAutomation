@@ -1,6 +1,7 @@
 package com.raddatz.automation.pages;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Locator;
 
 import java.util.regex.Pattern;
 
@@ -11,26 +12,31 @@ public final class Sidebar extends BasePage {
     }
 
     public DashboardPage goToDashboard() {
-        link("Dashboard").click();
+        navigationLink("Dashboard").click();
         page.waitForURL("**/dashboard");
         return new DashboardPage(page);
     }
 
     public ClientMatterListPage goToClients() {
-        link("Clients").click();
+        navigationLink("Clients").click();
         page.waitForURL("**/client-and-matter");
         return new ClientMatterListPage(page);
     }
 
     public TodoPage goToTodos() {
-        link("To-dos").click();
+        navigationLink("To-dos").click();
         page.waitForURL("**/todos/all");
         return new TodoPage(page);
     }
 
     public CalendarPage goToCalendar() {
-        link("Calendar").click();
+        navigationLink("Calendar").click();
         page.waitForURL(Pattern.compile(".*/calendar/view-full-calendar.*"));
         return new CalendarPage(page);
+    }
+
+    private Locator navigationLink(String name) {
+        return page.locator("#navbarTabs").getByRole(com.microsoft.playwright.options.AriaRole.LINK,
+                new Locator.GetByRoleOptions().setName(name).setExact(true));
     }
 }

@@ -1,0 +1,66 @@
+package com.raddatz.automation.pages;
+
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
+import com.raddatz.automation.data.AdminScenarioData;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
+/** Shared task modal used by Dashboard and To-dos; creates work only for the owned Matter. */
+public final class TaskFormModal extends BasePage {
+    private final Locator modal;
+
+    public TaskFormModal(Page page) {
+        super(page);
+        modal = page.getByRole(AriaRole.DIALOG);
+    }
+
+    public TaskFormModal assertLoaded() {
+        assertVisible(modal.getByRole(AriaRole.HEADING,
+                new Locator.GetByRoleOptions().setName("Add New Task").setExact(false)));
+        assertVisible(modal.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("Matter").setExact(true)));
+        return this;
+    }
+
+    public void createOwnedTask(AdminScenarioData data) {
+        Locator matterSearch = modal.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("Matter").setExact(true));
+        matterSearch.fill(data.tenantName());
+        Locator ownedMatter = modal.getByText(data.tenantName(), new Locator.GetByTextOptions().setExact(true)).last()
+                .locator("..");
+        assertVisible(ownedMatter);
+        ownedMatter.click();
+        assertThat(modal.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("Select a matter to populate the client").setExact(true)))
+                .hasValue(data.companyName());
+
+        modal.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("Enter task name").setExact(true)).fill(data.taskName());
+        modal.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("Optional description...").setExact(true)).fill(data.taskDescription());
+        modal.locator("input[type='date']").fill(data.taskDueDate());
+        chooseSearchableDropdown(0, "High");
+        chooseSearchableDropdown(1, "Staff Task");
+        modal.getByRole(AriaRole.COMBOBOX,
+                        new Locator.GetByRoleOptions().setName("— Select Staff —").setExact(true))
+                .click();
+        page.getByRole(AriaRole.LISTBOX).last().getByRole(AriaRole.OPTION,
+                        new Locator.GetByRoleOptions().setName("Mark Lee (admin)").setExact(true))
+                .click();
+
+        modal.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("+ Add Task").setExact(true)).click();
+    }
+
+    private void chooseSearchableDropdown(int index, String optionName) {
+        modal.getByRole(AriaRole.COMBOBOX,
+                        new Locator.GetByRoleOptions().setName("Search...").setExact(true))
+                .nth(index)
+                .click();
+        page.getByRole(AriaRole.LISTBOX).last().getByRole(AriaRole.OPTION,
+                        new Locator.GetByRoleOptions().setName(optionName).setExact(true))
+                .click();
+    }
+}

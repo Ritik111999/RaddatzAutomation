@@ -27,19 +27,19 @@ public final class CompanyFormPage extends BasePage {
         page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Email").setExact(true)).fill(data.contactEmail());
         page.getByRole(AriaRole.TEXTBOX,
-                new Page.GetByRoleOptions().setName("Phone number").setExact(true)).fill("202-555-0148");
+                new Page.GetByRoleOptions().setName("Phone number").setExact(true)).fill(data.officePhone());
         page.getByRole(AriaRole.TEXTBOX,
-                new Page.GetByRoleOptions().setName("Cell phone number").setExact(true)).fill("202-555-0162");
+                new Page.GetByRoleOptions().setName("Cell phone number").setExact(true)).fill(data.mobilePhone());
         page.getByPlaceholder("Enter street address",
-                new Page.GetByPlaceholderOptions().setExact(true)).fill("425 Market Street");
+                new Page.GetByPlaceholderOptions().setExact(true)).fill(data.companyStreetAddress());
         page.getByPlaceholder("Enter suite/unit",
-                new Page.GetByPlaceholderOptions().setExact(true)).fill("Suite 310");
+                new Page.GetByPlaceholderOptions().setExact(true)).fill(data.companySuite());
         page.getByPlaceholder("Enter city",
-                new Page.GetByPlaceholderOptions().setExact(true)).fill("Washington");
+                new Page.GetByPlaceholderOptions().setExact(true)).fill(data.companyCity());
         page.getByPlaceholder("Enter state",
-                new Page.GetByPlaceholderOptions().setExact(true)).fill("DC");
+                new Page.GetByPlaceholderOptions().setExact(true)).fill(data.companyState());
         page.getByPlaceholder("Enter zip code",
-                new Page.GetByPlaceholderOptions().setExact(true)).fill("20001");
+                new Page.GetByPlaceholderOptions().setExact(true)).fill(data.companyZipCode());
         page.getByPlaceholder("Add any important notes about this client...",
                 new Page.GetByPlaceholderOptions().setExact(true)).fill(data.ownershipNote());
 

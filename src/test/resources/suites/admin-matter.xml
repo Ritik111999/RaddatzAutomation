@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz owned Company-to-Property-to-Matter mutation" verbose="1">
+    <test name="Owned matter creation">
+        <groups>
+            <run>
+                <include name="admin-mutation"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminMatterCreationTest"/>
+        </classes>
+    </test>
+</suite>

@@ -15,4 +15,15 @@ public final class DashboardPage extends BasePage {
         assertVisible(link("Calendar"));
         return this;
     }
+
+    public TaskFormModal openAddTask() {
+        button("+ Add New Task").first().click();
+        return new TaskFormModal(page).assertLoaded();
+    }
+
+    public EventFormPage openAddEvent() {
+        link("+ Add Event").click();
+        page.waitForURL("**/calendar/add-event");
+        return new EventFormPage(page).assertLoaded();
+    }
 }

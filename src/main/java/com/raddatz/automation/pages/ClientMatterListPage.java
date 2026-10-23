@@ -32,6 +32,12 @@ public final class ClientMatterListPage extends BasePage {
         return new PropertyFormPage(page).assertLoaded();
     }
 
+    public MatterFormPage openAddMatter() {
+        link("+ Add New Matter").click();
+        page.waitForURL("**/create-matter");
+        return new MatterFormPage(page).assertLoaded();
+    }
+
     public ClientMatterListPage searchFor(String scenarioOwnedName) {
         page.getByPlaceholder("Search clients, cases, or tenants...",
                 new Page.GetByPlaceholderOptions().setExact(true)).fill(scenarioOwnedName);

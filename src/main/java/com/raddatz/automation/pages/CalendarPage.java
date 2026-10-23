@@ -5,7 +5,7 @@ import com.microsoft.playwright.options.AriaRole;
 
 import java.util.regex.Pattern;
 
-/** Calendar shell and view controls; no event-creation operations are exposed. */
+/** Calendar shell and its scenario-owned event entry point. */
 public final class CalendarPage extends BasePage {
     public CalendarPage(Page page) {
         super(page);
@@ -20,5 +20,11 @@ public final class CalendarPage extends BasePage {
         assertVisible(page.getByRole(AriaRole.GROUP,
                 new Page.GetByRoleOptions().setName("Calendar date picker").setExact(true)));
         return this;
+    }
+
+    public EventFormPage openAddEvent() {
+        link("+ Add Event").click();
+        page.waitForURL("**/calendar/add-event");
+        return new EventFormPage(page).assertLoaded();
     }
 }

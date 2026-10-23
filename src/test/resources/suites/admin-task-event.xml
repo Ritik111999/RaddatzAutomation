@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz owned Task and Event workflow" verbose="1">
+    <test name="Owned task and event creation">
+        <groups>
+            <run>
+                <include name="admin-mutation"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminTaskAndEventCreationTest"/>
+        </classes>
+    </test>
+</suite>

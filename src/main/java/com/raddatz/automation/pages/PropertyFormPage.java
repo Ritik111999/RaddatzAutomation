@@ -31,12 +31,12 @@ public final class PropertyFormPage extends BasePage {
         page.locator("input[name='property_name']").fill(data.propertyName());
         page.locator("input[name='property_type']").fill(data.propertyType());
         page.locator("textarea[name='rental_office_address']").fill(data.rentalOfficeAddress());
-        page.locator("input[name='business_licenses[0][descriptor]']").fill(data.rentalOfficeAddress());
+        page.locator("input[name='business_licenses[0][descriptor]']").fill(data.businessLicenseDescriptor());
         page.locator("input[name='business_licenses[0][number]']").fill(data.businessLicenseNumber());
-        page.locator("input[name='rad_numbers[0][descriptor]']").fill(data.rentalOfficeAddress());
+        page.locator("input[name='rad_numbers[0][descriptor]']").fill(data.radDescriptor());
         page.locator("input[name='rad_numbers[0][number]']").fill(data.radNumber());
-        page.locator("input[name='rad_numbers[0][expiration_date]']").fill("2027-12-31");
-        page.locator("input[name='total_units']").fill("48");
+        page.locator("input[name='rad_numbers[0][expiration_date]']").fill(data.radExpirationDate());
+        page.locator("input[name='total_units']").fill(data.totalUnits());
         page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Name").setExact(true)).fill(data.contactName());
         page.getByRole(AriaRole.TEXTBOX,
@@ -44,12 +44,14 @@ public final class PropertyFormPage extends BasePage {
         page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Email").setExact(true)).fill(data.contactEmail());
         page.getByRole(AriaRole.TEXTBOX,
-                new Page.GetByRoleOptions().setName("Phone number").setExact(true)).fill("202-555-0148");
+                new Page.GetByRoleOptions().setName("Phone number").setExact(true)).fill(data.officePhone());
         page.getByRole(AriaRole.TEXTBOX,
-                new Page.GetByRoleOptions().setName("Cell phone number").setExact(true)).fill("202-555-0162");
-        page.getByPlaceholder("0.00", new Page.GetByPlaceholderOptions().setExact(true)).fill("225.00");
+                new Page.GetByRoleOptions().setName("Cell phone number").setExact(true)).fill(data.mobilePhone());
+        page.getByPlaceholder("0.00", new Page.GetByPlaceholderOptions().setExact(true)).fill(data.propertyHourlyRate());
         page.getByPlaceholder("Add any important notes about this property...",
                 new Page.GetByPlaceholderOptions().setExact(true)).fill(data.ownershipNote());
+        page.locator("#propertyStatus").check();
+        page.locator("#portalAccess").check();
 
         button("Save Property").click();
         page.waitForURL(Pattern.compile(".*/property/\\d+$"));
