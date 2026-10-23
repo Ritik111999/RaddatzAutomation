@@ -17,4 +17,4 @@ This directory is the evidence-led discovery record for the local Raddatz PWA.
 
 ## Current investigation state
 
-The initial live inventory began on 2026-10-23 against the local PWA. The observed role is `admin`. This is an incremental knowledge base: findings are appended only after an evidence-producing observation.
+The initial local UI inventory began on 2026-10-23 against the supplied local PWA. The observed role is `admin`. This is an incremental knowledge base: findings are appended only after an evidence-producing observation.

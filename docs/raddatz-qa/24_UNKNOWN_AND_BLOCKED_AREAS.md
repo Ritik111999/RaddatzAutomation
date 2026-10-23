@@ -10,3 +10,4 @@
 | Billing and invoice finalization | RESTRICTED | Financial posting risk | Existing approved documentation only |
 | Email/SMS and external communication | RESTRICTED | Third-party communication risk | Existing approved documentation only |
 | Document editor autosave behavior | UNKNOWN | Opening may persist a lock/history/update | Inspect only after a safe observation method is confirmed |
+| Company/property portal-access controls, email, and spreadsheet | RESTRICTED / UNKNOWN | May grant access, communicate externally, or expose/persist shared data | Do not interact; document only at affordance level |

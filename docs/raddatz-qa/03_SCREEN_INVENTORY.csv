@@ -1,0 +1,19 @@
+screen_id,screen_name,route_pattern,classification,evidence_id,observed_capabilities,mutation_rule
+SCR-001,Dashboard,/dashboard,OBSERVED,RAD-E-0002,"task cards; weekly calendar; audit preview",read-only during discovery
+SCR-002,Companies & Matters,/client-and-matter,OBSERVED,RAD-E-0007,"search; add company/property/matter; lineage grid; status selector",only owned records after discovery
+SCR-002A,Company Details,/client-and-matter/client/{companyId}/view,OBSERVED,RAD-E-0013,"overview; property/case/note/document/billing tabs; contacts",only owned records; billing and portal actions excluded
+SCR-002B,Property Details,/property/{propertyId},OBSERVED,RAD-E-0013,"overview; active/inactive cases; notes/documents; contacts",only owned records; spreadsheet/email/upload excluded pending safety review
+SCR-003,Matter General,/matters/{matterId}/general,OBSERVED,RAD-E-0008,"tenants; case details; key dates; quick actions",only owned records
+SCR-004,Matter Notes,/client-and-matter/matter/{matterId}/notes,OBSERVED,RAD-E-0009,"rich-text note entry; note table; edit/delete controls",only owned records; never delete
+SCR-005,Matter Documents,/matters/{matterId}/documents,OBSERVED,RAD-E-0009,"file intake; template entry point; document count",only owned records; upload requires fixture policy
+SCR-006,Matter To-do,/matters/{matterId}/todos,OBSERVED,RAD-E-0009,"task filters; complete/edit/delete controls",only owned records; never delete
+SCR-007,Matter Timeline,/matters/{matterId}/timeline,OBSERVED,RAD-E-0009,"type filter; search; event history",read-only
+SCR-008,To-dos,/todos/all,OBSERVED,RAD-E-0005,"search; sort; filters; types; summaries; task actions",only owned records; never delete
+SCR-009,Calendar,/calendar/view-full-calendar?view=week,OBSERVED,RAD-E-0006,"views; category/people/courtroom filters; event links",only owned events
+SCR-010,Workflows,/workflow,OBSERVED,RAD-E-0003,"trigger/action list; enablement; create/edit/delete",create/edit requires workflow safety review
+SCR-011,Court Updates,/court/updates,OBSERVED,RAD-E-0004,"calendar selection; notes; status; task/event linkage; billing handoff",read-only pending billing safety review
+SCR-012,Document Templates,/document-templates,OBSERVED,RAD-E-0012,"search/filter; registry; view/download/edit/delete controls",read-only pending editor save-behavior validation
+SCR-013,Create Document Template,/document-templates/create,OBSERVED,RAD-E-0011,"metadata; variables; Word upload/editor; optional billing entries",read-only pending editor save-behavior validation
+SCR-014,Billing,unknown,RESTRICTED,RAD-E-0002,"primary navigation present",excluded
+SCR-015,Client Portal,unknown,RESTRICTED,RAD-E-0002,"primary navigation present",excluded
+SCR-016,Bulk Uploader,/mass-document,RESTRICTED,RAD-E-0002,"primary navigation present",excluded

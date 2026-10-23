@@ -1,0 +1,6 @@
+variable_name_or_token,source,consumer,syntax,status,evidence_id
+Custom template variable,Template Variables section,generated document,UNKNOWN,OBSERVED feature existence only,RAD-E-0011
+Required field count,Template registry,template list,not applicable,OBSERVED,RAD-E-0012
+Matter data,Use Template route,generated document,UNKNOWN,HYPOTHESIS based on template-to-matter entry point,RAD-E-0009
+Tenant data,Template generation,generated document,UNKNOWN,UNKNOWN,
+Case data,Template generation,generated document,UNKNOWN,UNKNOWN,

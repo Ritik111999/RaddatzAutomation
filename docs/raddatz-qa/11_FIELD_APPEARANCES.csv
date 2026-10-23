@@ -1,0 +1,21 @@
+field_or_concept,screen,appearance_type,evidence_id,classification
+Company,Companies & Matters,grid column and link,RAD-E-0007,OBSERVED
+Property,Companies & Matters,grid column and link,RAD-E-0007,OBSERVED
+Property,Matter General,breadcrumb,RAD-E-0008,OBSERVED
+Matter/Tenant,Companies & Matters,grid column and link,RAD-E-0007,OBSERVED
+Tenant name,Matter General,tenant form field,RAD-E-0008,OBSERVED
+Tenant contact details,Matter General,address phone email fields,RAD-E-0008,OBSERVED
+Case status,Companies & Matters,status selector,RAD-E-0007,OBSERVED
+Case status,Matter General,case detail selector,RAD-E-0008,OBSERVED
+Case status,Court Updates,input selector,RAD-E-0004,OBSERVED
+Case number,Companies & Matters,grid column,RAD-E-0007,OBSERVED
+Case number,Matter General,case detail field,RAD-E-0008,OBSERVED
+Task,Matter General,upcoming task summary,RAD-E-0008,OBSERVED
+Task,All Tasks,task row,RAD-E-0005,OBSERVED
+Task,Matter To-do,matter task card,RAD-E-0009,OBSERVED
+Task,Matter Timeline,created activity,RAD-E-0009,OBSERVED
+Event,Calendar,calendar item,RAD-E-0006,OBSERVED
+Event,Court Updates,calendar entry selection,RAD-E-0004,OBSERVED
+Document,Matter Documents,document inventory,RAD-E-0009,OBSERVED
+Template variable,Create Document Template,custom-variable section,RAD-E-0011,OBSERVED
+Required fields,Document Templates,registry column,RAD-E-0012,OBSERVED

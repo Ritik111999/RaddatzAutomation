@@ -1,0 +1,13 @@
+source_entity,field_or_relationship,consumer_screen,observed_use,evidence_id,classification
+Company,company relationship,Companies & Matters,grid company column,RAD-E-0007,OBSERVED
+Property,property relationship,Companies & Matters,grid property column,RAD-E-0007,OBSERVED
+Property,property relationship,Matter General,breadcrumb,RAD-E-0008,OBSERVED
+Matter,tenant/case relationship,Companies & Matters,grid matter/unit/case fields,RAD-E-0007,OBSERVED
+Matter,matter identifier,Matter tabs,General Notes Documents To-do Timeline,RAD-E-0008,OBSERVED
+Task,matter relationship,Dashboard,task card matter link,RAD-E-0002,OBSERVED
+Task,matter relationship,All Tasks,matter column,RAD-E-0005,OBSERVED
+Task,creation event,Matter Timeline,task-created history,RAD-E-0009,OBSERVED
+Event,matter relationship,Calendar,matter link on event,RAD-E-0006,OBSERVED
+Event,calendar entry,Court Updates,selection list and View Event Details,RAD-E-0004,OBSERVED
+Template,custom variable count,Template registry,required-fields column,RAD-E-0011,OBSERVED
+Template,Word source,Matter Documents,Use Template route,RAD-E-0009,OBSERVED
