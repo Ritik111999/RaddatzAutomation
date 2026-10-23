@@ -170,4 +170,33 @@ public record AdminScenarioData(
                 "Bring the lease ledger, notice documentation, and service affidavit for matter " + sequence + ".",
                 "Scenario reference " + reference + "; created for the local admin automation suite.");
     }
+
+    /**
+     * A realistic case-management note whose reference makes the created row
+     * positively identifiable as belonging to this exact scenario run.
+     */
+    public String initialMatterNote() {
+        return "Reviewed the rent ledger and service affidavit for the scheduled case conference. "
+                + "Scenario reference " + reference + ".";
+    }
+
+    /** A substantive update to the scenario-owned note, used to prove edit persistence. */
+    public String revisedMatterNote() {
+        return "Reviewed the rent ledger, service affidavit, and hearing notice for the scheduled case conference. "
+                + "Scenario reference " + reference + ".";
+    }
+
+    /** A unique, field-appropriate filename for this scenario's uploaded case memorandum. */
+    public String ownedDocumentFileName() {
+        return "case-review-memorandum-" + reference + ".docx";
+    }
+
+    public String initialTimeEntryDescription() {
+        return "Reviewed the lease ledger and prepared the hearing-status summary. Scenario reference " + reference + ".";
+    }
+
+    public String revisedTimeEntryDescription() {
+        return "Reviewed the lease ledger, hearing notice, and service affidavit for the case conference. Scenario reference "
+                + reference + ".";
+    }
 }

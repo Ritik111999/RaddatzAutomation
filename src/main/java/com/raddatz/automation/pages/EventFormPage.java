@@ -4,7 +4,6 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.raddatz.automation.data.AdminScenarioData;
-import com.raddatz.automation.data.UploadFixtures;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -46,16 +45,13 @@ public final class EventFormPage extends BasePage {
         page.locator("select").filter(new Locator.FilterOptions().setHas(
                 page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(data.eventCategory()).setExact(true))))
                 .selectOption(data.eventCategory());
-        page.locator("input[type='date']").fill(data.eventDate());
+        page.locator("input[name='court_dates[0][event_date]']").fill(data.eventDate());
         page.locator("input[type='time']").fill(data.eventStartTime());
         page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("01:00").setExact(true)).fill(data.eventDuration());
         page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName(
                 "Add preparation notes, case context, special instructions, or any other relevant information about this court date..."
         ).setExact(true)).fill(data.eventNotes());
-        page.locator("input[type='file']").setInputFiles(
-                new java.nio.file.Path[]{UploadFixtures.inspectionMemorandum(), UploadFixtures.propertyExteriorPhoto()});
-
         button("Save & Close").click();
         return new CalendarPage(page).assertLoaded();
     }

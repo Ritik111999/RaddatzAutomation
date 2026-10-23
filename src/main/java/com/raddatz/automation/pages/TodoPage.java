@@ -25,8 +25,11 @@ public final class TodoPage extends BasePage {
     }
 
     public TodoPage assertTaskListed(String taskName) {
-        assertVisible(page.getByText(taskName,
-                new Page.GetByTextOptions().setExact(true)).first());
+        page.getByRole(AriaRole.TEXTBOX,
+                        new Page.GetByRoleOptions().setName("Search tasks").setExact(true))
+                .fill(taskName);
+        assertVisible(page.getByTitle(taskName,
+                new Page.GetByTitleOptions().setExact(true)));
         return this;
     }
 }

@@ -1,7 +1,10 @@
 package com.raddatz.automation.pages;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.AriaRole;
+
+import java.util.regex.Pattern;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -52,5 +55,19 @@ public final class ClientMatterListPage extends BasePage {
         assertVisible(page.getByRole(AriaRole.LINK,
                 new Page.GetByRoleOptions().setName(scenarioOwnedName).setExact(true)));
         return this;
+    }
+
+    /** Opens only the Matter row bound to this run's unique case number. */
+    public MatterWorkspacePage openOwnedMatter(String tenantName, String caseNumber) {
+        searchFor(caseNumber);
+        var ownedMatterRow = page.getByRole(AriaRole.TABLE).getByRole(AriaRole.ROW)
+                .filter(new com.microsoft.playwright.Locator.FilterOptions().setHasText(caseNumber));
+        assertVisible(ownedMatterRow);
+        Locator ownedMatterLink = ownedMatterRow.getByRole(AriaRole.LINK,
+                new Locator.GetByRoleOptions().setName(tenantName).setExact(true));
+        assertVisible(ownedMatterLink);
+        ownedMatterLink.click();
+        page.waitForURL(Pattern.compile(".*/matters/\\d+/general$"));
+        return new MatterWorkspacePage(page).assertLoaded(tenantName);
     }
 }

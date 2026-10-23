@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz owned billing time-entry lifecycle" verbose="1">
+    <test name="Owned time-entry create-edit-delete">
+        <groups>
+            <run>
+                <include name="admin-mutation"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest"/>
+        </classes>
+    </test>
+</suite>

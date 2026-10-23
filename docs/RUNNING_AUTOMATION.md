@@ -2,7 +2,7 @@
 
 ## Safety model
 
-The included suite is deliberately **read-only**. It does not use create, update, delete, send, upload, generate, import, reset, void or billing-allocation controls. Local browser tests are disabled by default so `mvn test` is safe to run in a fresh checkout.
+The default suite is deliberately **read-only**. Mutable suites require the explicit `NONPROD_APPROVED` execution mode and use only records created and tagged by the current run. These approved suites may create, edit, view, download, upload, and clean up owned records. Billing entries and invoice workflow are in scope for owned data; external payment or settlement controls are not. Local browser tests are disabled by default so `mvn test` is safe to run in a fresh checkout.
 
 The execution mode defaults to `DOCS_ONLY`, which also blocks browser startup. An authorized local observation run requires `-Draddatz.execution.mode=PROD_OBSERVE`; approved non-production mutations require `-Draddatz.execution.mode=NONPROD_APPROVED` in addition to the existing explicit mutation switch.
 
