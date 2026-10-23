@@ -2,7 +2,7 @@
 
 ## Matter lifecycle — observed
 
-Company → Property → Matter → Tenant(s) → Case details/key dates → Tasks, notes, documents, timeline. `OBSERVED: RAD-E-0007, RAD-E-0008, RAD-E-0009`.
+Company → Property → Matter → Tenant(s) → Case details/key dates → Tasks, notes, documents, timeline. A Company can own multiple Properties, and a Property can own multiple Matters; each additional branch is entered through **Add Property** or **Add New Matter**, never by creating a duplicate Company. `OBSERVED: RAD-E-0007, RAD-E-0008, RAD-E-0009`; `CLIENT-CONFIRMED: 2026-10-23`.
 
 ## Work planning — observed
 

@@ -10,10 +10,7 @@
             </run>
         </groups>
         <classes>
-            <class name="com.raddatz.automation.tests.AdminCompanyCreationTest"/>
-            <class name="com.raddatz.automation.tests.AdminPropertyCreationTest"/>
-            <class name="com.raddatz.automation.tests.AdminMatterCreationTest"/>
-            <class name="com.raddatz.automation.tests.AdminTaskAndEventCreationTest"/>
+            <class name="com.raddatz.automation.tests.AdminPortfolioHierarchyTest"/>
         </classes>
     </test>
 </suite>

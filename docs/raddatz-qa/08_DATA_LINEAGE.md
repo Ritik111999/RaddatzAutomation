@@ -23,3 +23,5 @@ flowchart LR
 ```
 
 Observed evidence confirms the hierarchy and visible consumers. It does not yet prove database cardinalities, cascade behavior, or dynamic-variable substitution. `OBSERVED: RAD-E-0002, RAD-E-0004 through RAD-E-0011`.
+
+Client-confirmed cardinality: one Company may own multiple Properties, and one Property may own multiple Matters. Automation must create the parent once, then create each child through its explicit add path and verify the resulting Matter row contains the intended Company and Property. `CLIENT-CONFIRMED: 2026-10-23`.

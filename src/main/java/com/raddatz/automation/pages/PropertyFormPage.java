@@ -51,7 +51,6 @@ public final class PropertyFormPage extends BasePage {
         page.getByPlaceholder("Add any important notes about this property...",
                 new Page.GetByPlaceholderOptions().setExact(true)).fill(data.ownershipNote());
         page.locator("#propertyStatus").check();
-        page.locator("#portalAccess").check();
 
         button("Save Property").click();
         page.waitForURL(Pattern.compile(".*/property/\\d+$"));

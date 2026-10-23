@@ -3,6 +3,7 @@ package com.raddatz.automation.pages;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.AriaRole;
+import com.raddatz.automation.data.AdminScenarioData;
 
 import java.util.regex.Pattern;
 
@@ -54,6 +55,21 @@ public final class ClientMatterListPage extends BasePage {
     public ClientMatterListPage assertListedName(String scenarioOwnedName) {
         assertVisible(page.getByRole(AriaRole.LINK,
                 new Page.GetByRoleOptions().setName(scenarioOwnedName).setExact(true)));
+        return this;
+    }
+
+    /** Confirms the Matter is displayed below the exact owned Company and Property branch. */
+    public ClientMatterListPage assertOwnedMatterHierarchy(AdminScenarioData data) {
+        searchFor(data.caseNumber());
+        Locator ownedMatterRow = page.getByRole(AriaRole.TABLE).getByRole(AriaRole.ROW)
+                .filter(new Locator.FilterOptions().setHasText(data.caseNumber()));
+        assertVisible(ownedMatterRow);
+        assertVisible(ownedMatterRow.getByRole(AriaRole.LINK,
+                new Locator.GetByRoleOptions().setName(data.companyName()).setExact(true)));
+        assertVisible(ownedMatterRow.getByRole(AriaRole.LINK,
+                new Locator.GetByRoleOptions().setName(data.propertyName()).setExact(true)));
+        assertVisible(ownedMatterRow.getByRole(AriaRole.LINK,
+                new Locator.GetByRoleOptions().setName(data.tenantName()).setExact(true)));
         return this;
     }
 

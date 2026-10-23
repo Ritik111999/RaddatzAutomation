@@ -88,6 +88,18 @@ public record AdminScenarioData(
                 "Heights Apartments", "Village Residences", "Commons Apartments", "Landing Homes",
                 "Grove Residences", "Manor Apartments", "Station Homes", "Walk Residences"
         };
+        String[] companyLocalities = {
+                "Arlington", "Capitol Hill", "Cleveland Park", "Columbia Heights",
+                "Dupont Circle", "Foggy Bottom", "Georgetown", "Mount Pleasant",
+                "Navy Yard", "Palisades", "Petworth", "Shaw",
+                "Takoma", "Tenleytown", "Van Ness", "Woodley Park"
+        };
+        String[] propertyDistricts = {
+                "North", "South", "East", "West",
+                "Central", "Riverside", "Parkside", "Heights",
+                "Commons", "Gateway", "Lakeside", "Station",
+                "Terrace", "Village", "Waterfront", "Woodland"
+        };
         String[] contactGivenNames = {"Nina", "Marcus", "Danielle", "Avery", "Rachel", "Darius", "Monica", "Elliot"};
         String[] contactFamilyNames = {"Caldwell", "Ellison", "Porter", "Monroe", "Graves", "Holland", "Sullivan", "Whitaker"};
         String[] tenantGivenNames = {"Olivia", "Ethan", "Maya", "Jordan", "Naomi", "Caleb", "Sofia", "Adrian"};
@@ -102,11 +114,16 @@ public record AdminScenarioData(
                 + sequence;
         String companyName = companyDescriptors[(int) (nonce % companyDescriptors.length)]
                 + " "
+                + companyLocalities[(int) ((nonce / companyDescriptors.length) % companyLocalities.length)]
+                + " "
                 + companyOperators[(int) ((nonce / companyDescriptors.length) % companyOperators.length)]
                 + ", LLC";
         String propertyName = propertyNeighborhoods[(int) ((nonce / 100) % propertyNeighborhoods.length)]
                 + " "
-                + propertyStyles[(int) ((nonce / (100 * propertyNeighborhoods.length)) % propertyStyles.length)];
+                + propertyStyles[(int) ((nonce / (100 * propertyNeighborhoods.length)) % propertyStyles.length)]
+                + " "
+                + propertyDistricts[(int) ((nonce / (100 * propertyNeighborhoods.length * propertyStyles.length))
+                % propertyDistricts.length)];
         String contactName = contactGivenNames[(int) ((nonce / 10) % contactGivenNames.length)]
                 + " "
                 + contactFamilyNames[(int) ((nonce / (10 * contactGivenNames.length)) % contactFamilyNames.length)];
@@ -156,10 +173,10 @@ public record AdminScenarioData(
                 "Standard Plan",
                 "Medium",
                 LocalDate.now(clock).toString(),
-                "Lease Compliance Review - " + sequence,
-                "Review the lease-compliance file and prepare the matter status update for portfolio " + sequence + ".",
+                "Lease Compliance Review for " + propertyName,
+                "Review the lease-compliance file and prepare the matter status update for the assigned property.",
                 LocalDate.now(clock).plusDays(7).toString(),
-                "Initial Return Hearing - " + sequence,
+                "Initial Return Hearing for " + tenantName,
                 LocalDate.now(clock).plusDays(14).toString(),
                 "09:30",
                 "01:00",
@@ -169,6 +186,121 @@ public record AdminScenarioData(
                 "Hon. Elena Whitmore",
                 "Bring the lease ledger, notice documentation, and service affidavit for matter " + sequence + ".",
                 "Scenario reference " + reference + "; created for the local admin automation suite.");
+    }
+
+    /**
+     * Reuses only the Company identity and Company contact details from an owned
+     * parent. The resulting data represents a distinct Property/Matter branch.
+     */
+    public AdminScenarioData withCompanyFrom(AdminScenarioData companyOwner) {
+        return new AdminScenarioData(
+                reference,
+                companyOwner.companyName,
+                companyOwner.contactName,
+                companyOwner.contactTitle,
+                companyOwner.contactEmail,
+                companyOwner.officePhone,
+                companyOwner.mobilePhone,
+                companyOwner.companyStreetAddress,
+                companyOwner.companySuite,
+                companyOwner.companyCity,
+                companyOwner.companyState,
+                companyOwner.companyZipCode,
+                propertyName,
+                propertyType,
+                rentalOfficeAddress,
+                businessLicenseDescriptor,
+                businessLicenseNumber,
+                radDescriptor,
+                radNumber,
+                radExpirationDate,
+                totalUnits,
+                propertyHourlyRate,
+                tenantName,
+                tenantStreetAddress,
+                tenantQuadrant,
+                tenantUnitNumber,
+                tenantCity,
+                tenantZipCode,
+                tenantPhone,
+                tenantEmail,
+                caseNumber,
+                caseType,
+                caseStatus,
+                matterPlan,
+                casePriority,
+                openingDate,
+                taskName,
+                taskDescription,
+                taskDueDate,
+                eventTitle,
+                eventDate,
+                eventStartTime,
+                eventDuration,
+                eventCourtRoom,
+                eventType,
+                eventCategory,
+                eventJudgeName,
+                eventNotes,
+                ownershipNote);
+    }
+
+    /**
+     * Reuses an owned Company and Property while retaining this object's distinct
+     * Tenant, Matter, Task, Event, and ownership-reference values.
+     */
+    public AdminScenarioData withCompanyAndPropertyFrom(
+            AdminScenarioData companyOwner, AdminScenarioData propertyOwner) {
+        return new AdminScenarioData(
+                reference,
+                companyOwner.companyName,
+                companyOwner.contactName,
+                companyOwner.contactTitle,
+                companyOwner.contactEmail,
+                companyOwner.officePhone,
+                companyOwner.mobilePhone,
+                companyOwner.companyStreetAddress,
+                companyOwner.companySuite,
+                companyOwner.companyCity,
+                companyOwner.companyState,
+                companyOwner.companyZipCode,
+                propertyOwner.propertyName,
+                propertyOwner.propertyType,
+                propertyOwner.rentalOfficeAddress,
+                propertyOwner.businessLicenseDescriptor,
+                propertyOwner.businessLicenseNumber,
+                propertyOwner.radDescriptor,
+                propertyOwner.radNumber,
+                propertyOwner.radExpirationDate,
+                propertyOwner.totalUnits,
+                propertyOwner.propertyHourlyRate,
+                tenantName,
+                tenantStreetAddress,
+                tenantQuadrant,
+                tenantUnitNumber,
+                tenantCity,
+                tenantZipCode,
+                tenantPhone,
+                tenantEmail,
+                caseNumber,
+                caseType,
+                caseStatus,
+                matterPlan,
+                casePriority,
+                openingDate,
+                taskName,
+                taskDescription,
+                taskDueDate,
+                eventTitle,
+                eventDate,
+                eventStartTime,
+                eventDuration,
+                eventCourtRoom,
+                eventType,
+                eventCategory,
+                eventJudgeName,
+                eventNotes,
+                ownershipNote);
     }
 
     /**
