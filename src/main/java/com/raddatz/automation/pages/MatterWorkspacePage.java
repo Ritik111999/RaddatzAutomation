@@ -37,6 +37,39 @@ public final class MatterWorkspacePage extends BasePage {
         return new BillingSessionPage(page).assertLoaded();
     }
 
+    public MatterWorkspacePage openTodoTab() {
+        page.getByRole(AriaRole.LINK,
+                new Page.GetByRoleOptions().setName(Pattern.compile("Todo$")).setExact(false)).click();
+        page.waitForURL("**/todos");
+        return this;
+    }
+
+    public MatterWorkspacePage openTimelineTab() {
+        page.getByRole(AriaRole.LINK,
+                new Page.GetByRoleOptions().setName(Pattern.compile("Timeline$")).setExact(false)).click();
+        page.waitForURL("**/timeline");
+        return this;
+    }
+
+    public TaskFormModal openAddTaskModal() {
+        com.microsoft.playwright.Locator addTaskBtn = page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(Pattern.compile("Add Task$")).setExact(false));
+        assertVisible(addTaskBtn);
+        addTaskBtn.click();
+        return new TaskFormModal(page);
+    }
+
+    public EventFormPage openScheduleEvent() {
+        com.microsoft.playwright.Locator scheduleBtn = page.getByRole(AriaRole.LINK,
+                new Page.GetByRoleOptions().setName(Pattern.compile("Schedule Event$")).setExact(false));
+        if (!scheduleBtn.isVisible()) {
+            scheduleBtn = page.locator("a[href*='/calendar/add-event']");
+        }
+        assertVisible(scheduleBtn);
+        scheduleBtn.click();
+        page.waitForURL(Pattern.compile(".*/calendar/add-event.*"));
+        return new EventFormPage(page).assertLoaded();
+    }
 
     private com.microsoft.playwright.Locator notesLink() {
         // The UI prepends a presentational icon to the accessible link name.

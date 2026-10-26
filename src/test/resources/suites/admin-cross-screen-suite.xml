@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz Cross-Screen Multi-Entrypoint Workflows" verbose="1">
+    <listeners>
+        <listener class-name="com.raddatz.automation.reports.ExtentTestListener"/>
+    </listeners>
+    <test name="Court Updates and Multi-Hub Propagation">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminCrossScreenWorkflowTest"/>
+        </classes>
+    </test>
+</suite>
