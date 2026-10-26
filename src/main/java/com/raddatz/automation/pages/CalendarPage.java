@@ -47,9 +47,15 @@ public final class CalendarPage extends BasePage {
         // its searchable widget input over it. The widget's documented
         // data-ssd-for relationship is the only stable interactable contract.
         page.locator("input.ssd-input[data-ssd-for='" + nativeControlId + "']").click();
-        page.getByRole(AriaRole.LISTBOX).last().getByRole(AriaRole.OPTION,
-                        new Locator.GetByRoleOptions().setName(optionName).setExact(true))
-                .click();
+        page.waitForTimeout(400);
+        Locator option = page.locator(".ssd-option, [role='option']").filter(new Locator.FilterOptions().setHasText(optionName)).last();
+        if (option.isVisible()) {
+            option.click();
+        } else {
+            page.getByRole(AriaRole.LISTBOX).last().getByRole(AriaRole.OPTION,
+                            new Locator.GetByRoleOptions().setName(optionName).setExact(true))
+                    .click();
+        }
     }
 
     public CalendarPage assertOwnedEventVisible(AdminScenarioData data, boolean revised) {

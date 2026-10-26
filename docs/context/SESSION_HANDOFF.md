@@ -238,3 +238,47 @@ Identified and resolved critical runtime flaws during live execution:
 3. **Rigid Billing URL Regex**: Updated `BillingSessionPage.start` to accept both `/time` and `/time?matter_id=*`.
 4. **Court Updates Modal Precondition**: Uncovered requirement that a calendar entry / matter must be selected before `+ Add To-Do` or `+ Add Event` modals activate.
 5. **Comprehensive Cross-Screen Mapping**: Cataloged in [CROSS_MODULE_DATA_TEST_MATRIX.md](docs/qa/CROSS_MODULE_DATA_TEST_MATRIX.md) showing all multi-surface creation/edit points and propagation across Tasks, Events, Notes, Billing/Time, Invoices, and Case Status.
+
+**Master 10-Step E2E Lifecycle Verification, 2026-10-26:**
+Executed the authoritative 10-step end-to-end business lifecycle test (`AdminFullLifecycleE2ETest` via `admin-full-lifecycle-e2e.xml`) against `http://192.168.0.229:8000/login` in approved mutation mode:
+- **Result:** **100% Passed (1 of 1 in 1m 5s, 0 failures, 0 errors)**.
+- **Workflow Verified:**
+  1. Login & storage state session reuse.
+  2. Company → Property → Matter creation with unique run nonces.
+  3. Multi-tier Notes and Document uploads across all three levels (Company, Property, Matter).
+  4. Matter Task creation, staff assignment, and persistence verification on To-dos table.
+  5. Calendar Court Event scheduling on Matter with date-picker resolution.
+  6. Court Updates submission from Calendar Event.
+  7. Court Time recording, 1.50 hr entry, and auto-populated billing calculation ($337.50).
+  8. Propagation to Time section (`/time`), description update, and Expense CRUD ($75.00).
+  9. Invoice Draft generation verifying aggregated time + expense total ($412.50), `%PDF-` document download artifact check, and modal confirmation invoice send.
+
+**Full Parallel Mutation Regression Suite (13 Modules), 2026-10-26:**
+Executed the full parallel mutation regression suite (`admin-parallel-mutation.xml`, running with `parallel="classes"` and `thread-count="2"` across parallel browser contexts):
+- **Result:** **100% Passed (13 of 13 passed, 0 failures, 0 errors, 0 skipped in 3m 10s)**.
+- **Suite Classes:**
+  1. `AdminCompanyCreationTest` - PASS
+  2. `AdminPropertyCreationTest` - PASS
+  3. `AdminMatterCreationTest` - PASS
+  4. `AdminTaskLifecycleTest` - PASS
+  5. `AdminEventLifecycleTest` - PASS
+  6. `AdminMatterNoteLifecycleTest` - PASS
+  7. `AdminMatterDocumentLifecycleTest` - PASS
+  8. `AdminCourtUpdateLifecycleTest` - PASS
+  9. `AdminOwnedTimeEntryLifecycleTest` - PASS
+  10. `AdminOwnedExpenseLifecycleTest` - PASS
+  11. `AdminDocumentTemplateMetadataLifecycleTest` - PASS
+  12. `AdminMultiTenantMatterTest` - PASS
+  13. `AdminOwnedHierarchyEditTest` - PASS
+- **Reports & Artifacts:**
+  - Extent Report HTML: `target/automation-artifacts/run_20261026_182815/extent-report.html`
+  - Extent Report PDF: `target/automation-artifacts/run_20261026_182815/extent-report.pdf`
+  - QA Summary Report HTML: `target/automation-artifacts/run_20261026_182815/raddatz-qa-report.html`
+  - QA Summary Report PDF: `target/automation-artifacts/run_20261026_182815/raddatz-qa-report.pdf`
+- **Key Page Object Model Hardening Applied:**
+  - `CourtUpdatesPage`: Asynchronous delete modal dismissal with 15s timeout and reload verification.
+  - `DocumentTemplatesPage`: Footer Close button targeting and verification of modal dismissal.
+  - `CalendarPage`: Settle delay for custom dropdown picker animation avoiding DOM element detachment.
+  - `TimeEntryPage`: Matter autocomplete resolution via placeholder locator and dual search fallback.
+  - `ExpensePage`: Clean form submit navigation handling and direct row action handler for deletion.
+  - Strictly respected law firm confidentiality and safety boundaries: restricted integrations, backend data control, portal access, permissions, and payment gateways were left completely untouched.

@@ -69,10 +69,14 @@ public final class DocumentTemplatesPage extends BasePage {
         assertVisible(preview);
         assertVisible(preview.getByText(templateName, new Locator.GetByTextOptions().setExact(true)));
         assertVisible(preview.locator("#templatePreviewDownload"));
-        Locator previewHeader = preview.locator("#templatePreviewModalLabel").locator("..");
-        previewHeader.getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("Close").setExact(true)).click();
-        assertThat(preview).not().isVisible();
+        Locator closeBtn = preview.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Close").setExact(true)).first();
+        if (closeBtn.isVisible()) {
+            closeBtn.click();
+        } else {
+            preview.locator("[data-bs-dismiss='modal'], .btn-close").first().click();
+        }
+        assertThat(preview).not().isVisible(new com.microsoft.playwright.assertions.LocatorAssertions.IsVisibleOptions().setTimeout(15000));
         return this;
     }
 

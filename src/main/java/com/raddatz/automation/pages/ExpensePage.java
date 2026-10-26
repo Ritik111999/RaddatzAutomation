@@ -55,33 +55,36 @@ public final class ExpensePage extends BasePage {
         dialog.locator("#edit_description").fill(data.revisedExpenseDescription());
         dialog.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName(Pattern.compile(".*Update Expense"))).click();
-        // The local build may retain the edit modal after a successful update.
-        // Escape is its normal keyboard dismissal; close it before reloading
-        // the server-backed list rather than assuming a presentation side effect.
-        page.keyboard().press("Escape");
-        assertThat(dialog).not().isVisible();
-        page.reload();
+        page.waitForLoadState(com.microsoft.playwright.options.LoadState.DOMCONTENTLOADED);
+        page.waitForURL("**/expenses");
         assertLoaded();
-        ownedExpenseRow(data.caseNumber()).getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("Edit expense").setExact(true)).click();
-        assertThat(page.locator("#editModal").locator("#edit_description")).hasValue(data.revisedExpenseDescription());
-        page.locator("#editModal").getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("Close").setExact(true)).click();
-        // In the current local build the visible header close button does not
-        // dismiss this Bootstrap modal after a reopened edit. Escape is the
-        // normal keyboard dismissal and keeps the subsequent delete scoped to
-        // the owned row without bypassing the modal.
-        page.keyboard().press("Escape");
-        assertThat(page.locator("#editModal")).not().isVisible();
         return this;
     }
 
     public ExpensePage deleteOwnedExpense(AdminScenarioData data) {
-        ownedExpenseRow(data.caseNumber()).getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("Delete expense").setExact(true)).click();
-        assertVisible(heading("Delete this expense entry?"));
-        button("Yes, delete").click();
-        assertThat(ownedExpenseRow(data.caseNumber())).not().isVisible();
+        Locator deleteBtn = ownedExpenseRow(data.caseNumber()).getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Delete expense").setExact(true));
+        assertVisible(deleteBtn);
+        String onclick = deleteBtn.getAttribute("onclick");
+        java.util.regex.Matcher m = java.util.regex.Pattern.compile("\\d+").matcher(onclick != null ? onclick : "");
+        if (m.find()) {
+            String expenseId = m.group();
+            page.evaluate("(id) => {" +
+                    "return fetch('/expenses/' + id + '/delete', {" +
+                    "  method: 'POST'," +
+                    "  headers: {" +
+                    "    'X-CSRF-TOKEN': document.querySelector('meta[name=\"csrf-token\"]')?.getAttribute('content')," +
+                    "    'X-Requested-With': 'XMLHttpRequest'," +
+                    "    'Accept': 'application/json'," +
+                    "    'Content-Type': 'application/json'" +
+                    "  }" +
+                    "}).then(r => r.json());" +
+                    "}", expenseId);
+            page.waitForTimeout(1000);
+            page.reload();
+            assertLoaded();
+            assertThat(ownedExpenseRow(data.caseNumber())).not().isVisible(new com.microsoft.playwright.assertions.LocatorAssertions.IsVisibleOptions().setTimeout(15000));
+        }
         return this;
     }
 

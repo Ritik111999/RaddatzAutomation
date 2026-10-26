@@ -106,13 +106,15 @@ public final class CourtUpdatesPage extends BasePage {
     public CourtUpdatesPage deleteOwnedCourtUpdate(String revisedNotes) {
         ownedCourtUpdateRow(revisedNotes).getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Delete court update").setExact(true)).click();
-        assertVisible(page.getByRole(AriaRole.HEADING,
-                new Page.GetByRoleOptions().setName("Delete this court update?").setExact(true)));
+        Locator modalHeading = page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Delete this court update?").setExact(true));
+        assertVisible(modalHeading);
         button("Yes, delete").click();
-        assertThat(ownedCourtUpdateRow(revisedNotes)).not().isVisible();
+        assertThat(modalHeading).not().isVisible(new com.microsoft.playwright.assertions.LocatorAssertions.IsVisibleOptions().setTimeout(15000));
+        page.waitForTimeout(1000);
         page.reload();
         assertLoaded();
-        assertThat(ownedCourtUpdateRow(revisedNotes)).not().isVisible();
+        assertThat(ownedCourtUpdateRow(revisedNotes)).not().isVisible(new com.microsoft.playwright.assertions.LocatorAssertions.IsVisibleOptions().setTimeout(15000));
         return this;
     }
 

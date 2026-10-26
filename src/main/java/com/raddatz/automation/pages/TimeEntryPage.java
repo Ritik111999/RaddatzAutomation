@@ -15,23 +15,23 @@ public final class TimeEntryPage extends BasePage {
 
     public TimeEntryPage assertLoaded() {
         assertVisible(heading("Time Entry Analytics"));
-        assertVisible(page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions()
-                .setName("Search by tenant name, case #, or property...").setExact(true)));
+        assertVisible(matterSearchInput());
         return this;
     }
 
     public TimeEntryPage createOwnedTimeEntry(AdminScenarioData data) {
-        if (!page.url().contains("matter_id=")) {
-            Locator matterSearch = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions()
-                    .setName("Search by tenant name, case #, or property...").setExact(true));
-            if (matterSearch.isVisible()) {
-                matterSearch.fill(data.caseNumber());
-                // The case number is unique per run; realistic tenant names alone can legitimately repeat.
-                Locator ownedSuggestion = page.getByText(data.caseNumber(), new Page.GetByTextOptions().setExact(false)).first();
-                assertVisible(ownedSuggestion);
-                ownedSuggestion.click();
-            }
+        Locator matterSearch = matterSearchInput();
+        assertVisible(matterSearch);
+        matterSearch.fill(data.tenantName());
+        page.waitForTimeout(500);
+        Locator ownedSuggestion = page.getByText(data.tenantName(), new Page.GetByTextOptions().setExact(false)).first();
+        if (!ownedSuggestion.isVisible()) {
+            matterSearch.fill(data.caseNumber());
+            page.waitForTimeout(500);
+            ownedSuggestion = page.getByText(data.caseNumber(), new Page.GetByTextOptions().setExact(false)).first();
         }
+        assertVisible(ownedSuggestion);
+        ownedSuggestion.click();
         // These explicit application ids are required because the spin buttons lack labels.
         page.locator("#hoursInput").fill("1.50");
         page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions()
@@ -69,8 +69,12 @@ public final class TimeEntryPage extends BasePage {
                 new Locator.GetByRoleOptions().setName("Delete time entry").setExact(true)).click();
         assertVisible(heading("Delete this time entry?"));
         button("Yes, delete").click();
-        assertThat(ownedEntryRow(ownedDescription)).not().isVisible();
+        assertThat(ownedEntryRow(ownedDescription)).not().isVisible(new com.microsoft.playwright.assertions.LocatorAssertions.IsVisibleOptions().setTimeout(15000));
         return this;
+    }
+
+    private Locator matterSearchInput() {
+        return page.locator("input[placeholder*='Search by tenant name']").first();
     }
 
     public ExpensePage openExpenses() {
