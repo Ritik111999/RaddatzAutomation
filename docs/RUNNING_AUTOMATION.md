@@ -36,6 +36,23 @@ mvn test -Draddatz.run.local=true -Draddatz.report.pdf=false
 
 `target/automation-artifacts/run_<timestamp>/extent-report.html` is always produced. When Chromium is available, the listener renders the raw `extent-report.pdf` plus the executive `raddatz-qa-report.pdf` (cover page, run metadata, outcome dashboard, module summary, and scenario register). Failure screenshots and Log4j2 logs are stored under `target/automation-artifacts`.
 
+The executive report includes scenario details (preconditions, implemented steps,
+expected/actual outcome, duration, redacted failure class, and evidence reference)
+and a coverage-gap section. Step descriptions document the implemented test;
+they are not independent runtime step-status records.
+
+To rebuild a PDF from saved evidence without interacting with the application:
+
+```zsh
+mvn -q -DskipTests test-compile
+mvn -q exec:java -Dexec.classpathScope=test \
+  -Dexec.mainClass=com.raddatz.automation.reports.RebuildQaReport \
+  '-Dexec.args=path/to/saved-testng-results.xml output/pdf/new-report-directory'
+```
+
+Use a new output directory. Do not compile source while a test JVM is running;
+the JVM may lazily load incompatible class versions from the build directory.
+
 ## Framework layout
 
 ### Serial regression with one browser

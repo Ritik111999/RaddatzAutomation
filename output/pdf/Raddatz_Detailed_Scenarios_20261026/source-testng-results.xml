@@ -1,0 +1,1860 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="19" passed="12" failed="1" skipped="6">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-10-26T15:02:15 IST" name="Raddatz local admin regression - single browser" finished-at="2026-10-26T15:11:26 IST" duration-ms="550410">
+    <groups>
+      <group name="admin-mutation">
+        <method signature="AdminCourtUpdateLifecycleTest.administratorMaintainsOwnedCourtUpdate()[pri:0, instance:com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest@45e37a7e]" name="administratorMaintainsOwnedCourtUpdate" class="com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest"/>
+        <method signature="AdminDocumentTemplateMetadataLifecycleTest.administratorMaintainsOwnedDocumentTemplateMetadata()[pri:0, instance:com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest@6941827a]" name="administratorMaintainsOwnedDocumentTemplateMetadata" class="com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest"/>
+        <method signature="AdminDocumentVariableGenerationTest.administratorGeneratesOwnedVariableDocument()[pri:0, instance:com.raddatz.automation.tests.AdminDocumentVariableGenerationTest@5a7005d]" name="administratorGeneratesOwnedVariableDocument" class="com.raddatz.automation.tests.AdminDocumentVariableGenerationTest"/>
+        <method signature="AdminEventLifecycleTest.administratorMaintainsOwnedEvent()[pri:0, instance:com.raddatz.automation.tests.AdminEventLifecycleTest@57459491]" name="administratorMaintainsOwnedEvent" class="com.raddatz.automation.tests.AdminEventLifecycleTest"/>
+        <method signature="AdminMatterDocumentLifecycleTest.administratorManagesOwnedMatterDocumentLifecycle()[pri:0, instance:com.raddatz.automation.tests.AdminMatterDocumentLifecycleTest@77a98a6a]" name="administratorManagesOwnedMatterDocumentLifecycle" class="com.raddatz.automation.tests.AdminMatterDocumentLifecycleTest"/>
+        <method signature="AdminMatterNoteLifecycleTest.administratorManagesOwnedMatterNoteLifecycle()[pri:0, instance:com.raddatz.automation.tests.AdminMatterNoteLifecycleTest@3f0846c6]" name="administratorManagesOwnedMatterNoteLifecycle" class="com.raddatz.automation.tests.AdminMatterNoteLifecycleTest"/>
+        <method signature="AdminMultiTenantMatterTest.administratorAddsOwnedSecondTenantToOwnedMatter()[pri:0, instance:com.raddatz.automation.tests.AdminMultiTenantMatterTest@3a3e4aff]" name="administratorAddsOwnedSecondTenantToOwnedMatter" class="com.raddatz.automation.tests.AdminMultiTenantMatterTest"/>
+        <method signature="AdminOwnedExpenseLifecycleTest.administratorMaintainsOwnedExpenseLifecycle()[pri:0, instance:com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest@7e22550a]" name="administratorMaintainsOwnedExpenseLifecycle" class="com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest"/>
+        <method signature="AdminOwnedHierarchyEditTest.administratorEditsOwnedHierarchy()[pri:0, instance:com.raddatz.automation.tests.AdminOwnedHierarchyEditTest@13cf7d52]" name="administratorEditsOwnedHierarchy" class="com.raddatz.automation.tests.AdminOwnedHierarchyEditTest"/>
+        <method signature="AdminOwnedInvoiceDraftTest.administratorCreatesOwnedInvoiceDraftFromOwnedTime()[pri:0, instance:com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest@62452cc9]" name="administratorCreatesOwnedInvoiceDraftFromOwnedTime" class="com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest"/>
+        <method signature="AdminOwnedTimeEntryLifecycleTest.administratorManagesOwnedTimeEntryLifecycle()[pri:0, instance:com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest@78fbff54]" name="administratorManagesOwnedTimeEntryLifecycle" class="com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest"/>
+        <method signature="AdminPortfolioHierarchyTest.administratorBuildsOwnedPortfolioHierarchy()[pri:0, instance:com.raddatz.automation.tests.AdminPortfolioHierarchyTest@39ad977d]" name="administratorBuildsOwnedPortfolioHierarchy" class="com.raddatz.automation.tests.AdminPortfolioHierarchyTest"/>
+        <method signature="AdminTaskLifecycleTest.administratorMaintainsOwnedTask()[pri:0, instance:com.raddatz.automation.tests.AdminTaskLifecycleTest@5d2a4eed]" name="administratorMaintainsOwnedTask" class="com.raddatz.automation.tests.AdminTaskLifecycleTest"/>
+        <method signature="AdminTimeEntryInvoicePropagationTest.administratorSeesUpdatedOwnedTimeEntryInDraftInvoice()[pri:0, instance:com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest@3e10dc6]" name="administratorSeesUpdatedOwnedTimeEntryInDraftInvoice" class="com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest"/>
+      </group> <!-- admin-mutation -->
+      <group name="admin-readonly">
+        <method signature="AdminSearchFilterTest.calendarViewsAndFilterContractsAreReadOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" name="calendarViewsAndFilterContractsAreReadOnly" class="com.raddatz.automation.tests.AdminSearchFilterTest"/>
+        <method signature="AdminSearchFilterTest.reportsTabsAndFiltersRemainReadOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" name="reportsTabsAndFiltersRemainReadOnly" class="com.raddatz.automation.tests.AdminSearchFilterTest"/>
+        <method signature="AdminSearchFilterTest.searchAndFilterContractsAreReadOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" name="searchAndFilterContractsAreReadOnly" class="com.raddatz.automation.tests.AdminSearchFilterTest"/>
+        <method signature="AdminSearchFilterTest.settingsRemainObservationOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" name="settingsRemainObservationOnly" class="com.raddatz.automation.tests.AdminSearchFilterTest"/>
+        <method signature="AdminSearchFilterTest.workflowContractsAreObservationOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" name="workflowContractsAreObservationOnly" class="com.raddatz.automation.tests.AdminSearchFilterTest"/>
+      </group> <!-- admin-readonly -->
+    </groups>
+    <test started-at="2026-10-26T15:02:15 IST" name="Verified owned workflows" finished-at="2026-10-26T15:11:26 IST" duration-ms="550410">
+      <class name="com.raddatz.automation.tests.AdminDocumentVariableGenerationTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminDocumentVariableGenerationTest@5a7005d]" started-at="2026-10-26T15:08:25 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:08:55 IST" duration-ms="30058" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminDocumentVariableGenerationTest.administratorGeneratesOwnedVariableDocument()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.navigateImpl(FrameImpl.java:429)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:971)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:44)
+at com.microsoft.playwright.Page.navigate(Page.java:5759)
+at com.raddatz.automation.tests.ReadOnlyTestBase.startLocalReadOnlySession(ReadOnlyTestBase.java:43)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 41 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorGeneratesOwnedVariableDocument()[pri:0, instance:com.raddatz.automation.tests.AdminDocumentVariableGenerationTest@5a7005d]" started-at="2026-10-26T15:08:55 IST" name="administratorGeneratesOwnedVariableDocument" description="Generate an owned Word document and verify a custom variable is replaced in its downloaded XML." finished-at="2026-10-26T15:08:55 IST" duration-ms="0" status="SKIP">
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.navigateImpl(FrameImpl.java:429)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:971)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:44)
+at com.microsoft.playwright.Page.navigate(Page.java:5759)
+at com.raddatz.automation.tests.ReadOnlyTestBase.startLocalReadOnlySession(ReadOnlyTestBase.java:43)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 41 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorGeneratesOwnedVariableDocument -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminDocumentVariableGenerationTest@5a7005d]" started-at="2026-10-26T15:08:55 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:08:55 IST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorGeneratesOwnedVariableDocument status=SKIP method=AdminDocumentVariableGenerationTest.administratorGeneratesOwnedVariableDocument()[pri:0, instance:com.raddatz.automation.tests.AdminDocumentVariableGenerationTest@5a7005d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminDocumentVariableGenerationTest -->
+      <class name="com.raddatz.automation.tests.AdminSearchFilterTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:08:55 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:09:25 IST" duration-ms="30060" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminSearchFilterTest.calendarViewsAndFilterContractsAreReadOnly()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.navigateImpl(FrameImpl.java:429)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:971)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:44)
+at com.microsoft.playwright.Page.navigate(Page.java:5759)
+at com.raddatz.automation.tests.ReadOnlyTestBase.startLocalReadOnlySession(ReadOnlyTestBase.java:43)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 41 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="calendarViewsAndFilterContractsAreReadOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:09:25 IST" name="calendarViewsAndFilterContractsAreReadOnly" description="Calendar views and filters can be observed without opening, creating, or changing events." finished-at="2026-10-26T15:09:25 IST" duration-ms="0" status="SKIP">
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.navigateImpl(FrameImpl.java:429)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:971)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:44)
+at com.microsoft.playwright.Page.navigate(Page.java:5759)
+at com.raddatz.automation.tests.ReadOnlyTestBase.startLocalReadOnlySession(ReadOnlyTestBase.java:43)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 41 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- calendarViewsAndFilterContractsAreReadOnly -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:09:25 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:09:25 IST" duration-ms="5" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=calendarViewsAndFilterContractsAreReadOnly status=SKIP method=AdminSearchFilterTest.calendarViewsAndFilterContractsAreReadOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:09:25 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:09:55 IST" duration-ms="30058" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminSearchFilterTest.reportsTabsAndFiltersRemainReadOnly()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.navigateImpl(FrameImpl.java:429)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:971)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:44)
+at com.microsoft.playwright.Page.navigate(Page.java:5759)
+at com.raddatz.automation.tests.ReadOnlyTestBase.startLocalReadOnlySession(ReadOnlyTestBase.java:43)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 41 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="reportsTabsAndFiltersRemainReadOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:09:55 IST" name="reportsTabsAndFiltersRemainReadOnly" description="Reports are observed after approved sensitive-access setup without generating, exporting, sending, or opening record actions." finished-at="2026-10-26T15:09:55 IST" duration-ms="0" status="SKIP">
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.navigateImpl(FrameImpl.java:429)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:971)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:44)
+at com.microsoft.playwright.Page.navigate(Page.java:5759)
+at com.raddatz.automation.tests.ReadOnlyTestBase.startLocalReadOnlySession(ReadOnlyTestBase.java:43)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 41 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- reportsTabsAndFiltersRemainReadOnly -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:09:55 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:09:55 IST" duration-ms="7" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=reportsTabsAndFiltersRemainReadOnly status=SKIP method=AdminSearchFilterTest.reportsTabsAndFiltersRemainReadOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:09:55 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:10:25 IST" duration-ms="30059" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminSearchFilterTest.searchAndFilterContractsAreReadOnly()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.navigateImpl(FrameImpl.java:429)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:971)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:44)
+at com.microsoft.playwright.Page.navigate(Page.java:5759)
+at com.raddatz.automation.tests.ReadOnlyTestBase.startLocalReadOnlySession(ReadOnlyTestBase.java:43)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 41 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="searchAndFilterContractsAreReadOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:10:25 IST" name="searchAndFilterContractsAreReadOnly" description="Company and task searches return empty results for a unique no-match query and reset safely." finished-at="2026-10-26T15:10:25 IST" duration-ms="0" status="SKIP">
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.navigateImpl(FrameImpl.java:429)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:971)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:44)
+at com.microsoft.playwright.Page.navigate(Page.java:5759)
+at com.raddatz.automation.tests.ReadOnlyTestBase.startLocalReadOnlySession(ReadOnlyTestBase.java:43)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 41 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchAndFilterContractsAreReadOnly -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:10:25 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:10:25 IST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=searchAndFilterContractsAreReadOnly status=SKIP method=AdminSearchFilterTest.searchAndFilterContractsAreReadOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:10:25 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:10:55 IST" duration-ms="30060" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminSearchFilterTest.settingsRemainObservationOnly()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.navigateImpl(FrameImpl.java:429)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:971)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:44)
+at com.microsoft.playwright.Page.navigate(Page.java:5759)
+at com.raddatz.automation.tests.ReadOnlyTestBase.startLocalReadOnlySession(ReadOnlyTestBase.java:43)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 41 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="settingsRemainObservationOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:10:55 IST" name="settingsRemainObservationOnly" description="Settings destinations are observed without opening restricted configuration controls." finished-at="2026-10-26T15:10:55 IST" duration-ms="0" status="SKIP">
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.navigateImpl(FrameImpl.java:429)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:971)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:44)
+at com.microsoft.playwright.Page.navigate(Page.java:5759)
+at com.raddatz.automation.tests.ReadOnlyTestBase.startLocalReadOnlySession(ReadOnlyTestBase.java:43)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 41 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- settingsRemainObservationOnly -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:10:55 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:10:55 IST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=settingsRemainObservationOnly status=SKIP method=AdminSearchFilterTest.settingsRemainObservationOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:10:55 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:11:26 IST" duration-ms="30056" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminSearchFilterTest.workflowContractsAreObservationOnly()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.navigateImpl(FrameImpl.java:429)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:971)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:44)
+at com.microsoft.playwright.Page.navigate(Page.java:5759)
+at com.raddatz.automation.tests.ReadOnlyTestBase.startLocalReadOnlySession(ReadOnlyTestBase.java:43)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 41 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="workflowContractsAreObservationOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:11:26 IST" name="workflowContractsAreObservationOnly" description="Workflow contracts are observed without choosing triggers/actions, toggling workflows, or saving a workflow." finished-at="2026-10-26T15:11:26 IST" duration-ms="0" status="SKIP">
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.navigateImpl(FrameImpl.java:429)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:971)
+at com.microsoft.playwright.impl.PageImpl.navigate(PageImpl.java:44)
+at com.microsoft.playwright.Page.navigate(Page.java:5759)
+at com.raddatz.automation.tests.ReadOnlyTestBase.startLocalReadOnlySession(ReadOnlyTestBase.java:43)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - navigating to "http://192.168.0.229:8000/dashboard", waiting until "load"
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 41 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- workflowContractsAreObservationOnly -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d]" started-at="2026-10-26T15:11:26 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:11:26 IST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=workflowContractsAreObservationOnly status=SKIP method=AdminSearchFilterTest.workflowContractsAreObservationOnly()[pri:0, instance:com.raddatz.automation.tests.AdminSearchFilterTest@5bc9ba1d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminSearchFilterTest -->
+      <class name="com.raddatz.automation.tests.AdminMatterDocumentLifecycleTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminMatterDocumentLifecycleTest@77a98a6a]" started-at="2026-10-26T15:05:10 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:05:12 IST" duration-ms="2167" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminMatterDocumentLifecycleTest.administratorManagesOwnedMatterDocumentLifecycle()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorManagesOwnedMatterDocumentLifecycle()[pri:0, instance:com.raddatz.automation.tests.AdminMatterDocumentLifecycleTest@77a98a6a]" started-at="2026-10-26T15:05:12 IST" name="administratorManagesOwnedMatterDocumentLifecycle" description="Administrator manages an owned Matter document without portal, email, timeline, or note side effects." finished-at="2026-10-26T15:05:40 IST" duration-ms="27740" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorManagesOwnedMatterDocumentLifecycle -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminMatterDocumentLifecycleTest@77a98a6a]" started-at="2026-10-26T15:05:40 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:05:40 IST" duration-ms="7" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorManagesOwnedMatterDocumentLifecycle status=SUCCESS method=AdminMatterDocumentLifecycleTest.administratorManagesOwnedMatterDocumentLifecycle()[pri:0, instance:com.raddatz.automation.tests.AdminMatterDocumentLifecycleTest@77a98a6a] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminMatterDocumentLifecycleTest -->
+      <class name="com.raddatz.automation.tests.AdminOwnedHierarchyEditTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminOwnedHierarchyEditTest@13cf7d52]" started-at="2026-10-26T15:03:05 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:03:07 IST" duration-ms="2081" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminOwnedHierarchyEditTest.administratorEditsOwnedHierarchy()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorEditsOwnedHierarchy()[pri:0, instance:com.raddatz.automation.tests.AdminOwnedHierarchyEditTest@13cf7d52]" started-at="2026-10-26T15:03:07 IST" name="administratorEditsOwnedHierarchy" description="Edit an owned Company contact role, Property unit count and Matter priority, then verify persistence and unchanged lineage." finished-at="2026-10-26T15:03:35 IST" duration-ms="28268" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorEditsOwnedHierarchy -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminOwnedHierarchyEditTest@13cf7d52]" started-at="2026-10-26T15:03:35 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:03:35 IST" duration-ms="6" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorEditsOwnedHierarchy status=SUCCESS method=AdminOwnedHierarchyEditTest.administratorEditsOwnedHierarchy()[pri:0, instance:com.raddatz.automation.tests.AdminOwnedHierarchyEditTest@13cf7d52] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminOwnedHierarchyEditTest -->
+      <class name="com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest@6941827a]" started-at="2026-10-26T15:07:44 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:07:48 IST" duration-ms="3647" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest.administratorMaintainsOwnedDocumentTemplateMetadata()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorMaintainsOwnedDocumentTemplateMetadata()[pri:0, instance:com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest@6941827a]" started-at="2026-10-26T15:07:48 IST" name="administratorMaintainsOwnedDocumentTemplateMetadata" description="Administrator creates, uploads, edits, and downloads an owned document template without generation or billing side effects." finished-at="2026-10-26T15:08:24 IST" duration-ms="36322" status="FAIL">
+          <exception class="com.microsoft.playwright.TimeoutError">
+            <message>
+              <![CDATA[Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - waiting for getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile(".*Save Template.*")))
+-     - locator resolved to <button type="submit" class="btn btn-primary">…</button>
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is visible, enabled and stable
+-       - scrolling into view if needed
+-       - done scrolling
+-       - <div id="rz-tf-panel" aria-live="polite" class="rz-tf-panel-processing">…</div> intercepts pointer events
+-     - retrying click action
+-     - waiting 20ms
+-     - waiting for element to be visible, enabled and stable
+-     - element is not stable
+-   - retrying click action
+-     - waiting 100ms
+-     - waiting for element to be visible, enabled and stable
+-     - element is visible, enabled and stable
+-     - scrolling into view if needed
+-     - done scrolling
+-     - <div id="rz-tf-panel" aria-live="polite" class="rz-tf-panel-processing">…</div> intercepts pointer events
+-   - retrying click action
+-     - waiting 100ms
+-     - waiting for element to be visible, enabled and stable
+-     - element is not stable
+-   - retrying click action
+-     - waiting 500ms
+-     - waiting for element to be visible, enabled and stable
+-     - element is visible, enabled and stable
+-     - scrolling into view if needed
+-     - done scrolling
+-     - <div id="rz-tf-panel" aria-live="polite" class="rz-tf-panel-processing">…</div> intercepts pointer events
+-   51 × retrying click action
+-        - waiting 500ms
+-        - waiting for element to be visible, enabled and stable
+-        - element is visible, enabled and stable
+-        - scrolling into view if needed
+-        - done scrolling
+-        - <div id="rz-offline" aria-modal="true" role="alertdialog" class="is-visible" aria-labelledby="rz-offline-title" aria-describedby="rz-offline-desc">…</div> intercepts pointer events
+-   - retrying click action
+-     - waiting 500ms
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - waiting for getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile(".*Save Template.*")))
+-     - locator resolved to <button type="submit" class="btn btn-primary">…</button>
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is visible, enabled and stable
+-       - scrolling into view if needed
+-       - done scrolling
+-       - <div id="rz-tf-panel" aria-live="polite" class="rz-tf-panel-processing">…</div> intercepts pointer events
+-     - retrying click action
+-     - waiting 20ms
+-     - waiting for element to be visible, enabled and stable
+-     - element is not stable
+-   - retrying click action
+-     - waiting 100ms
+-     - waiting for element to be visible, enabled and stable
+-     - element is visible, enabled and stable
+-     - scrolling into view if needed
+-     - done scrolling
+-     - <div id="rz-tf-panel" aria-live="polite" class="rz-tf-panel-processing">…</div> intercepts pointer events
+-   - retrying click action
+-     - waiting 100ms
+-     - waiting for element to be visible, enabled and stable
+-     - element is not stable
+-   - retrying click action
+-     - waiting 500ms
+-     - waiting for element to be visible, enabled and stable
+-     - element is visible, enabled and stable
+-     - scrolling into view if needed
+-     - done scrolling
+-     - <div id="rz-tf-panel" aria-live="polite" class="rz-tf-panel-processing">…</div> intercepts pointer events
+-   51 × retrying click action
+-        - waiting 500ms
+-        - waiting for element to be visible, enabled and stable
+-        - element is visible, enabled and stable
+-        - scrolling into view if needed
+-        - done scrolling
+-        - <div id="rz-offline" aria-modal="true" role="alertdialog" class="is-visible" aria-labelledby="rz-offline-title" aria-describedby="rz-offline-desc">…</div> intercepts pointer events
+-   - retrying click action
+-     - waiting 500ms
+
+at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+at com.microsoft.playwright.impl.FrameImpl.clickImpl(FrameImpl.java:244)
+at com.microsoft.playwright.impl.LocatorImpl.click(LocatorImpl.java:173)
+at com.microsoft.playwright.Locator.click(Locator.java:2840)
+at com.raddatz.automation.pages.DocumentTemplateFormPage.saveTemplate(DocumentTemplateFormPage.java:106)
+at com.raddatz.automation.pages.DocumentTemplateFormPage.createOwnedTemplate(DocumentTemplateFormPage.java:62)
+at com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest.administratorMaintainsOwnedDocumentTemplateMetadata(AdminDocumentTemplateMetadataLifecycleTest.java:42)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/w3/48vhlky529l7qlp8lf9_75yh0000gn/T/playwright-java-14570726010662400893/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - waiting for getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile(".*Save Template.*")))
+-     - locator resolved to <button type="submit" class="btn btn-primary">…</button>
+-   - attempting click action
+-     2 × waiting for element to be visible, enabled and stable
+-       - element is visible, enabled and stable
+-       - scrolling into view if needed
+-       - done scrolling
+-       - <div id="rz-tf-panel" aria-live="polite" class="rz-tf-panel-processing">…</div> intercepts pointer events
+-     - retrying click action
+-     - waiting 20ms
+-     - waiting for element to be visible, enabled and stable
+-     - element is not stable
+-   - retrying click action
+-     - waiting 100ms
+-     - waiting for element to be visible, enabled and stable
+-     - element is visible, enabled and stable
+-     - scrolling into view if needed
+-     - done scrolling
+-     - <div id="rz-tf-panel" aria-live="polite" class="rz-tf-panel-processing">…</div> intercepts pointer events
+-   - retrying click action
+-     - waiting 100ms
+-     - waiting for element to be visible, enabled and stable
+-     - element is not stable
+-   - retrying click action
+-     - waiting 500ms
+-     - waiting for element to be visible, enabled and stable
+-     - element is visible, enabled and stable
+-     - scrolling into view if needed
+-     - done scrolling
+-     - <div id="rz-tf-panel" aria-live="polite" class="rz-tf-panel-processing">…</div> intercepts pointer events
+-   51 × retrying click action
+-        - waiting 500ms
+-        - waiting for element to be visible, enabled and stable
+-        - element is visible, enabled and stable
+-        - scrolling into view if needed
+-        - done scrolling
+-        - <div id="rz-offline" aria-modal="true" role="alertdialog" class="is-visible" aria-labelledby="rz-offline-title" aria-describedby="rz-offline-desc">…</div> intercepts pointer events
+-   - retrying click action
+-     - waiting 500ms
+
+at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+... 38 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- com.microsoft.playwright.TimeoutError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorMaintainsOwnedDocumentTemplateMetadata -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest@6941827a]" started-at="2026-10-26T15:08:25 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:08:25 IST" duration-ms="589" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorMaintainsOwnedDocumentTemplateMetadata status=FAILURE method=AdminDocumentTemplateMetadataLifecycleTest.administratorMaintainsOwnedDocumentTemplateMetadata()[pri:0, instance:com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest@6941827a] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest -->
+      <class name="com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest@45e37a7e]" started-at="2026-10-26T15:07:00 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:07:02 IST" duration-ms="1924" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest.administratorMaintainsOwnedCourtUpdate()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorMaintainsOwnedCourtUpdate()[pri:0, instance:com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest@45e37a7e]" started-at="2026-10-26T15:07:02 IST" name="administratorMaintainsOwnedCourtUpdate" description="Administrator creates, edits, verifies, and deletes an owned Court Update from an owned calendar Event." finished-at="2026-10-26T15:07:25 IST" duration-ms="22430" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorMaintainsOwnedCourtUpdate -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest@45e37a7e]" started-at="2026-10-26T15:07:25 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:07:25 IST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorMaintainsOwnedCourtUpdate status=SUCCESS method=AdminCourtUpdateLifecycleTest.administratorMaintainsOwnedCourtUpdate()[pri:0, instance:com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest@45e37a7e] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest -->
+      <class name="com.raddatz.automation.tests.AdminMultiTenantMatterTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminMultiTenantMatterTest@3a3e4aff]" started-at="2026-10-26T15:03:35 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:03:38 IST" duration-ms="2091" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminMultiTenantMatterTest.administratorAddsOwnedSecondTenantToOwnedMatter()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorAddsOwnedSecondTenantToOwnedMatter()[pri:0, instance:com.raddatz.automation.tests.AdminMultiTenantMatterTest@3a3e4aff]" started-at="2026-10-26T15:03:38 IST" name="administratorAddsOwnedSecondTenantToOwnedMatter" description="Administrator adds a fully populated second tenant to an owned Matter." finished-at="2026-10-26T15:03:56 IST" duration-ms="18604" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorAddsOwnedSecondTenantToOwnedMatter -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminMultiTenantMatterTest@3a3e4aff]" started-at="2026-10-26T15:03:56 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:03:56 IST" duration-ms="5" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorAddsOwnedSecondTenantToOwnedMatter status=SUCCESS method=AdminMultiTenantMatterTest.administratorAddsOwnedSecondTenantToOwnedMatter()[pri:0, instance:com.raddatz.automation.tests.AdminMultiTenantMatterTest@3a3e4aff] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminMultiTenantMatterTest -->
+      <class name="com.raddatz.automation.tests.AdminPortfolioHierarchyTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminPortfolioHierarchyTest@39ad977d]" started-at="2026-10-26T15:02:15 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:02:20 IST" duration-ms="4417" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminPortfolioHierarchyTest.administratorBuildsOwnedPortfolioHierarchy()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorBuildsOwnedPortfolioHierarchy()[pri:0, instance:com.raddatz.automation.tests.AdminPortfolioHierarchyTest@39ad977d]" started-at="2026-10-26T15:02:20 IST" name="administratorBuildsOwnedPortfolioHierarchy" description="Administrator creates two Properties, three Matters, a Task, and an Event under one owned Company." finished-at="2026-10-26T15:03:05 IST" duration-ms="45535" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorBuildsOwnedPortfolioHierarchy -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminPortfolioHierarchyTest@39ad977d]" started-at="2026-10-26T15:03:05 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:03:05 IST" duration-ms="19" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorBuildsOwnedPortfolioHierarchy status=SUCCESS method=AdminPortfolioHierarchyTest.administratorBuildsOwnedPortfolioHierarchy()[pri:0, instance:com.raddatz.automation.tests.AdminPortfolioHierarchyTest@39ad977d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+        <test-method is-config="true" signature="closeSuiteBrowser()[pri:0, instance:com.raddatz.automation.tests.AdminPortfolioHierarchyTest@39ad977d]" started-at="2026-10-26T15:11:26 IST" name="closeSuiteBrowser" finished-at="2026-10-26T15:11:26 IST" duration-ms="336" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeSuiteBrowser -->
+      </class> <!-- com.raddatz.automation.tests.AdminPortfolioHierarchyTest -->
+      <class name="com.raddatz.automation.tests.AdminMatterNoteLifecycleTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminMatterNoteLifecycleTest@3f0846c6]" started-at="2026-10-26T15:04:49 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:04:51 IST" duration-ms="2072" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminMatterNoteLifecycleTest.administratorManagesOwnedMatterNoteLifecycle()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorManagesOwnedMatterNoteLifecycle()[pri:0, instance:com.raddatz.automation.tests.AdminMatterNoteLifecycleTest@3f0846c6]" started-at="2026-10-26T15:04:51 IST" name="administratorManagesOwnedMatterNoteLifecycle" description="Administrator manages a note only on a newly-created owned Matter." finished-at="2026-10-26T15:05:10 IST" duration-ms="19138" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorManagesOwnedMatterNoteLifecycle -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminMatterNoteLifecycleTest@3f0846c6]" started-at="2026-10-26T15:05:10 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:05:10 IST" duration-ms="6" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorManagesOwnedMatterNoteLifecycle status=SUCCESS method=AdminMatterNoteLifecycleTest.administratorManagesOwnedMatterNoteLifecycle()[pri:0, instance:com.raddatz.automation.tests.AdminMatterNoteLifecycleTest@3f0846c6] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminMatterNoteLifecycleTest -->
+      <class name="com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest@7e22550a]" started-at="2026-10-26T15:06:28 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:06:30 IST" duration-ms="1867" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest.administratorMaintainsOwnedExpenseLifecycle()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorMaintainsOwnedExpenseLifecycle()[pri:0, instance:com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest@7e22550a]" started-at="2026-10-26T15:06:30 IST" name="administratorMaintainsOwnedExpenseLifecycle" description="Administrator manages an owned expense only for a newly-created owned Matter." finished-at="2026-10-26T15:07:00 IST" duration-ms="30733" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorMaintainsOwnedExpenseLifecycle -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest@7e22550a]" started-at="2026-10-26T15:07:00 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:07:00 IST" duration-ms="6" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorMaintainsOwnedExpenseLifecycle status=SUCCESS method=AdminOwnedExpenseLifecycleTest.administratorMaintainsOwnedExpenseLifecycle()[pri:0, instance:com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest@7e22550a] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest -->
+      <class name="com.raddatz.automation.tests.AdminEventLifecycleTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminEventLifecycleTest@57459491]" started-at="2026-10-26T15:04:20 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:04:22 IST" duration-ms="2115" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminEventLifecycleTest.administratorMaintainsOwnedEvent()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorMaintainsOwnedEvent()[pri:0, instance:com.raddatz.automation.tests.AdminEventLifecycleTest@57459491]" started-at="2026-10-26T15:04:22 IST" name="administratorMaintainsOwnedEvent" description="Administrator maintains an owned calendar Event and its Court Updates propagation." finished-at="2026-10-26T15:04:49 IST" duration-ms="27116" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorMaintainsOwnedEvent -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminEventLifecycleTest@57459491]" started-at="2026-10-26T15:04:49 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:04:49 IST" duration-ms="5" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorMaintainsOwnedEvent status=SUCCESS method=AdminEventLifecycleTest.administratorMaintainsOwnedEvent()[pri:0, instance:com.raddatz.automation.tests.AdminEventLifecycleTest@57459491] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminEventLifecycleTest -->
+      <class name="com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest@62452cc9]" started-at="2026-10-26T15:07:25 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:07:26 IST" duration-ms="1552" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest.administratorCreatesOwnedInvoiceDraftFromOwnedTime()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorCreatesOwnedInvoiceDraftFromOwnedTime()[pri:0, instance:com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest@62452cc9]" started-at="2026-10-26T15:07:26 IST" name="administratorCreatesOwnedInvoiceDraftFromOwnedTime" description="Administrator creates and verifies an owned invoice draft from owned billable time." finished-at="2026-10-26T15:07:44 IST" duration-ms="18151" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorCreatesOwnedInvoiceDraftFromOwnedTime -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest@62452cc9]" started-at="2026-10-26T15:07:44 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:07:44 IST" duration-ms="6" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorCreatesOwnedInvoiceDraftFromOwnedTime status=SUCCESS method=AdminOwnedInvoiceDraftTest.administratorCreatesOwnedInvoiceDraftFromOwnedTime()[pri:0, instance:com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest@62452cc9] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest -->
+      <class name="com.raddatz.automation.tests.AdminTaskLifecycleTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminTaskLifecycleTest@5d2a4eed]" started-at="2026-10-26T15:03:56 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:03:58 IST" duration-ms="2196" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminTaskLifecycleTest.administratorMaintainsOwnedTask()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorMaintainsOwnedTask()[pri:0, instance:com.raddatz.automation.tests.AdminTaskLifecycleTest@5d2a4eed]" started-at="2026-10-26T15:03:58 IST" name="administratorMaintainsOwnedTask" description="Administrator maintains an owned Matter task without touching existing tasks." finished-at="2026-10-26T15:04:20 IST" duration-ms="21471" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorMaintainsOwnedTask -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminTaskLifecycleTest@5d2a4eed]" started-at="2026-10-26T15:04:20 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:04:20 IST" duration-ms="7" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorMaintainsOwnedTask status=SUCCESS method=AdminTaskLifecycleTest.administratorMaintainsOwnedTask()[pri:0, instance:com.raddatz.automation.tests.AdminTaskLifecycleTest@5d2a4eed] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminTaskLifecycleTest -->
+      <class name="com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest@3e10dc6]" started-at="2026-10-26T15:06:04 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:06:06 IST" duration-ms="1704" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest.administratorSeesUpdatedOwnedTimeEntryInDraftInvoice()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorSeesUpdatedOwnedTimeEntryInDraftInvoice()[pri:0, instance:com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest@3e10dc6]" started-at="2026-10-26T15:06:06 IST" name="administratorSeesUpdatedOwnedTimeEntryInDraftInvoice" description="Updated owned time entry is reloaded and reflected in its owned draft invoice." finished-at="2026-10-26T15:06:28 IST" duration-ms="21591" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorSeesUpdatedOwnedTimeEntryInDraftInvoice -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest@3e10dc6]" started-at="2026-10-26T15:06:28 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:06:28 IST" duration-ms="5" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorSeesUpdatedOwnedTimeEntryInDraftInvoice status=SUCCESS method=AdminTimeEntryInvoicePropagationTest.administratorSeesUpdatedOwnedTimeEntryInDraftInvoice()[pri:0, instance:com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest@3e10dc6] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest -->
+      <class name="com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest">
+        <test-method is-config="true" signature="startLocalReadOnlySession(java.lang.reflect.Method,org.testng.ITestContext)[pri:0, instance:com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest@78fbff54]" started-at="2026-10-26T15:05:40 IST" name="startLocalReadOnlySession" finished-at="2026-10-26T15:05:42 IST" duration-ms="1911" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest.administratorManagesOwnedTimeEntryLifecycle()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[org.testng.TestRunner@1a78dacd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startLocalReadOnlySession -->
+        <test-method signature="administratorManagesOwnedTimeEntryLifecycle()[pri:0, instance:com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest@78fbff54]" started-at="2026-10-26T15:05:42 IST" name="administratorManagesOwnedTimeEntryLifecycle" description="Administrator manages a billing time entry only for a newly-created owned Matter." finished-at="2026-10-26T15:06:04 IST" duration-ms="22278" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administratorManagesOwnedTimeEntryLifecycle -->
+        <test-method is-config="true" signature="closeLocalReadOnlySession(org.testng.ITestResult)[pri:0, instance:com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest@78fbff54]" started-at="2026-10-26T15:06:04 IST" name="closeLocalReadOnlySession" finished-at="2026-10-26T15:06:04 IST" duration-ms="7" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=administratorManagesOwnedTimeEntryLifecycle status=SUCCESS method=AdminOwnedTimeEntryLifecycleTest.administratorManagesOwnedTimeEntryLifecycle()[pri:0, instance:com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest@78fbff54] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeLocalReadOnlySession -->
+      </class> <!-- com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest -->
+    </test> <!-- Verified owned workflows -->
+  </suite> <!-- Raddatz local admin regression - single browser -->
+</testng-results>

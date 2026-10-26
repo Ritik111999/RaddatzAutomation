@@ -152,3 +152,39 @@ and excluding credentials. A read-only verification run passed 4/4 and generated
 `target/automation-artifacts/run_20261026_144310/raddatz-qa-report.pdf`; the
 cover page was rendered and visually inspected. `extent-report.pdf` remains the
 underlying detailed Extent artifact.
+
+**Scenario-wise report correction, 2026-10-26:** added a detailed section for
+each serial-suite method: type, preconditions, implemented workflow steps,
+expected/actual outcome, redacted failure class, duration, and evidence reference.
+Coverage gaps are explicitly listed, including rescheduling and Expense-to-Invoice.
+Skipped modules no longer display PASS. `RebuildQaReport` rebuilds the PDF from
+saved TestNG XML without rerunning the application, using secure XML parsing.
+Latest attempted run `run_20261026_150215`: saved TestNG evidence contains 12 PASS,
+1 FAIL (Template Save timeout), 6 SKIP (setup timeouts). Report generation also
+encountered a class-version error because compilation occurred while its JVM was
+running; it was recovered offline after compilation with the run stopped.
+The preceding clean 19/19 result remains historical evidence from
+`run_20261026_144930`; it must not be presented as this latest attempt's result.
+
+The final corrected PDF is
+`output/pdf/Raddatz_Detailed_Scenarios_20261026/raddatz-qa-report.pdf` (22 pages,
+19 scenario detail sections with registry IDs, prerequisites, steps, expected/
+actual results, redacted failure classes and evidence references). It was rebuilt
+from the preserved XML, preserving run ID/timestamps. All pages were rendered;
+text verification found exactly 19 IDs, 19 precondition sections, 19 expected
+results, and 19 actual results. Module outcomes with skipped cases are explicitly
+SKIP. Maven test compilation and `git diff --check` pass. The PDF layout work
+adds no new application coverage. Template Save and setup timeouts remain pending
+triage; no additional PWA run was performed for the final formatting changes.
+
+**Primary lifecycle correction from client, 2026-10-26:** user explicitly defined
+the full journey as admin setup → Company/Property/Matter → documents/notes at all
+three levels → assigned Matter Tasks → Events/court Event → saved/submitted Court
+Update → Court Time selection and auto-populated amount/edit/delete → Save into
+Time → Time/Expense operations → Invoice New Draft/Save/Send. This is authoritative
+CLIENT-CONFIRMED scope; it does not establish runtime coverage. Updated client
+requirements, business workflows, lineage, lifecycle matrix, and clarifications.
+The key missing connected transition is Court Update → Court Time → Time, rather
+than an independently created Time entry. Exact labels/formulas remain unknown.
+Send is an explicit business endpoint but must be classified for external messaging
+before execution. No application action or new test execution occurred this turn.

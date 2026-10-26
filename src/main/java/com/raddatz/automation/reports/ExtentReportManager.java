@@ -23,7 +23,7 @@ public final class ExtentReportManager {
             Path html = directory.resolve("extent-report.html");
             ExtentSparkReporter spark = new ExtentSparkReporter(html.toString());
             spark.config().setDocumentTitle("Raddatz PWA Automation");
-            spark.config().setReportName("Read-only Playwright/TestNG execution");
+            spark.config().setReportName("Approved Raddatz Playwright/TestNG execution");
             ExtentReports extent = new ExtentReports();
             extent.attachReporter(spark);
             extent.setSystemInfo("Browser", config.browser());

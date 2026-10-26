@@ -73,7 +73,9 @@ public final class ExtentTestListener implements ITestListener, IExecutionListen
         scenarios.add(new RaddatzQaPdfReport.Scenario(result.getMethod().getMethodName(),
                 description == null ? "" : description,
                 status,
-                Duration.ofMillis(Math.max(0, result.getEndMillis() - result.getStartMillis()))));
+                Duration.ofMillis(Math.max(0, result.getEndMillis() - result.getStartMillis())),
+                result.getThrowable() == null ? "None recorded" : result.getThrowable().getClass().getSimpleName()
+                        + " (cause requires triage; confidential exception content omitted)"));
     }
 
     private void attachScreenshot(ITestResult result) {

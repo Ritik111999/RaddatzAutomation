@@ -32,3 +32,10 @@ target. Result: 19 executed, 19 passed, 0 failures, 0 errors, 0 skipped; duratio
 408.2 seconds. It includes permitted update persistence and propagation checks,
 including revised Time Entry data in its owned draft-invoice source. Restricted
 modules and payment/send/allocation/settlement controls remain excluded.
+
+Latest attempt: `run_20261026_150215`, 19 selected methods: 12 passed, 1 failed
+(Template Save timeout), 6 skipped (session setup timeouts). The report listener
+also encountered a class-version error after a concurrent compilation. Saved
+TestNG results were recovered and the corrected report rebuilt offline at
+`output/pdf/Raddatz_Detailed_Scenarios_20261026/raddatz-qa-report.pdf`.
+The preceding 19/19 result is historical and is not the result of this attempt.

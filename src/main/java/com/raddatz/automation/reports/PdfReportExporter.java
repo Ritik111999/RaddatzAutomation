@@ -21,7 +21,13 @@ public final class PdfReportExporter {
             Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
             Page page = browser.newPage();
             page.navigate(html.toUri().toString());
-            page.pdf(new Page.PdfOptions().setPath(pdf).setFormat("A4").setPrintBackground(true));
+            Page.PdfOptions options = new Page.PdfOptions().setPath(pdf).setFormat("A4").setPrintBackground(true);
+            if (html.getFileName().toString().equals("raddatz-qa-report.html")) {
+                options.setPreferCSSPageSize(true).setDisplayHeaderFooter(true)
+                        .setHeaderTemplate("<div style='font-size:8px;width:100%;text-align:center;color:#64748b'>Raddatz PWA - Confidential QA execution report</div>")
+                        .setFooterTemplate("<div style='font-size:8px;width:100%;text-align:center;color:#64748b'>Page <span class='pageNumber'></span> of <span class='totalPages'></span></div>");
+            }
+            page.pdf(options);
             browser.close();
             LOGGER.info("PDF report written to {}", pdf.toAbsolutePath());
         } catch (RuntimeException exception) {
