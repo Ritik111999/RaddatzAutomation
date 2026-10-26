@@ -41,6 +41,8 @@ public final class MatterNotesPage extends BasePage {
         dialog.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Update").setExact(true)).click();
         assertVisible(page.getByText("Note updated successfully.", new Page.GetByTextOptions().setExact(true)));
+        page.reload();
+        assertLoaded();
         assertVisible(ownedNoteRow(revisedText));
         return this;
     }

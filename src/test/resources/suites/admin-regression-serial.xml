@@ -11,6 +11,7 @@
         <class name="com.raddatz.automation.tests.AdminMatterNoteLifecycleTest"/>
         <class name="com.raddatz.automation.tests.AdminMatterDocumentLifecycleTest"/>
         <class name="com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest"/>
+        <class name="com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest"/>
         <class name="com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest"/>
         <class name="com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest"/>
         <class name="com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest"/>

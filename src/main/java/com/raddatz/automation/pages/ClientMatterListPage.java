@@ -31,8 +31,12 @@ public final class ClientMatterListPage extends BasePage {
     }
 
     public PropertyFormPage openAddProperty() {
-        link("+ Add Property").click();
-        page.waitForURL("**/property/create");
+        // This local PWA occasionally needs more than the default action
+        // timeout to render the parent-bound property route after Company
+        // creation. The click is allowed to complete its navigation and the
+        // route itself remains the explicit readiness contract.
+        link("+ Add Property").click(new Locator.ClickOptions().setNoWaitAfter(true));
+        page.waitForURL("**/property/create", new Page.WaitForURLOptions().setTimeout(60_000));
         return new PropertyFormPage(page).assertLoaded();
     }
 

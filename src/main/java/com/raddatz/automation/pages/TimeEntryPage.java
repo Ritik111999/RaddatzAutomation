@@ -52,6 +52,10 @@ public final class TimeEntryPage extends BasePage {
         dialog.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Update Entry").setExact(false)).click();
         assertVisible(page.getByText("Time entry updated successfully!", new Page.GetByTextOptions().setExact(true)));
+        // The table is refreshed from the server to prove this is not merely
+        // the optimistic modal state retained by the client.
+        page.reload();
+        assertLoaded();
         assertVisible(ownedEntryRow(revisedDescription));
         return this;
     }

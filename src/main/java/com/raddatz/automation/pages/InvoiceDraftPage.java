@@ -78,6 +78,14 @@ public final class InvoiceDraftPage extends BasePage {
     }
 
     public InvoiceDraftPage assertOwnedDraft(AdminScenarioData data) {
+        return assertOwnedDraftReflectsTime(data, data.initialTimeEntryDescription());
+    }
+
+    /**
+     * Proves the current invoice draft consumed the server-persisted bill note,
+     * including the edit path exercised by the owned time-entry lifecycle.
+     */
+    public InvoiceDraftPage assertOwnedDraftReflectsTime(AdminScenarioData data, String expectedBillNote) {
         assertVisible(page.getByRole(AriaRole.HEADING,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Invoice Details.*Draft", Pattern.CASE_INSENSITIVE))));
         Locator clientRow = page.getByRole(AriaRole.ROW).filter(new Locator.FilterOptions()
@@ -93,7 +101,7 @@ public final class InvoiceDraftPage extends BasePage {
         assertVisible(ownedTimeRow);
         assertThat(ownedTimeRow.getByRole(AriaRole.TEXTBOX,
                 new Locator.GetByRoleOptions().setName("Bill note").setExact(true)))
-                .hasValue(data.initialTimeEntryDescription());
+                .hasValue(expectedBillNote);
         assertThat(ownedTimeRow.getByRole(AriaRole.SPINBUTTON,
                 new Locator.GetByRoleOptions().setName("Time Billed Hours").setExact(true)))
                 .hasValue("1.50");

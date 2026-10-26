@@ -111,3 +111,27 @@ now also opens only the blank Court Updates screen in `PROD_OBSERVE`. It passed
 `target/automation-artifacts/run_20261026_130848/extent-report.pdf`. Matter,
 Notes, and case status expose required attributes; Notes has `maxlength=5000`.
 No calendar entry was selected and no Court Update was submitted.
+
+**Time-to-invoice update propagation, 2026-10-26:**
+`AdminTimeEntryInvoicePropagationTest` passed 1/1 in
+`run_20261026_134420`; report
+`target/automation-artifacts/run_20261026_134420/extent-report.pdf`. It creates
+only a fresh owned hierarchy and owned Time Entry, updates the bill note, reloads
+the server-backed Time Entry grid, and creates an owned draft whose source row
+contains the revised note. It excludes all payment/send/allocation/void controls.
+The test is included in the serial regression but that full 19-test suite has not
+yet been rerun after this addition. Expense-to-invoice inclusion remains unknown
+because the local application's exact date-range rule is not yet confirmed.
+
+**Update-propagation hardening, 2026-10-26:** Time update persistence now reloads
+the billing grid before its invoice-source assertion; Task and Note update paths
+reload before checking their revised owned identities. Two serial reruns exposed
+test-contract issues rather than confirmed product data loss: a stale Task search
+query after rename, and a local Expense edit modal that may remain open after a
+successful update. The Task lifecycle passed focused in `run_20261026_135549` and
+the repaired Expense lifecycle passed focused in `run_20261026_141323` (1/1 each).
+The most recent 19-test serial run `run_20261026_140545` had one Expense-modal
+assertion failure before that repair; therefore no fresh 19/19 full-suite pass is
+claimed yet. A clean full serial rerun remains required before updating the master
+pass status. Expense-to-invoice inclusion remains unverified pending a confirmed
+date-range rule.

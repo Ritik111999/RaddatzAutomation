@@ -45,6 +45,12 @@ public final class TodoPage extends BasePage {
         // The application persists in place and leaves the edit modal open.
         dialog.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Close").setExact(true)).click();
+        page.reload();
+        // Reload preserves the old search query. The renamed owned task should
+        // no longer match it, so query by the revised identity before asserting
+        // the server-backed list rather than treating the empty old-query state
+        // as a persistence failure.
+        assertVisible(heading("All Tasks"));
         assertTaskListed(revisedTaskName);
         return this;
     }

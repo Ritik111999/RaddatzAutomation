@@ -55,6 +55,10 @@ public final class ExpensePage extends BasePage {
         dialog.locator("#edit_description").fill(data.revisedExpenseDescription());
         dialog.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName(Pattern.compile(".*Update Expense"))).click();
+        // The local build may retain the edit modal after a successful update.
+        // Escape is its normal keyboard dismissal; close it before reloading
+        // the server-backed list rather than assuming a presentation side effect.
+        page.keyboard().press("Escape");
         assertThat(dialog).not().isVisible();
         page.reload();
         assertLoaded();

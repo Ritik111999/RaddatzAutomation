@@ -26,3 +26,4 @@ RAD-TC-00024,RAD-MOD-001,observation,Company Property and Matter visible field-c
 RAD-TC-00025,RAD-MOD-001,observation,Company Property and Matter native validation-attribute inventory,AdminFormContractObservationTest,PASS,run_20261026_130646,no values or submit; message text remains unknown
 RAD-TC-00026,RAD-MOD-003,observation,Task Event and Template native validation-attribute inventory,AdminFormContractObservationTest,PASS,run_20261026_130646,no values/upload/submit
 RAD-TC-00027,RAD-MOD-005,observation,Court Update native validation-attribute inventory,AdminFormContractObservationTest,PASS,run_20261026_130848,no Event selection or submit
+RAD-TC-00028,RAD-MOD-006,positive,Updated owned Time Entry persists after reload and feeds its owned draft invoice source,AdminTimeEntryInvoicePropagationTest,PASS,run_20261026_134420,owned data; no payment/send/allocation/void
