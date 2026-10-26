@@ -7,6 +7,8 @@ import com.raddatz.automation.data.AdminScenarioData;
 import com.raddatz.automation.data.OwnedRecordIds;
 
 import java.util.regex.Pattern;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -25,6 +27,40 @@ public final class PropertyFormPage extends BasePage {
                 new Page.GetByPlaceholderOptions().setExact(true)));
         assertVisible(page.locator("input[name='property_name']"));
         return this;
+    }
+
+    /** Observation-only contract; it deliberately neither selects a Client nor saves. */
+    public PropertyFormPage assertObservedFieldContract() {
+        assertVisible(page.getByPlaceholder("Search client name...",
+                new Page.GetByPlaceholderOptions().setExact(true)));
+        for (String name : new String[]{"property_name", "property_type", "total_units"}) {
+            assertVisible(page.locator("input[name='" + name + "']"));
+        }
+        assertVisible(page.locator("textarea[name='rental_office_address']"));
+        assertVisible(page.locator("input[name='business_licenses[0][descriptor]']"));
+        assertVisible(page.locator("input[name='business_licenses[0][number]']"));
+        assertVisible(page.locator("input[name='rad_numbers[0][descriptor]']"));
+        assertVisible(page.locator("input[name='rad_numbers[0][number]']"));
+        assertVisible(page.locator("input[name='rad_numbers[0][expiration_date]']"));
+        assertVisible(button("Save Property"));
+        return this;
+    }
+
+    /** Reads native validation attributes only; no parent selection or save occurs. */
+    public Map<String, ObservedFieldConstraint> observeValidationConstraints() {
+        Map<String, ObservedFieldConstraint> constraints = new LinkedHashMap<>();
+        constraints.put("clientSearch", observeConstraint("clientSearch",
+                page.getByPlaceholder("Search client name...", new Page.GetByPlaceholderOptions().setExact(true))));
+        constraints.put("propertyName", observeConstraint("propertyName", page.locator("input[name='property_name']")));
+        constraints.put("propertyType", observeConstraint("propertyType", page.locator("input[name='property_type']")));
+        constraints.put("totalUnits", observeConstraint("totalUnits", page.locator("input[name='total_units']")));
+        constraints.put("rentalOfficeAddress", observeConstraint("rentalOfficeAddress",
+                page.locator("textarea[name='rental_office_address']")));
+        constraints.put("businessLicenseNumber", observeConstraint("businessLicenseNumber",
+                page.locator("input[name='business_licenses[0][number]']")));
+        constraints.put("radExpirationDate", observeConstraint("radExpirationDate",
+                page.locator("input[name='rad_numbers[0][expiration_date]']")));
+        return Map.copyOf(constraints);
     }
 
     public PropertyDetailsPage createOwnedProperty(AdminScenarioData data) {

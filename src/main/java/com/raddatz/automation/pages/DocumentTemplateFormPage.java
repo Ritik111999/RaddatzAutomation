@@ -8,6 +8,8 @@ import com.microsoft.playwright.options.WaitForSelectorState;
 
 import java.nio.file.Path;
 import java.util.regex.Pattern;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -28,6 +30,16 @@ public final class DocumentTemplateFormPage extends BasePage {
         assertVisible(heading(Pattern.compile("Edit: .+")));
         assertVisible(page.locator("#name"));
         return this;
+    }
+
+    /** Inspects the blank template form only; no variable, source document, or template is added. */
+    public Map<String, ObservedFieldConstraint> observeValidationConstraints() {
+        Map<String, ObservedFieldConstraint> constraints = new LinkedHashMap<>();
+        constraints.put("name", observeConstraint("name", page.locator("#name")));
+        constraints.put("description", observeConstraint("description", page.locator("#description")));
+        constraints.put("category", observeConstraint("category", page.locator("#category")));
+        constraints.put("docxSource", observeConstraint("docxSource", page.locator("#docxImportFile")));
+        return Map.copyOf(constraints);
     }
 
     public DocumentTemplatesPage createOwnedTemplate(

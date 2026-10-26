@@ -1,0 +1,28 @@
+field_id,module_id,screen,field,label_or_control,type,required,status,confirmed_dependency,validation_source
+RAD-FIELD-001,RAD-MOD-001,Add Company,companyName,Enter company name,text,Yes,OBSERVED,None,required attribute run_20261026_130646
+RAD-FIELD-002,RAD-MOD-001,Add Company,contactEmail,Email,email,No,OBSERVED,Company contact,type=email run_20261026_130646
+RAD-FIELD-003,RAD-MOD-001,Add Company,address,Street/suite/city/state/zip,text,No,OBSERVED,None,zip maxlength=10; other observed address controls unrequired run_20261026_130646
+RAD-FIELD-004,RAD-MOD-001,Add Property,client,Search client name,text,No,OBSERVED,Must be current-run owned Company,visible input has no native required attribute; parent selection still required by workflow
+RAD-FIELD-005,RAD-MOD-001,Add Property,propertyName,Property Name,text,Yes,OBSERVED,Current Company,required attribute run_20261026_130646
+RAD-FIELD-006,RAD-MOD-001,Add Property,totalUnits,Total Units,number,No,OBSERVED,None,type=number; no min/max attributes observed run_20261026_130646
+RAD-FIELD-007,RAD-MOD-002,Create Matter,company,Company (Property Management Company),text,No,OBSERVED,Owned Company before Property,visible search input has no native required attribute; dependency client-confirmed
+RAD-FIELD-008,RAD-MOD-002,Create Matter,property,Property,text,No,OBSERVED,Selected owned Company,visible search input has no native required attribute; dependency client-confirmed
+RAD-FIELD-009,RAD-MOD-002,Create Matter,tenantName,Full tenant name,text,No,OBSERVED,Selected Property,no native required attribute observed run_20261026_130646
+RAD-FIELD-010,RAD-MOD-002,Create Matter,caseNumber,Case Number,text,No,OBSERVED,Unique owned fixture,explicitly optional label; no native required attribute
+RAD-FIELD-011,RAD-MOD-002,Create Matter,caseStatus,Case status,select,Observed,OBSERVED,None,RAD-E-0008
+RAD-FIELD-012,RAD-MOD-003,Task,Matter,Matter search,text,Aria-required,OBSERVED,Owned Matter derives Client,aria-required=true; native required absent run_20261026_130646
+RAD-FIELD-013,RAD-MOD-003,Task,dueDate,date,date,Yes,OBSERVED,None,required; min=2026-10-26 observed run_20261026_130646
+RAD-FIELD-014,RAD-MOD-004,Event,Matter,text,No,OBSERVED,Owned Matter derives Property,native required absent; dependency client-confirmed
+RAD-FIELD-015,RAD-MOD-004,Event,eventDate,date,date,Yes,OBSERVED,None,required; min=2026-10-26 observed run_20261026_130646
+RAD-FIELD-016,RAD-MOD-006,Time Entry,hours,Hours,number,Observed,OBSERVED,Owned Matter,UI/POM
+RAD-FIELD-017,RAD-MOD-006,Expense,expenseCode,Expense Code,select,Yes,OBSERVED,Configured master data read-only,UI/POM
+RAD-FIELD-018,RAD-MOD-007,Template,docxSource,Word source,file,No,OBSERVED,Owned template,type=file; native required absent run_20261026_130646
+RAD-FIELD-019,RAD-MOD-007,Template,customVariable,Field label/token/type/hint,compound,Optional,OBSERVED,Owned Word fixture,RAD-E-0014
+RAD-FIELD-020,RAD-MOD-004,Event,duration,Duration,masked-text,No,OBSERVED,None,maxlength=5; pattern=^(?:00:(?:0[1-9]|[1-5]\\d)|(?:0[1-9]|1\\d|2[0-3]):[0-5]\\d|24:00)$ run_20261026_130646
+RAD-FIELD-021,RAD-MOD-004,Event,startTime,Start time,time,Yes,OBSERVED,None,required attribute run_20261026_130646
+RAD-FIELD-022,RAD-MOD-007,Template,name,Template name,text,Yes,OBSERVED,Owned template,required attribute run_20261026_130646
+RAD-FIELD-023,RAD-MOD-007,Template,category,Category,select,Yes,OBSERVED,Owned template,required attribute run_20261026_130646
+RAD-FIELD-024,RAD-MOD-005,Court Update,matter,Matter,text,Yes,OBSERVED,Current calendar Event,required attribute run_20261026_130848
+RAD-FIELD-025,RAD-MOD-005,Court Update,notes,Notes,textarea,Yes,OBSERVED,Selected Event,required; maxlength=5000 run_20261026_130848
+RAD-FIELD-026,RAD-MOD-005,Court Update,caseStatus,Case status,select,Yes,OBSERVED,Selected Event,required attribute run_20261026_130848
+RAD-FIELD-027,RAD-MOD-005,Court Update,calendarDate,Calendar date,date,No,OBSERVED,None,type=date; native required absent run_20261026_130848

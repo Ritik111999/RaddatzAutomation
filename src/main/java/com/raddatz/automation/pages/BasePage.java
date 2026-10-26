@@ -34,4 +34,22 @@ public abstract class BasePage {
     protected void assertVisible(Locator locator) {
         assertThat(locator).isVisible();
     }
+
+    /** Reads only rendered control metadata; it never focuses, fills, or submits the control. */
+    protected ObservedFieldConstraint observeConstraint(String control, Locator locator) {
+        assertVisible(locator);
+        return new ObservedFieldConstraint(
+                control,
+                absentAsEmpty(locator.getAttribute("type")),
+                locator.getAttribute("required") != null,
+                absentAsEmpty(locator.getAttribute("min")),
+                absentAsEmpty(locator.getAttribute("max")),
+                absentAsEmpty(locator.getAttribute("maxlength")),
+                absentAsEmpty(locator.getAttribute("pattern")),
+                absentAsEmpty(locator.getAttribute("aria-required")));
+    }
+
+    private String absentAsEmpty(String value) {
+        return value == null ? "" : value;
+    }
 }

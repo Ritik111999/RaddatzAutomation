@@ -4,6 +4,7 @@
     <listeners><listener class-name="com.raddatz.automation.reports.ExtentTestListener"/></listeners>
     <test name="Verified owned workflows" preserve-order="true"><classes>
         <class name="com.raddatz.automation.tests.AdminPortfolioHierarchyTest"/>
+        <class name="com.raddatz.automation.tests.AdminOwnedHierarchyEditTest"/>
         <class name="com.raddatz.automation.tests.AdminMultiTenantMatterTest"/>
         <class name="com.raddatz.automation.tests.AdminTaskLifecycleTest"/>
         <class name="com.raddatz.automation.tests.AdminEventLifecycleTest"/>

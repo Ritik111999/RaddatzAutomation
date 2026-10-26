@@ -63,6 +63,12 @@ public final class ExpensePage extends BasePage {
         assertThat(page.locator("#editModal").locator("#edit_description")).hasValue(data.revisedExpenseDescription());
         page.locator("#editModal").getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Close").setExact(true)).click();
+        // In the current local build the visible header close button does not
+        // dismiss this Bootstrap modal after a reopened edit. Escape is the
+        // normal keyboard dismissal and keeps the subsequent delete scoped to
+        // the owned row without bypassing the modal.
+        page.keyboard().press("Escape");
+        assertThat(page.locator("#editModal")).not().isVisible();
         return this;
     }
 

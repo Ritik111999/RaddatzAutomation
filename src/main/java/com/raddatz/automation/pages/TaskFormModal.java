@@ -7,6 +7,9 @@ import com.raddatz.automation.data.AdminScenarioData;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /** Shared task modal used by Dashboard and To-dos; creates work only for the owned Matter. */
 public final class TaskFormModal extends BasePage {
     private final Locator modal;
@@ -22,6 +25,19 @@ public final class TaskFormModal extends BasePage {
         assertVisible(modal.getByRole(AriaRole.TEXTBOX,
                 new Locator.GetByRoleOptions().setName("Matter").setExact(true)));
         return this;
+    }
+
+    /** Captures rendered task controls only; opening the modal does not save a task. */
+    public Map<String, ObservedFieldConstraint> observeValidationConstraints() {
+        Map<String, ObservedFieldConstraint> constraints = new LinkedHashMap<>();
+        constraints.put("matter", observeConstraint("matter", modal.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("Matter").setExact(true))));
+        constraints.put("taskName", observeConstraint("taskName", modal.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("Enter task name").setExact(true))));
+        constraints.put("description", observeConstraint("description", modal.getByRole(AriaRole.TEXTBOX,
+                new Locator.GetByRoleOptions().setName("Optional description...").setExact(true))));
+        constraints.put("dueDate", observeConstraint("dueDate", modal.locator("input[type='date']")));
+        return Map.copyOf(constraints);
     }
 
     public void createOwnedTask(AdminScenarioData data) {

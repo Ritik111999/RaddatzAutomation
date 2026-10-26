@@ -27,10 +27,12 @@ The table above records the initial observation pass and is retained as historic
 - Template: owned DOCX upload/create, full metadata and variable persistence, preview/download/edit/delete passed. Word-content editor unavailable in this environment; generated substitution is a separate unverified study.
 - Search/Calendar/Settings/Reports/Workflows: five read-only scenarios passed, including seven Report tab/filter contracts and unsaved Workflow form. Workflow execution/configuration mutations are not covered.
 
-The combined serial regression passed 16 tests with 0 failures/errors/skips in
-295.8 seconds; report `run_20261023_175408/extent-report.pdf`. It uses one application
-browser and one authenticated session retained only in memory. This is scoped
-regression evidence, not complete PWA coverage. Direct Calendar-card propagation
-assertions added afterward are under focused verification; generated-document
-substitution remains excluded until its study passes. Restricted areas and actions
-remain excluded as defined in `docs/context/SAFETY_BOUNDARIES.md`.
+The combined serial regression passed 18 tests with 0 failures/errors/skips in
+401.7 seconds on 2026-10-26; report
+`target/automation-artifacts/run_20261026_123638/extent-report.pdf`. It uses one
+application browser and one authenticated session retained only in memory. This
+run includes the persisted owned Company/Property/Matter edit lifecycle and the
+controlled DOCX variable-generation lifecycle, as well as direct Calendar-card
+propagation checks. It remains scoped regression evidence, not complete PWA
+coverage. Restricted areas and actions remain excluded as defined in
+`docs/context/SAFETY_BOUNDARIES.md`.

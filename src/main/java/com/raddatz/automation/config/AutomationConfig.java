@@ -1,6 +1,9 @@
 package com.raddatz.automation.config;
 
 import java.nio.file.Path;
+import java.io.InputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.Locale;
 
 /** Reads runtime settings without ever persisting credentials. */
@@ -16,10 +19,12 @@ public record AutomationConfig(
         boolean generatePdf,
         Path artifactDirectory) {
 
+    private static final String MUTATION_APPROVAL_MANIFEST = "approvals/local-owned-scenarios.properties";
+
     public static AutomationConfig load() {
         return new AutomationConfig(
                 ExecutionMode.from(value("raddatz.execution.mode", "RADDATZ_EXECUTION_MODE", "DOCS_ONLY")),
-                value("raddatz.base.url", "RADDATZ_BASE_URL", "http://192.168.1.12:8000/login"),
+                value("raddatz.base.url", "RADDATZ_BASE_URL", "http://192.168.0.229:8000/login"),
                 value("raddatz.username", "RADDATZ_USERNAME", ""),
                 value("raddatz.password", "RADDATZ_PASSWORD", ""),
                 value("raddatz.browser", "RADDATZ_BROWSER", "chromium").toLowerCase(Locale.ROOT),
@@ -43,7 +48,7 @@ public record AutomationConfig(
         if (mutation && executionMode != ExecutionMode.NONPROD_APPROVED) {
             throw new IllegalStateException("Mutations require NONPROD_APPROVED mode and an approved non-production target.");
         }
-        if (!baseUrl.startsWith("http://192.168.1.12:8000/")) {
+        if (!baseUrl.startsWith("http://192.168.0.229:8000/")) {
             throw new IllegalStateException("The configured target is not an approved Raddatz local origin.");
         }
     }
@@ -52,6 +57,27 @@ public record AutomationConfig(
         if (!allowMutation) {
             throw new IllegalStateException(
                     "Data-changing admin scenarios are disabled. Set -Draddatz.allow.mutation=true only for owned test data.");
+        }
+    }
+
+    /**
+     * Fails closed unless the exact TestNG method has a local-owned-data entry
+     * in the approved scenario manifest packaged with the test suite.
+     */
+    public void requireApprovedMutationScenario(String className, String methodName) {
+        String scenarioId = className + "#" + methodName;
+        Properties approvals = new Properties();
+        try (InputStream stream = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream(MUTATION_APPROVAL_MANIFEST)) {
+            if (stream == null) {
+                throw new IllegalStateException("Missing mutation approval manifest: " + MUTATION_APPROVAL_MANIFEST);
+            }
+            approvals.load(stream);
+        } catch (IOException exception) {
+            throw new IllegalStateException("Unable to read mutation approval manifest", exception);
+        }
+        if (!"approved".equals(approvals.getProperty(scenarioId))) {
+            throw new IllegalStateException("Mutation scenario is not approved for the local owned-data environment: " + scenarioId);
         }
     }
 

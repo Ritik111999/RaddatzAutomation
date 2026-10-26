@@ -1,0 +1,13 @@
+# QA coverage dashboard
+
+As of 2026-10-26:
+
+| Measure | Count | Denominator | Result |
+| --- | ---: | ---: | --- |
+| Executed automated scenarios | 22 | 22 executed scenarios | 100% pass rate |
+| Passed scenarios | 22 | 22 executed | 100% |
+| Designed validation/negative scenarios | 5 | N/A: confirmed-rule denominator unknown | N/A |
+| Blocked scenarios | 3 | N/A | Inline editor, existing tenant editor, unconfirmed billing/document rules |
+| Restricted modules | 3 | 12 mapped modules | 25% explicitly non-executable |
+
+These are execution and inventory metrics, not a claim of complete functional or field coverage. The next approved batch is evidence-only mapping of validation constraints and field dependencies, followed by no-submit validation automation where the expected messages are observed.

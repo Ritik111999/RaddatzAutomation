@@ -53,3 +53,61 @@
 **Current next slice:** `admin-hierarchy-edit.xml` is live-verifying a fresh Company contact role update, Property unit/quadrant update, and Matter priority update with before-write ownership notes and reopen/reload persistence checks. Actual UI has duplicate Edit Property links; the POM scopes to the header action. New-property license/RAD Address values now use real street/city/state/ZIP addresses; backend `descriptor` keys had previously been mistaken for descriptive labels. Existing records were not retroactively changed. This data correction and hierarchy edits need their focused result before coverage is claimed.
 
 **Load next:** `AGENTS.md`, this file, `docs/context/SAFETY_BOUNDARIES.md`, `docs/architecture/EXISTING_FRAMEWORK_AUDIT.md`, then the task-specific skill.
+
+**Local-target migration and regression, 2026-10-26:** client supplied and approved
+`http://192.168.0.229:8000/login`; `AutomationConfig` and the run guide now default
+to and fail closed outside that local origin. The focused owned hierarchy-edit test
+passed 1/1. A first full run exposed three genuine UI-contract issues (Calendar's
+searchable picker overlay, Expense modal dismissal, and Matter submit/navigation)
+plus one read-only Calendar tab-role change; all were repaired using normal visible
+UI interactions, then reverified in focused suites. The final serial master passed
+**18 tests, 0 failures, 0 errors, 0 skips** in 401.7 seconds. Its report is
+`target/automation-artifacts/run_20261026_123638/extent-report.pdf`. It covers
+owned Company/Property/Matter hierarchy and persistence edits; multi-tenant Matter
+creation; Task/Event/Court Update/Notes/Documents/Time/Expense CRUD; draft invoice
+PDF; template metadata and controlled DOCX variable generation; and five
+observation-only search, Calendar, Workflow, Settings, and Reports contracts.
+Restricted controls remain untouched; this is a passing scoped regression, not a
+claim of complete PWA coverage.
+
+**QA intelligence foundation, 2026-10-26:** the client-provided functional-QA plan
+was reconciled with the existing evidence and suite. New `docs/qa/` artifacts
+provide the master inventory, executable/design/blocked test registry, field
+catalog, lifecycle and data-lineage matrices, document/variable/PWA matrices,
+approval register, execution report, defect register, clarification register, and
+coverage dashboard. They preserve unknowns rather than inventing validation rules.
+`approvals/local-owned-scenarios.properties` is now enforced by
+`AutomationConfig` before any mutation test opens a browser. Focused verification
+of the manifest using `admin-hierarchy-edit.xml` passed 1/1 on the approved local
+target; report `target/automation-artifacts/run_20261026_124812/extent-report.pdf`.
+Next safe batch: observe and document no-submit field-validation behavior, then
+implement only validation cases with confirmed expected messages.
+
+**Field-contract observation, 2026-10-26:** `AdminFormContractObservationTest`
+now opens Company, Property, and Matter forms in `PROD_OBSERVE` mode and asserts
+their mapped visible controls without filling, choosing, uploading, or submitting
+anything. It passed 1/1; report
+`target/automation-artifacts/run_20261026_125537/extent-report.pdf`. Registry row
+RAD-TC-00024 is now PASS. Field validation constraints and messages remain UNKNOWN;
+the next test-design batch must observe them safely before attempting a negative
+submission.
+
+**Expanded validation-attribute observation, 2026-10-26:** the same read-only
+test now maps native `type`, `required`, `min`, `max`, `maxlength`, `pattern`, and
+`aria-required` attributes for hierarchy, Task, Event, and Template controls. It
+passed 3/3 in `run_20261026_130646`; report
+`target/automation-artifacts/run_20261026_130646/extent-report.pdf`. Confirmed
+examples: Company name, Property name, rental-office address, business-license
+number, Matter case type/opening date/tenant address/ZIP, Task name/due date,
+Event date/start time/title, and template name/category expose required contracts;
+tenant ZIP has `maxlength=10` and a 5-or-9-digit ZIP pattern; Event duration has
+`maxlength=5` and a 24-hour duration pattern. Nothing was entered, uploaded, or
+submitted. Validation-message text and persistence after a rejected submit remain
+unknown and must not be inferred.
+
+**Court Update contract observation, 2026-10-26:** `AdminFormContractObservationTest`
+now also opens only the blank Court Updates screen in `PROD_OBSERVE`. It passed
+4/4 in `run_20261026_130848`; report
+`target/automation-artifacts/run_20261026_130848/extent-report.pdf`. Matter,
+Notes, and case status expose required attributes; Notes has `maxlength=5000`.
+No calendar entry was selected and no Court Update was submitted.

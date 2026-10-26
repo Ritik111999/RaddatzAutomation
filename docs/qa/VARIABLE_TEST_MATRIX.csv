@@ -1,0 +1,5 @@
+variable_id,token,source,output,design_status,execution_status,evidence
+RAD-VAR-001,{{HEARING_PREPARATION_INSTRUCTIONS}},Owned custom template field,Generated owned DOCX,VERIFIED,PASS,RAD-E-0014/run_20261026_123638
+RAD-VAR-002,UNKNOWN,Matter data,Generated DOCX,DESIGNED,BLOCKED,source mapping not confirmed
+RAD-VAR-003,UNKNOWN,Tenant data,Generated DOCX,DESIGNED,BLOCKED,source mapping not confirmed
+RAD-VAR-004,UNKNOWN,Case data,Generated DOCX,DESIGNED,BLOCKED,source mapping not confirmed

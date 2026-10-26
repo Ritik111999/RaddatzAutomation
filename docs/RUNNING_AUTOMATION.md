@@ -6,7 +6,7 @@ The default suite is deliberately **read-only**. Mutable suites require the expl
 
 The execution mode defaults to `DOCS_ONLY`, which also blocks browser startup. An authorized local observation run requires `-Draddatz.execution.mode=PROD_OBSERVE`; approved non-production mutations require `-Draddatz.execution.mode=NONPROD_APPROVED` in addition to the existing explicit mutation switch.
 
-The default target is the shared local environment: `http://192.168.1.12:8000/login`. Override it only when a different local server is explicitly supplied:
+The default target is the client-approved local environment: `http://192.168.0.229:8000/login`. Override it only when a different local server is explicitly supplied:
 
 ```zsh
 mvn test -Draddatz.run.local=true -Draddatz.base.url=http://<host>:<port>/login

@@ -88,10 +88,12 @@ public final class SearchFilterPage extends BasePage {
         Locator search = page.getByPlaceholder(CALENDAR_SEARCH_PLACEHOLDER,
                 new Page.GetByPlaceholderOptions().setExact(true));
         assertVisible(search);
-        assertVisible(button("Month view"));
-        assertVisible(button("Week view"));
-        assertVisible(button("Day view"));
-        assertVisible(link("Agenda view"));
+        // The view switcher uses tab semantics; its accessible names include
+        // the icon's "… view" label while its rendered text is shorter.
+        assertVisible(calendarViewTab("Month view"));
+        assertVisible(calendarViewTab("Week view"));
+        assertVisible(calendarViewTab("Day view"));
+        assertVisible(calendarViewTab("Agenda view"));
         assertVisible(button("Court Dates"));
         assertVisible(page.getByRole(AriaRole.COMBOBOX,
                 new Page.GetByRoleOptions().setName("Search people...").setExact(true)));
@@ -103,13 +105,13 @@ public final class SearchFilterPage extends BasePage {
         search.fill("");
         assertThat(search).hasValue("");
 
-        button("Month view").click();
+        calendarViewTab("Month view").click();
         page.waitForURL(Pattern.compile(".*/calendar/view-full-calendar\\?view=month"));
         assertVisible(page.getByRole(AriaRole.REGION,
                 new Page.GetByRoleOptions().setName("Monthly calendar, scroll horizontally to see all days").setExact(true)));
-        button("Week view").click();
+        calendarViewTab("Week view").click();
         page.waitForURL(Pattern.compile(".*/calendar/view-full-calendar\\?view=week"));
-        button("Day view").click();
+        calendarViewTab("Day view").click();
         page.waitForURL(Pattern.compile(".*/calendar/view-full-calendar\\?view=day"));
         return this;
     }
@@ -157,6 +159,14 @@ public final class SearchFilterPage extends BasePage {
             assertVisible(link(destination));
         }
         return this;
+    }
+
+    /** Opens the blank permitted template form from the visible Settings menu. */
+    public DocumentTemplateFormPage openCreateDocumentTemplate() {
+        button("Settings").click();
+        link("Create Document Template").click();
+        page.waitForURL("**/document-templates/create");
+        return new DocumentTemplateFormPage(page).assertCreateLoaded();
     }
 
     public SearchFilterPage openReportsGateWithoutAuthenticating() {
@@ -274,5 +284,10 @@ public final class SearchFilterPage extends BasePage {
     private Locator linkMatching(String expression) {
         return page.getByRole(AriaRole.LINK,
                 new Page.GetByRoleOptions().setName(Pattern.compile(expression)));
+    }
+
+    private Locator calendarViewTab(String name) {
+        return page.getByRole(AriaRole.TAB,
+                new Page.GetByRoleOptions().setName(name).setExact(true));
     }
 }

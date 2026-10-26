@@ -7,6 +7,8 @@ import com.raddatz.automation.data.AdminScenarioData;
 import com.raddatz.automation.data.OwnedRecordIds;
 
 import java.util.regex.Pattern;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -28,13 +30,56 @@ public final class MatterFormPage extends BasePage {
         return this;
     }
 
+    /** Observation-only contract for parent selectors and first tenant/case controls. */
+    public MatterFormPage assertObservedFieldContract() {
+        assertVisible(page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Company (Property Management Company)*").setExact(true)));
+        assertVisible(page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Property*").setExact(true)));
+        assertVisible(page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Full tenant name").setExact(true)));
+        assertVisible(page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Street address").setExact(true)));
+        assertVisible(page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Case Number (leave blank to auto-generate)").setExact(true)));
+        assertVisible(page.locator("select[name='case_type']"));
+        assertVisible(page.locator("select[name='case_status']"));
+        assertVisible(page.locator("select[name='matter_plan']"));
+        assertVisible(button("+ Add Another Tenant"));
+        assertVisible(button("Create Matter"));
+        return this;
+    }
+
+    /** Reads only browser-provided control constraints before any parent data is selected. */
+    public Map<String, ObservedFieldConstraint> observeValidationConstraints() {
+        Map<String, ObservedFieldConstraint> constraints = new LinkedHashMap<>();
+        constraints.put("company", observeConstraint("company", page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Company (Property Management Company)*").setExact(true))));
+        constraints.put("property", observeConstraint("property", page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Property*").setExact(true))));
+        constraints.put("tenantName", observeConstraint("tenantName", page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Full tenant name").setExact(true))));
+        constraints.put("tenantStreetAddress", observeConstraint("tenantStreetAddress", page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Street address").setExact(true))));
+        constraints.put("tenantZipCode", observeConstraint("tenantZipCode",
+                page.getByPlaceholder("e.g. 32803 or 32803-1234", new Page.GetByPlaceholderOptions().setExact(true))));
+        constraints.put("caseNumber", observeConstraint("caseNumber", page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Case Number (leave blank to auto-generate)").setExact(true))));
+        constraints.put("caseType", observeConstraint("caseType", page.locator("select[name='case_type']")));
+        constraints.put("openingDate", observeConstraint("openingDate", page.locator("#openingDate")));
+        return Map.copyOf(constraints);
+    }
+
     public ClientMatterListPage createOwnedMatter(AdminScenarioData data) {
         selectOwnedCompany(data);
         selectOwnedProperty(data);
         fillFirstTenant(data);
         fillMatterCaseDetails(data);
 
-        button("Create Matter").click();
+        // The submit causes a full route transition. Do not couple the click
+        // itself to the transition; wait for the destination explicitly so a
+        // slow local server cannot turn a completed submit into a click timeout.
+        button("Create Matter").click(new Locator.ClickOptions().setNoWaitAfter(true));
         page.waitForURL("**/client-and-matter");
         return new ClientMatterListPage(page).assertLoaded();
     }
@@ -49,7 +94,7 @@ public final class MatterFormPage extends BasePage {
         fillAdditionalTenant(additionalTenant);
         fillMatterCaseDetails(primaryTenant);
 
-        button("Create Matter").click();
+        button("Create Matter").click(new Locator.ClickOptions().setNoWaitAfter(true));
         page.waitForURL("**/client-and-matter");
         return new ClientMatterListPage(page).assertLoaded();
     }

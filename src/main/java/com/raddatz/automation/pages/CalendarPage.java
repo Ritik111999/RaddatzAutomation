@@ -3,7 +3,6 @@ package com.raddatz.automation.pages;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.SelectOption;
 import com.raddatz.automation.data.AdminScenarioData;
 
 import java.time.LocalDate;
@@ -34,12 +33,23 @@ public final class CalendarPage extends BasePage {
     public CalendarPage selectEventDate(String date) {
         LocalDate selected = LocalDate.parse(date);
         page.locator("#calendarDateTrigger").click();
-        page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Choose year").setExact(true))
-                .selectOption(new SelectOption().setLabel(Integer.toString(selected.getYear())));
-        page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Choose month").setExact(true))
-                .selectOption(new SelectOption().setLabel(selected.getMonth().getDisplayName(TextStyle.FULL, Locale.US)));
-        button(selected.format(DateTimeFormatter.ofPattern("EEEE, MMMM d, uuuu", Locale.US))).click();
+        choosePickerValue("calendarPickerYearSelect", Integer.toString(selected.getYear()));
+        choosePickerValue("calendarPickerMonthSelect", selected.getMonth().getDisplayName(TextStyle.FULL, Locale.US));
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions()
+                        .setName(selected.format(DateTimeFormatter.ofPattern("EEEE, MMMM d, uuuu", Locale.US)))
+                        .setExact(true))
+                .click();
         return this;
+    }
+
+    private void choosePickerValue(String nativeControlId, String optionName) {
+        // The app leaves the native select in the accessibility tree but places
+        // its searchable widget input over it. The widget's documented
+        // data-ssd-for relationship is the only stable interactable contract.
+        page.locator("input.ssd-input[data-ssd-for='" + nativeControlId + "']").click();
+        page.getByRole(AriaRole.LISTBOX).last().getByRole(AriaRole.OPTION,
+                        new Locator.GetByRoleOptions().setName(optionName).setExact(true))
+                .click();
     }
 
     public CalendarPage assertOwnedEventVisible(AdminScenarioData data, boolean revised) {

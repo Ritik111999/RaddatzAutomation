@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz hierarchy field contracts - observation only" parallel="none">
+    <parameter name="reuseBrowser" value="true"/>
+    <listeners><listener class-name="com.raddatz.automation.reports.ExtentTestListener"/></listeners>
+    <test name="Hierarchy form observation"><classes>
+        <class name="com.raddatz.automation.tests.AdminFormContractObservationTest"/>
+    </classes></test>
+</suite>

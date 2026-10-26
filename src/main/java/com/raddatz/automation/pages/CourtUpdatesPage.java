@@ -6,6 +6,8 @@ import com.microsoft.playwright.options.AriaRole;
 import com.raddatz.automation.data.AdminScenarioData;
 
 import java.util.regex.Pattern;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -21,6 +23,18 @@ public final class CourtUpdatesPage extends BasePage {
         assertVisible(page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Matter *").setExact(true)));
         return this;
+    }
+
+    /** Reads blank Court Update controls only; it does not select an Event or submit an update. */
+    public Map<String, ObservedFieldConstraint> observeValidationConstraints() {
+        Map<String, ObservedFieldConstraint> constraints = new LinkedHashMap<>();
+        constraints.put("matter", observeConstraint("matter", page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Matter *").setExact(true))));
+        constraints.put("notes", observeConstraint("notes", page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Notes *").setExact(true))));
+        constraints.put("caseStatus", observeConstraint("caseStatus", page.locator("#case_status")));
+        constraints.put("calendarDate", observeConstraint("calendarDate", page.locator("#courtUpdatesCalendarDate")));
+        return Map.copyOf(constraints);
     }
 
     public CourtUpdatesPage selectCalendarDate(String date) {

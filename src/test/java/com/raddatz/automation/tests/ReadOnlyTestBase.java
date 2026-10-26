@@ -14,6 +14,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterSuite;
 
+import java.lang.reflect.Method;
+
 public abstract class ReadOnlyTestBase implements HasPage {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
     protected AutomationConfig config;
@@ -21,7 +23,7 @@ public abstract class ReadOnlyTestBase implements HasPage {
     private PlaywrightSession session;
 
     @BeforeMethod(alwaysRun = true)
-    public void startLocalReadOnlySession(ITestContext testContext) {
+    public void startLocalReadOnlySession(Method testMethod, ITestContext testContext) {
         config = AutomationConfig.load();
         if (!config.runLocal()) {
             throw new SkipException("Local tests are disabled. Run with -Draddatz.run.local=true and environment credentials.");
@@ -29,6 +31,7 @@ public abstract class ReadOnlyTestBase implements HasPage {
         config.requireBrowserExecution(requiresMutationPermission());
         if (requiresMutationPermission()) {
             config.requireMutationPermission();
+            config.requireApprovedMutationScenario(getClass().getName(), testMethod.getName());
         }
         config.requireLocalCredentials();
         boolean reuseBrowser = Boolean.getBoolean("raddatz.reuse.browser")

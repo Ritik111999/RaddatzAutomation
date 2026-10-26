@@ -1,0 +1,28 @@
+test_id,module_id,type,scenario,automation,status,evidence_or_run,scope_note
+RAD-TC-00001,RAD-MOD-001,positive,Owned Company-Property-Matter hierarchy with two Properties and three Matters,AdminPortfolioHierarchyTest,PASS,run_20261026_123638,owned data
+RAD-TC-00002,RAD-MOD-001,positive,Company contact/Property units/Matter priority edit persistence,AdminOwnedHierarchyEditTest,PASS,run_20261026_123638,owned data
+RAD-TC-00003,RAD-MOD-002,positive,Create Matter with two populated tenants,AdminMultiTenantMatterTest,PASS,run_20261026_123638,owned data
+RAD-TC-00004,RAD-MOD-003,positive,Owned Task create-edit-delete,AdminTaskLifecycleTest,PASS,run_20261026_123638,owned data
+RAD-TC-00005,RAD-MOD-003,observation,Task search/filter reset,AdminSearchFilterTest,PASS,run_20261026_123638,read-only
+RAD-TC-00006,RAD-MOD-004,positive,Owned Event create-edit-delete and Calendar propagation,AdminEventLifecycleTest,PASS,run_20261026_123638,owned data
+RAD-TC-00007,RAD-MOD-002,positive,Owned Matter Note create-edit-delete,AdminMatterNoteLifecycleTest,PASS,run_20261026_123638,owned data
+RAD-TC-00008,RAD-MOD-002,positive,Owned Matter Document upload-view-download-delete,AdminMatterDocumentLifecycleTest,PASS,run_20261026_123638,owned fixture
+RAD-TC-00009,RAD-MOD-004,observation,Calendar view and search contracts,AdminSearchFilterTest,PASS,run_20261026_123638,read-only
+RAD-TC-00010,RAD-MOD-005,positive,Owned Court Update create-edit-delete,AdminCourtUpdateLifecycleTest,PASS,run_20261026_123638,owned data; no billing handoff
+RAD-TC-00011,RAD-MOD-006,positive,Owned Time Entry create-edit-delete,AdminOwnedTimeEntryLifecycleTest,PASS,run_20261026_123638,owned data
+RAD-TC-00012,RAD-MOD-006,positive,Owned Expense create-edit-delete,AdminOwnedExpenseLifecycleTest,PASS,run_20261026_123638,owned data
+RAD-TC-00013,RAD-MOD-006,positive,Owned draft invoice source/total/PDF,AdminOwnedInvoiceDraftTest,PASS,run_20261026_123638,no send/payment/void
+RAD-TC-00014,RAD-MOD-007,positive,Owned template metadata/variable/upload/edit/download/delete,AdminDocumentTemplateMetadataLifecycleTest,PASS,run_20261026_123638,owned fixture
+RAD-TC-00015,RAD-MOD-007,positive,Owned DOCX custom-variable substitution,AdminDocumentVariableGenerationTest,PASS,run_20261026_123638,owned fixture
+RAD-TC-00016,RAD-MOD-008,observation,Reports tab/filter contracts,AdminSearchFilterTest,PASS,run_20261026_123638,read-only
+RAD-TC-00017,RAD-MOD-009,observation,Workflow list and unsaved-form contract,AdminSearchFilterTest,PASS,run_20261026_123638,no trigger/action/save
+RAD-TC-00018,RAD-MOD-010,observation,Settings menu contract,AdminSearchFilterTest,PASS,run_20261026_123638,restricted destinations not opened
+RAD-TC-00019,RAD-MOD-001,negative,Required Company fields reject empty/whitespace input,TBD,DESIGNED,UNKNOWN validation messages,no submit until contract observed
+RAD-TC-00020,RAD-MOD-001,negative,Matter Property cannot be selected before owned Company,TBD,DESIGNED,CLIENT-CONFIRMED dependency,no record creation
+RAD-TC-00021,RAD-MOD-002,boundary,Second tenant add/remove/persistence on existing Matter,TBD,BLOCKED,known existing-editor defect,do not claim passing coverage
+RAD-TC-00022,RAD-MOD-007,negative,Unsupported/corrupt document fixture rejection,TBD,DESIGNED,UNKNOWN server-side validation,no confidential document
+RAD-TC-00023,RAD-MOD-006,negative,Invoice excludes unselected/out-of-range owned entries,TBD,DESIGNED,UNKNOWN date-range rule,owned records only
+RAD-TC-00024,RAD-MOD-001,observation,Company Property and Matter visible field-contract inventory,AdminFormContractObservationTest,PASS,run_20261026_125537,no values or submit
+RAD-TC-00025,RAD-MOD-001,observation,Company Property and Matter native validation-attribute inventory,AdminFormContractObservationTest,PASS,run_20261026_130646,no values or submit; message text remains unknown
+RAD-TC-00026,RAD-MOD-003,observation,Task Event and Template native validation-attribute inventory,AdminFormContractObservationTest,PASS,run_20261026_130646,no values/upload/submit
+RAD-TC-00027,RAD-MOD-005,observation,Court Update native validation-attribute inventory,AdminFormContractObservationTest,PASS,run_20261026_130848,no Event selection or submit
