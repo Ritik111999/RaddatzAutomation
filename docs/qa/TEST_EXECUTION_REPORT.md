@@ -26,3 +26,9 @@ Court Update extension: `run_20261026_130848` on the same local target. Result:
 metadata: Matter, Notes, and case-status controls are natively required; Notes
 has `maxlength=5000`; calendar date is an optional date input. No Event was
 selected and no Court Update was submitted.
+
+Latest complete serial regression: `run_20261026_142452` on the approved local
+target. Result: 19 executed, 19 passed, 0 failures, 0 errors, 0 skipped; duration
+408.2 seconds. It includes permitted update persistence and propagation checks,
+including revised Time Entry data in its owned draft-invoice source. Restricted
+modules and payment/send/allocation/settlement controls remain excluded.

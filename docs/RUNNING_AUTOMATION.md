@@ -34,7 +34,7 @@ mvn test -Draddatz.run.local=true -Draddatz.browser=firefox
 mvn test -Draddatz.run.local=true -Draddatz.report.pdf=false
 ```
 
-`target/automation-artifacts/run_<timestamp>/extent-report.html` is always produced. When Chromium is available, the listener also renders `extent-report.pdf`. Failure screenshots and Log4j2 logs are stored under `target/automation-artifacts`.
+`target/automation-artifacts/run_<timestamp>/extent-report.html` is always produced. When Chromium is available, the listener renders the raw `extent-report.pdf` plus the executive `raddatz-qa-report.pdf` (cover page, run metadata, outcome dashboard, module summary, and scenario register). Failure screenshots and Log4j2 logs are stored under `target/automation-artifacts`.
 
 ## Framework layout
 

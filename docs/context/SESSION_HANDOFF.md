@@ -135,3 +135,20 @@ assertion failure before that repair; therefore no fresh 19/19 full-suite pass i
 claimed yet. A clean full serial rerun remains required before updating the master
 pass status. Expense-to-invoice inclusion remains unverified pending a confirmed
 date-range rule.
+
+**Clean 19-test serial regression, 2026-10-26:** `admin-regression-serial.xml`
+passed **19/19** in one browser with zero failures, errors, or skips in 408.2
+seconds. Report: `target/automation-artifacts/run_20261026_142452/extent-report.pdf`.
+This is the current passing scoped suite and includes Time-update-to-Invoice
+propagation. It is not a claim of complete PWA coverage. Next: refactor independent
+lifecycle fixtures to reuse one owned Company → multi-Property → multi-Matter family
+per serial run, preventing duplicate-looking Company records in the local UI.
+
+**Executive PDF reporting, 2026-10-26:** Raddatz now emits a second, primary
+executive PDF alongside the raw Extent export: `raddatz-qa-report.pdf`. Its design
+adapts the approved ToolTrader pattern with a cover page, run metadata, outcome
+dashboard, module summary, and scenario register, while redacting business data
+and excluding credentials. A read-only verification run passed 4/4 and generated
+`target/automation-artifacts/run_20261026_144310/raddatz-qa-report.pdf`; the
+cover page was rendered and visually inspected. `extent-report.pdf` remains the
+underlying detailed Extent artifact.

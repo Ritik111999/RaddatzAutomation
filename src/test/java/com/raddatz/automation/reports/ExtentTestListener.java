@@ -13,17 +13,24 @@ import org.testng.ITestResult;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public final class ExtentTestListener implements ITestListener, IExecutionListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(ExtentTestListener.class);
     private static final ThreadLocal<ExtentTest> CURRENT_TEST = new ThreadLocal<>();
     private AutomationConfig config;
     private ExtentReportManager.ReportRun reportRun;
+    private final List<RaddatzQaPdfReport.Scenario> scenarios = new CopyOnWriteArrayList<>();
+    private Instant started;
 
     @Override
     public void onExecutionStart() {
         config = AutomationConfig.load();
         reportRun = ExtentReportManager.create(config);
+        started = Instant.now();
     }
 
     @Override
@@ -35,16 +42,19 @@ public final class ExtentTestListener implements ITestListener, IExecutionListen
     @Override
     public void onTestSuccess(ITestResult result) {
         CURRENT_TEST.get().pass("Passed");
+        record(result, "PASS");
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
         CURRENT_TEST.get().skip(result.getThrowable());
+        record(result, "SKIP");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         CURRENT_TEST.get().fail(result.getThrowable());
+        record(result, "FAIL");
         attachScreenshot(result);
     }
 
@@ -53,8 +63,17 @@ public final class ExtentTestListener implements ITestListener, IExecutionListen
         reportRun.extent().flush();
         if (config.generatePdf()) {
             PdfReportExporter.export(reportRun.htmlFile(), reportRun.directory().resolve("extent-report.pdf"));
+            RaddatzQaPdfReport.write(config, reportRun.directory(), started, Instant.now(), scenarios);
         }
         LOGGER.info("Extent report written to {}", reportRun.htmlFile().toAbsolutePath());
+    }
+
+    private void record(ITestResult result, String status) {
+        String description = result.getMethod().getDescription();
+        scenarios.add(new RaddatzQaPdfReport.Scenario(result.getMethod().getMethodName(),
+                description == null ? "" : description,
+                status,
+                Duration.ofMillis(Math.max(0, result.getEndMillis() - result.getStartMillis()))));
     }
 
     private void attachScreenshot(ITestResult result) {

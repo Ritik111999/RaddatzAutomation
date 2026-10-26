@@ -4,8 +4,8 @@ As of 2026-10-26:
 
 | Measure | Count | Denominator | Result |
 | --- | ---: | ---: | --- |
-| Executed automated scenarios | 22 | 22 executed scenarios | 100% pass rate |
-| Passed scenarios | 22 | 22 executed | 100% |
+| Executed automated scenarios | 23 | 23 executed scenarios | 100% pass rate |
+| Passed scenarios | 23 | 23 executed | 100% |
 | Designed validation/negative scenarios | 5 | N/A: confirmed-rule denominator unknown | N/A |
 | Blocked scenarios | 3 | N/A | Inline editor, existing tenant editor, unconfirmed billing/document rules |
 | Restricted modules | 3 | 12 mapped modules | 25% explicitly non-executable |
