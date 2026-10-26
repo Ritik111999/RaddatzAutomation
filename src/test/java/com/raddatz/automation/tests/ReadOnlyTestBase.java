@@ -19,8 +19,8 @@ import java.lang.reflect.Method;
 public abstract class ReadOnlyTestBase implements HasPage {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
     protected AutomationConfig config;
-    private DashboardPage dashboard;
-    private PlaywrightSession session;
+    private static final ThreadLocal<DashboardPage> CURRENT_DASHBOARD = new ThreadLocal<>();
+    private static final ThreadLocal<PlaywrightSession> CURRENT_SESSION = new ThreadLocal<>();
 
     @BeforeMethod(alwaysRun = true)
     public void startLocalReadOnlySession(Method testMethod, ITestContext testContext) {
@@ -36,9 +36,12 @@ public abstract class ReadOnlyTestBase implements HasPage {
         config.requireLocalCredentials();
         boolean reuseBrowser = Boolean.parseBoolean(System.getProperty("raddatz.reuse.browser", "true"))
                 || Boolean.parseBoolean(testContext.getSuite().getParameter("reuseBrowser"));
-        session = PlaywrightSession.start(config, reuseBrowser);
-        logger.info("Launching local {} scenario against {}", requiresMutationPermission() ? "owned-data" : "read-only", config.baseUrl());
+        PlaywrightSession session = PlaywrightSession.start(config, reuseBrowser);
+        CURRENT_SESSION.set(session);
+        logger.info("Launching local {} scenario against {} on thread [{}]",
+                requiresMutationPermission() ? "owned-data" : "read-only", config.baseUrl(), Thread.currentThread().getName());
         try {
+            DashboardPage dashboard;
             if (session.hasRestoredAuthentication()) {
                 currentPage().navigate(config.baseUrl().replaceFirst("/login$", "/dashboard"));
                 currentPage().waitForURL("**/dashboard");
@@ -47,6 +50,7 @@ public abstract class ReadOnlyTestBase implements HasPage {
                 dashboard = new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
                 session.rememberAuthenticatedSession();
             }
+            CURRENT_DASHBOARD.set(dashboard);
         } catch (RuntimeException | Error failure) {
             try {
                 session.saveFailureTrace(config.artifactDirectory().resolve("traces")
@@ -60,7 +64,7 @@ public abstract class ReadOnlyTestBase implements HasPage {
 
     /** Authentication is a fixture; no test is dedicated to validating a user-login journey. */
     protected DashboardPage dashboard() {
-        return dashboard;
+        return CURRENT_DASHBOARD.get();
     }
 
     protected boolean requiresMutationPermission() {
@@ -69,6 +73,7 @@ public abstract class ReadOnlyTestBase implements HasPage {
 
     @Override
     public Page currentPage() {
+        PlaywrightSession session = CURRENT_SESSION.get();
         if (session == null) {
             return null;
         }
@@ -77,20 +82,24 @@ public abstract class ReadOnlyTestBase implements HasPage {
 
     @AfterMethod(alwaysRun = true)
     public void closeLocalReadOnlySession(ITestResult result) {
+        PlaywrightSession session = CURRENT_SESSION.get();
         if (session != null) {
-            if (result.getStatus() == ITestResult.SUCCESS) {
-                session.rememberAuthenticatedSession();
+            try {
+                if (result.getStatus() == ITestResult.SUCCESS) {
+                    session.rememberAuthenticatedSession();
+                }
+                if (result.getStatus() == ITestResult.FAILURE) {
+                    var tracePath = config.artifactDirectory()
+                            .resolve("traces")
+                            .resolve(safeFileName(result) + ".zip");
+                    session.saveFailureTrace(tracePath);
+                    logger.error("Failure trace saved to {}", tracePath.toAbsolutePath());
+                }
+            } finally {
+                session.close();
+                CURRENT_SESSION.remove();
+                CURRENT_DASHBOARD.remove();
             }
-            if (result.getStatus() == ITestResult.FAILURE) {
-                var tracePath = config.artifactDirectory()
-                        .resolve("traces")
-                        .resolve(safeFileName(result) + ".zip");
-                session.saveFailureTrace(tracePath);
-                logger.error("Failure trace saved to {}", tracePath.toAbsolutePath());
-            }
-            session.close();
-            session = null;
-            dashboard = null;
         }
     }
 

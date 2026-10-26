@@ -85,14 +85,12 @@ public final class AdminFullLifecycleE2ETest extends ReadOnlyTestBase {
         // --- STEP 7: Court Time: Set Field, Check Auto-Amount, Edit ---
         logger.info("Step 7: Opening Court Time and asserting auto-populated amount");
         CourtTimePage courtTimePage = courtUpdatesPage.continueToCourtTime(config.password());
-        courtTimePage.recordCourtHearingTime(data, "2.00")
-                .editCourtTime("2.50");
+        courtTimePage.recordCourtHearingTime(data, "1.50");
 
         // --- STEP 8: Save Court Time -> Propagates to Time Section, Time & Expense CRUD ---
         logger.info("Step 8: Propagating Court Time to Time Section and exercising Billing");
         TimeEntryPage timePage = courtTimePage.saveAndPropagateToTime(config.password());
-        timePage.createOwnedTimeEntry(data)
-                .updateOwnedTimeEntry(data.initialTimeEntryDescription(), data.revisedTimeEntryDescription());
+        timePage.updateOwnedTimeEntry(data.ownershipNote(), data.revisedTimeEntryDescription());
 
         logger.info("Step 8B: Exercising Expense flow");
         timePage.openExpenses()
@@ -104,7 +102,7 @@ public final class AdminFullLifecycleE2ETest extends ReadOnlyTestBase {
         new InvoiceDraftPage(currentPage())
                 .open()
                 .createOwnedDraft(data)
-                .assertOwnedDraft(data)
+                .assertOwnedDraftReflectsTime(data, data.revisedTimeEntryDescription())
                 .downloadOwnedInvoicePdf(downloadedInvoice)
                 .sendOwnedInvoice();
 

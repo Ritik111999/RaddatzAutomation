@@ -58,7 +58,7 @@ public final class ClientMatterListPage extends BasePage {
 
     public ClientMatterListPage assertListedName(String scenarioOwnedName) {
         assertVisible(page.getByRole(AriaRole.LINK,
-                new Page.GetByRoleOptions().setName(scenarioOwnedName).setExact(true)));
+                new Page.GetByRoleOptions().setName(scenarioOwnedName).setExact(true)).first());
         return this;
     }
 

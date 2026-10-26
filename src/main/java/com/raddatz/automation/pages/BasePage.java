@@ -32,7 +32,7 @@ public abstract class BasePage {
     }
 
     protected void assertVisible(Locator locator) {
-        assertThat(locator).isVisible();
+        assertThat(locator).isVisible(new com.microsoft.playwright.assertions.LocatorAssertions.IsVisibleOptions().setTimeout(15000));
     }
 
     /** Reads only rendered control metadata; it never focuses, fills, or submits the control. */

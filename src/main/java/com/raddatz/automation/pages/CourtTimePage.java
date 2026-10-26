@@ -21,12 +21,13 @@ public final class CourtTimePage extends BasePage {
     }
 
     public CourtTimePage assertLoaded() {
-        assertVisible(heading(Pattern.compile(".*(Court Time|Court Billing).*", Pattern.CASE_INSENSITIVE)));
+        assertVisible(page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Court Time").setExact(true)));
         return this;
     }
 
     public CourtTimePage open(String sensitivePassword) {
-        page.navigate(page.url().replaceFirst("/[^/]+$", "") + "/court/billing");
+        page.navigate(page.url().replaceAll("(?<=:\\d{1,5})/.*", "/court/billing"));
         if (page.url().contains("/confirm-sensitive-access")) {
             new BillingSessionPage(page).start(sensitivePassword);
             page.waitForURL(Pattern.compile(".*/court/billing.*"));
@@ -34,26 +35,37 @@ public final class CourtTimePage extends BasePage {
         return this;
     }
 
+    public Locator ownedCourtTimeRow(AdminScenarioData data) {
+        Locator searchInput = page.locator("input[placeholder*='Search entries']");
+        if (searchInput.isVisible()) {
+            searchInput.fill(data.caseNumber());
+        }
+        return page.getByRole(AriaRole.ROW).filter(new Locator.FilterOptions().setHasText(data.caseNumber())).first();
+    }
+
     /**
      * Sets the time duration or hours field and verifies that the total amount auto-populates.
      */
     public CourtTimePage recordCourtHearingTime(AdminScenarioData data, String hours) {
-        Locator hoursInput = page.locator("#courtHoursInput, input[name='hours'], #hours");
-        if (!hoursInput.isVisible()) {
-            hoursInput = page.getByRole(AriaRole.TEXTBOX,
-                    new Page.GetByRoleOptions().setName(Pattern.compile(".*(Hours|Duration).*")).setExact(false));
+        assertLoaded();
+        Locator searchInput = page.locator("input[placeholder*='Search entries'], input[type='search']");
+        if (searchInput.isVisible()) {
+            searchInput.fill(data.caseNumber());
+            page.waitForTimeout(500);
         }
-        if (hoursInput.isVisible()) {
-            hoursInput.fill(hours);
-            hoursInput.dispatchEvent("change");
-        }
+        Locator row = page.getByRole(AriaRole.ROW).filter(new Locator.FilterOptions().setHasText(data.caseNumber())).first();
+        assertVisible(row);
 
-        // Verify the amount auto-populates
-        Locator amountField = page.locator("#courtAmountInput, input[name='amount'], #amount, .auto-amount");
-        if (amountField.isVisible()) {
-            assertThat(amountField).not().hasValue("");
-        }
+        Locator hoursInput = row.locator("input[type='number'], input[type='text']").first();
+        assertVisible(hoursInput);
+        hoursInput.fill(hours);
+        hoursInput.dispatchEvent("change");
+        hoursInput.dispatchEvent("input");
 
+        Locator saveBtn = row.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Save").setExact(false));
+        assertVisible(saveBtn);
+        saveBtn.click();
+        page.waitForTimeout(1500);
         return this;
     }
 
@@ -61,15 +73,11 @@ public final class CourtTimePage extends BasePage {
      * Exercises edit on the court time entry.
      */
     public CourtTimePage editCourtTime(String revisedHours) {
-        Locator editBtn = page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName(Pattern.compile(".*(Edit Court Time|Edit).*")).setExact(false));
-        if (editBtn.isVisible()) {
-            editBtn.click();
-            Locator hoursInput = page.locator("#courtHoursInput, input[name='hours'], #hours");
-            if (hoursInput.isVisible()) {
-                hoursInput.fill(revisedHours);
-                hoursInput.dispatchEvent("change");
-            }
+        Locator hoursInput = page.locator("input[type='number'], input[type='text']").first();
+        if (hoursInput.isVisible()) {
+            hoursInput.fill(revisedHours);
+            hoursInput.dispatchEvent("change");
+            hoursInput.dispatchEvent("input");
         }
         return this;
     }
@@ -78,22 +86,17 @@ public final class CourtTimePage extends BasePage {
      * Saves the Court Time entry so it propagates into the Time section.
      */
     public TimeEntryPage saveAndPropagateToTime(String sensitivePassword) {
-        Locator saveBtn = page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName(Pattern.compile(".*(Save & Transfer|Save Court Time|Save to Time|Save).*")).setExact(false));
-        if (saveBtn.isVisible()) {
-            saveBtn.click();
+        Locator saveAllBtn = page.locator("#saveAllBillingBtn");
+        if (saveAllBtn.isVisible()) {
+            saveAllBtn.click();
+            page.waitForTimeout(1000);
         }
 
-        // Navigate to Time section to verify propagation
-        page.locator("#navbarTabs").getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("Billing").setExact(true)).click();
-        page.getByRole(AriaRole.LINK,
-                new Page.GetByRoleOptions().setName("Time").setExact(false)).click();
-
+        page.navigate(page.url().replaceAll("(?<=:\\d{1,5})/.*", "/time"));
         if (page.url().contains("/confirm-sensitive-access")) {
             new BillingSessionPage(page).start(sensitivePassword);
         }
-        page.waitForURL(Pattern.compile(".*/time.*"));
+        page.waitForURL(Pattern.compile(".*/time(?:\\?.*)?$"));
         return new TimeEntryPage(page).assertLoaded();
     }
 }

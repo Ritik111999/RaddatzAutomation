@@ -8,16 +8,23 @@ import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.Tracing;
 import com.raddatz.automation.config.AutomationConfig;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-/** Owns one isolated browser context per TestNG test method. */
+/**
+ * Owns one isolated browser context per TestNG test method.
+ * Supports per-thread browser ownership for fast, thread-safe parallel test execution.
+ */
 public final class PlaywrightSession implements AutoCloseable {
-    private static Playwright sharedPlaywright;
-    private static Browser sharedBrowser;
-    private static Thread sharedOwner;
-    private static String authenticatedState;
+    private static final ThreadLocal<Playwright> THREAD_PLAYWRIGHT = new ThreadLocal<>();
+    private static final ThreadLocal<Browser> THREAD_BROWSER = new ThreadLocal<>();
+    private static final List<Playwright> ALL_PLAYWRIGHTS = new CopyOnWriteArrayList<>();
+    private static final List<Browser> ALL_BROWSERS = new CopyOnWriteArrayList<>();
+    private static volatile String authenticatedState;
+
     private final Playwright playwright;
     private final Browser browser;
     private final BrowserContext context;
@@ -34,7 +41,7 @@ public final class PlaywrightSession implements AutoCloseable {
     }
 
     public static PlaywrightSession start(AutomationConfig config) {
-        return start(config, Boolean.getBoolean("raddatz.reuse.browser"));
+        return start(config, Boolean.parseBoolean(System.getProperty("raddatz.reuse.browser", "true")));
     }
 
     public static PlaywrightSession start(AutomationConfig config, boolean reuseBrowser) {
@@ -49,57 +56,76 @@ public final class PlaywrightSession implements AutoCloseable {
             default -> throw new IllegalArgumentException("Unsupported raddatz.browser: " + config.browser());
         };
         Browser browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(config.headless()));
-        BrowserContext context = browser.newContext(new Browser.NewContextOptions().setViewportSize(1440, 1000));
+        Browser.NewContextOptions options = new Browser.NewContextOptions().setViewportSize(1440, 1000);
+        String state = authenticatedState;
+        if (state != null) {
+            options.setStorageState(state);
+        }
+        BrowserContext context = browser.newContext(options);
         PlaywrightSession session = new PlaywrightSession(playwright, browser, context, context.newPage());
+        session.restoredAuthentication = (state != null);
         session.startTracing();
         return session;
     }
 
-    /** One browser for a serial suite, with a fresh context and trace for every scenario. */
-    private static synchronized PlaywrightSession startShared(AutomationConfig config) {
-        if (sharedOwner != null && sharedOwner != Thread.currentThread()) {
-            throw new IllegalStateException("Shared-browser suites must run on one TestNG thread.");
-        }
-        if (sharedBrowser == null) {
-            sharedOwner = Thread.currentThread();
-            sharedPlaywright = Playwright.create();
+    /** One browser per thread in parallel suites, with a fresh context and trace for every scenario. */
+    private static PlaywrightSession startShared(AutomationConfig config) {
+        Playwright playwright = THREAD_PLAYWRIGHT.get();
+        Browser browser = THREAD_BROWSER.get();
+        if (browser == null) {
+            playwright = Playwright.create();
             BrowserType type = switch (config.browser()) {
-                case "firefox" -> sharedPlaywright.firefox();
-                case "webkit" -> sharedPlaywright.webkit();
-                case "chromium" -> sharedPlaywright.chromium();
+                case "firefox" -> playwright.firefox();
+                case "webkit" -> playwright.webkit();
+                case "chromium" -> playwright.chromium();
                 default -> throw new IllegalArgumentException("Unsupported browser: " + config.browser());
             };
-            sharedBrowser = type.launch(new BrowserType.LaunchOptions().setHeadless(config.headless()));
+            browser = type.launch(new BrowserType.LaunchOptions().setHeadless(config.headless()));
+            THREAD_PLAYWRIGHT.set(playwright);
+            THREAD_BROWSER.set(browser);
+            ALL_PLAYWRIGHTS.add(playwright);
+            ALL_BROWSERS.add(browser);
         }
         Browser.NewContextOptions options = new Browser.NewContextOptions().setViewportSize(1440, 1000);
-        if (authenticatedState != null) options.setStorageState(authenticatedState);
-        BrowserContext context = sharedBrowser.newContext(options);
-        PlaywrightSession session = new PlaywrightSession(sharedPlaywright, sharedBrowser, context, context.newPage());
+        String state = authenticatedState;
+        if (state != null) {
+            options.setStorageState(state);
+        }
+        BrowserContext context = browser.newContext(options);
+        PlaywrightSession session = new PlaywrightSession(playwright, browser, context, context.newPage());
         session.shared = true;
-        session.restoredAuthentication = authenticatedState != null;
+        session.restoredAuthentication = (state != null);
         session.startTracing();
         return session;
     }
 
     public static synchronized void closeSharedBrowser() {
-        try {
-            if (sharedBrowser != null) sharedBrowser.close();
-        } finally {
-            sharedBrowser = null;
-            if (sharedPlaywright != null) sharedPlaywright.close();
-            sharedPlaywright = null;
-            sharedOwner = null;
-            authenticatedState = null;
+        for (Browser browser : ALL_BROWSERS) {
+            try {
+                browser.close();
+            } catch (Exception ignored) { }
         }
+        for (Playwright pw : ALL_PLAYWRIGHTS) {
+            try {
+                pw.close();
+            } catch (Exception ignored) { }
+        }
+        ALL_BROWSERS.clear();
+        ALL_PLAYWRIGHTS.clear();
+        THREAD_BROWSER.remove();
+        THREAD_PLAYWRIGHT.remove();
+        authenticatedState = null;
     }
 
     public boolean hasRestoredAuthentication() {
         return restoredAuthentication;
     }
 
-    /** Credentials/session state remain in memory only and are discarded at suite teardown. */
+    /** Credentials/session state remain in memory only and are shared across worker threads to avoid rate limits. */
     public void rememberAuthenticatedSession() {
-        if (shared) authenticatedState = context.storageState();
+        try {
+            authenticatedState = context.storageState();
+        } catch (Exception ignored) { }
     }
 
     public Page page() {
@@ -134,13 +160,21 @@ public final class PlaywrightSession implements AutoCloseable {
     @Override
     public void close() {
         if (tracing) {
-            context.tracing().stop();
+            try {
+                context.tracing().stop();
+            } catch (Exception ignored) { }
             tracing = false;
         }
-        context.close();
+        try {
+            context.close();
+        } catch (Exception ignored) { }
         if (!shared) {
-            browser.close();
-            playwright.close();
+            try {
+                browser.close();
+            } catch (Exception ignored) { }
+            try {
+                playwright.close();
+            } catch (Exception ignored) { }
         }
     }
 }

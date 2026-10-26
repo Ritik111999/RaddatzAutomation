@@ -1,0 +1,29 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz Parallel Admin Mutation Automation" parallel="classes" thread-count="2" verbose="1">
+    <parameter name="reuseBrowser" value="true"/>
+    <listeners>
+        <listener class-name="com.raddatz.automation.reports.ExtentTestListener"/>
+    </listeners>
+    <test name="Parallel Owned Mutation Workflows">
+        <groups>
+            <run>
+                <include name="admin-mutation"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminCompanyCreationTest"/>
+            <class name="com.raddatz.automation.tests.AdminPropertyCreationTest"/>
+            <class name="com.raddatz.automation.tests.AdminMatterCreationTest"/>
+            <class name="com.raddatz.automation.tests.AdminTaskLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminEventLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminMatterNoteLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminMatterDocumentLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminMultiTenantMatterTest"/>
+            <class name="com.raddatz.automation.tests.AdminOwnedHierarchyEditTest"/>
+        </classes>
+    </test>
+</suite>

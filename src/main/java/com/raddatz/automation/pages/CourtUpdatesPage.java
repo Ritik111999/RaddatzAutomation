@@ -39,7 +39,7 @@ public final class CourtUpdatesPage extends BasePage {
 
     public CourtUpdatesPage selectCalendarDate(String date) {
         page.locator("#courtUpdatesCalendarDate").fill(date);
-        page.waitForURL(Pattern.compile(".*calendar_date=" + Pattern.quote(date) + ".*"));
+        page.waitForURL(Pattern.compile(".*calendar_date=" + date + ".*"));
         return this;
     }
 
@@ -64,12 +64,12 @@ public final class CourtUpdatesPage extends BasePage {
         if (courtTimeBtn.isVisible()) {
             courtTimeBtn.click();
         } else {
-            page.navigate(page.url().replaceFirst("/[^/]+$", "") + "/court/billing");
+            page.navigate(page.url().replaceAll("/court/.*", "/court/billing"));
         }
         if (page.url().contains("/confirm-sensitive-access")) {
             new BillingSessionPage(page).start(sensitivePassword);
         }
-        return new CourtTimePage(page);
+        return new CourtTimePage(page).assertLoaded();
     }
 
     /** Updates and proves persistence only for a notes-scoped Court Update owned by this run. */

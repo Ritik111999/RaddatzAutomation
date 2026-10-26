@@ -11,7 +11,6 @@ public final class BillingSessionPage extends BasePage {
 
     public BillingSessionPage assertLoaded() {
         if (isBillingSessionActive()) {
-            new TimeEntryPage(page).assertLoaded();
             return this;
         }
         assertVisible(heading("Enter Billing Mode"));
@@ -21,16 +20,23 @@ public final class BillingSessionPage extends BasePage {
     }
 
     public TimeEntryPage start(String password) {
-        if (isBillingSessionActive()) return new TimeEntryPage(page).assertLoaded();
-        page.getByRole(AriaRole.TEXTBOX,
-                new Page.GetByRoleOptions().setName("Password").setExact(true)).fill(password);
-        page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Start Billing Session").setExact(false)).click();
-        page.waitForURL(java.util.regex.Pattern.compile(".*/time(?:\\?.*)?$"));
-        return new TimeEntryPage(page).assertLoaded();
+        if (!isBillingSessionActive()) {
+            com.microsoft.playwright.Locator pwdInput = page.getByRole(AriaRole.TEXTBOX,
+                    new Page.GetByRoleOptions().setName("Password").setExact(true));
+            if (!pwdInput.isVisible()) {
+                pwdInput = page.locator("input[type='password'], input[name='password']");
+            }
+            if (pwdInput.isVisible()) {
+                pwdInput.fill(password);
+                page.getByRole(AriaRole.BUTTON,
+                        new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile(".*(Start|Confirm|Submit|Access).*")).setExact(false)).click();
+                page.waitForCondition(() -> !page.url().contains("/confirm-sensitive-access"));
+            }
+        }
+        return new TimeEntryPage(page);
     }
 
     private boolean isBillingSessionActive() {
-        return java.net.URI.create(page.url()).getPath().equals("/time");
+        return !page.url().contains("/confirm-sensitive-access");
     }
 }

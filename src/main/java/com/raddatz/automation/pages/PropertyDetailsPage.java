@@ -20,7 +20,8 @@ public final class PropertyDetailsPage extends BasePage {
     }
 
     public PropertyDetailsPage assertLoaded(String propertyName) {
-        assertVisible(heading(Pattern.compile(".*" + Pattern.quote(propertyName) + ".*")));
+        assertVisible(page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName(propertyName).setExact(false)));
         return this;
     }
 
@@ -66,11 +67,10 @@ public final class PropertyDetailsPage extends BasePage {
 
     public PropertyDetailsPage uploadOwnedDocument(Path documentPath) {
         openDocumentsTab();
-        Locator fileInput = page.locator("input[type='file']");
-        if (fileInput.isVisible() || fileInput.count() > 0) {
+        Locator fileInput = page.locator("input[type='file']").first();
+        if (fileInput.count() > 0) {
             fileInput.setInputFiles(documentPath);
-            Locator uploadBtn = page.getByRole(AriaRole.BUTTON,
-                    new Page.GetByRoleOptions().setName(Pattern.compile(".*Upload.*")).setExact(false));
+            Locator uploadBtn = page.locator("#documentsTabUploadBtn, #headerUploadDocBtn, button:has-text('Upload')").first();
             if (uploadBtn.isVisible()) {
                 uploadBtn.click();
             }

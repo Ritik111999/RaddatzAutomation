@@ -21,13 +21,17 @@ public final class TimeEntryPage extends BasePage {
     }
 
     public TimeEntryPage createOwnedTimeEntry(AdminScenarioData data) {
-        Locator matterSearch = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions()
-                .setName("Search by tenant name, case #, or property...").setExact(true));
-        matterSearch.fill(data.caseNumber());
-        // The case number is unique per run; realistic tenant names alone can legitimately repeat.
-        Locator ownedSuggestion = page.getByText(data.caseNumber(), new Page.GetByTextOptions().setExact(false));
-        assertVisible(ownedSuggestion);
-        ownedSuggestion.click();
+        if (!page.url().contains("matter_id=")) {
+            Locator matterSearch = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions()
+                    .setName("Search by tenant name, case #, or property...").setExact(true));
+            if (matterSearch.isVisible()) {
+                matterSearch.fill(data.caseNumber());
+                // The case number is unique per run; realistic tenant names alone can legitimately repeat.
+                Locator ownedSuggestion = page.getByText(data.caseNumber(), new Page.GetByTextOptions().setExact(false)).first();
+                assertVisible(ownedSuggestion);
+                ownedSuggestion.click();
+            }
+        }
         // These explicit application ids are required because the spin buttons lack labels.
         page.locator("#hoursInput").fill("1.50");
         page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions()
@@ -70,18 +74,31 @@ public final class TimeEntryPage extends BasePage {
     }
 
     public ExpensePage openExpenses() {
-        page.locator("#navbarTabs").getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("Billing").setExact(true)).click();
-        page.getByRole(AriaRole.LINK,
-                new Page.GetByRoleOptions().setName("Expenses").setExact(true)).click();
-        page.waitForURL("**/expenses");
+        try {
+            page.locator("#navbarTabs").getByRole(AriaRole.BUTTON,
+                    new Locator.GetByRoleOptions().setName("Billing").setExact(true)).click();
+            page.getByRole(AriaRole.LINK,
+                    new Page.GetByRoleOptions().setName("Expenses").setExact(true)).click();
+            page.waitForURL("**/expenses");
+        } catch (Exception e) {
+            page.navigate(page.url().replaceAll("(?<=:\\d{1,5})/.*", "/expenses"));
+        }
         return new ExpensePage(page).assertLoaded();
     }
 
-    private Locator ownedEntryRow(String description) {
-        // The table visually truncates long descriptions, but the application
-        // retains the exact owned text in the description element's title.
-        return page.getByTitle(description, new Page.GetByTitleOptions().setExact(true))
-                .locator("..").locator("..");
+    public TimeEntryPage assertPropagatedTimeEntry(String description) {
+        assertVisible(ownedEntryRow(description));
+        return this;
+    }
+
+    public Locator ownedEntryRow(String description) {
+        java.util.regex.Matcher m = java.util.regex.Pattern.compile("\\d{8}-\\d+").matcher(description);
+        if (m.find()) {
+            String ref = m.group();
+            return page.locator("tr").filter(new Locator.FilterOptions().setHas(
+                    page.locator("[title*='" + ref + "'], td:has-text('" + ref + "')"))).first();
+        }
+        String snippet = description.length() > 25 ? description.substring(0, 25) : description;
+        return page.getByRole(AriaRole.ROW).filter(new Locator.FilterOptions().setHasText(snippet)).first();
     }
 }

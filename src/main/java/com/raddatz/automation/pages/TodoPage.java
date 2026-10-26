@@ -62,9 +62,14 @@ public final class TodoPage extends BasePage {
                 new Page.GetByRoleOptions().setName("Are you sure?").setExact(true)));
         page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Yes, delete it").setExact(true)).click();
+        assertThat(page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Are you sure?").setExact(true))).not().isVisible();
+        page.reload();
+        assertVisible(heading("All Tasks"));
         searchTasks(taskName);
         assertThat(page.getByRole(AriaRole.TABLE).getByRole(AriaRole.ROW)
-                .filter(new Locator.FilterOptions().setHasText(taskName))).hasCount(0);
+                .filter(new Locator.FilterOptions().setHasText(taskName)))
+                .hasCount(0, new com.microsoft.playwright.assertions.LocatorAssertions.HasCountOptions().setTimeout(15000));
         return this;
     }
 

@@ -117,6 +117,7 @@ public record AdminScenarioData(
                 + companyLocalities[(int) ((nonce / companyDescriptors.length) % companyLocalities.length)]
                 + " "
                 + companyOperators[(int) ((nonce / (companyDescriptors.length * companyLocalities.length)) % companyOperators.length)]
+                + " " + sequence
                 + ", LLC";
         String propertyName = propertyNeighborhoods[(int) ((nonce / 100) % propertyNeighborhoods.length)]
                 + " "

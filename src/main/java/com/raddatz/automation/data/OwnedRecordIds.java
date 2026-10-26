@@ -1,12 +1,12 @@
 package com.raddatz.automation.data;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 
-/** Current-JVM identities proved through owned UI data, never a cross-run record cache. */
+/** Current-JVM identities proved through owned UI data, thread-safe for parallel execution. */
 public final class OwnedRecordIds {
-    private static final Map<String, String> COMPANIES = new HashMap<>();
-    private static final Map<String, String> PROPERTIES = new HashMap<>();
+    private static final Map<String, String> COMPANIES = new ConcurrentHashMap<>();
+    private static final Map<String, String> PROPERTIES = new ConcurrentHashMap<>();
     private OwnedRecordIds() { }
 
     public static void company(String email, String id) { register(COMPANIES, email, id); }
