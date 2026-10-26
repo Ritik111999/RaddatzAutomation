@@ -188,3 +188,10 @@ The key missing connected transition is Court Update → Court Time → Time, ra
 than an independently created Time entry. Exact labels/formulas remain unknown.
 Send is an explicit business endpoint but must be classified for external messaging
 before execution. No application action or new test execution occurred this turn.
+
+**User-requested shutdown, 2026-10-26:** stopped the two confirmed Raddatz
+terminal shells (3549 and 93920, both working in this repository). They ignored
+SIGTERM and exited after SIGHUP. Final process checks found no matching Raddatz
+test runners, automation browser workers, or project terminal shells. No new
+test run started. Unrelated applications and the separate home-directory terminal
+were left running.
