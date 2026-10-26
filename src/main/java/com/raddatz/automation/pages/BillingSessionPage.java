@@ -26,7 +26,7 @@ public final class BillingSessionPage extends BasePage {
                 new Page.GetByRoleOptions().setName("Password").setExact(true)).fill(password);
         page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Start Billing Session").setExact(false)).click();
-        page.waitForURL("**/time?matter_id=*");
+        page.waitForURL(java.util.regex.Pattern.compile(".*/time(?:\\?.*)?$"));
         return new TimeEntryPage(page).assertLoaded();
     }
 

@@ -223,5 +223,18 @@ To-dos, Calendar, and Matter workspaces). Enhanced `CourtUpdatesPage` with `addC
 restricted area boundaries: integrations, backend data controls/resets, portal publishing,
 staff/permissions, external messaging, and payment gateways remain completely untouched and
 safely isolated.
+**Live Physical Inspection & Multi-Surface Discovery, 2026-10-26:** Executed live browser inspection
+suite `AdminFullSystemInspectionTest` against `http://192.168.0.229:8000/login` with user credentials
+(`marklee@knoxweb.us` / `sR123456`), verifying accessibility across all primary routes and sensitive access gates
+(`/confirm-sensitive-access/billing` and `/confirm-sensitive-access/reports`). Physically captured 17 full-page
+high-resolution screenshots (`target/automation-artifacts/exploration/`) covering Dashboard, Companies & Matters,
+Company Details, Company Notes, Property Creation/Details, Matter General, Matter Notes, Matter Tasks, Court Updates
+(including To-do and Extra Event in-situ modal affordances and alert preconditions), All Tasks, Calendar, Billing/Time,
+Invoice Drafts, Document Templates, and Reports.
 
-
+Identified and resolved critical runtime flaws during live execution:
+1. **Server Login Throttling (HTTP 429)**: Defaulted `reuseBrowser` to `true` in `ReadOnlyTestBase` to ensure sequential test methods share in-memory storage state instead of triggering Laravel login rate limits.
+2. **Silent Login Timeout**: Added immediate rate-limit detection to `LoginPage.signIn` to fail fast with descriptive messaging.
+3. **Rigid Billing URL Regex**: Updated `BillingSessionPage.start` to accept both `/time` and `/time?matter_id=*`.
+4. **Court Updates Modal Precondition**: Uncovered requirement that a calendar entry / matter must be selected before `+ Add To-Do` or `+ Add Event` modals activate.
+5. **Comprehensive Cross-Screen Mapping**: Cataloged in [CROSS_MODULE_DATA_TEST_MATRIX.md](docs/qa/CROSS_MODULE_DATA_TEST_MATRIX.md) showing all multi-surface creation/edit points and propagation across Tasks, Events, Notes, Billing/Time, Invoices, and Case Status.
