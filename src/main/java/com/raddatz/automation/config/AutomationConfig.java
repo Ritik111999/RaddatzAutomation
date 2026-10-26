@@ -48,8 +48,14 @@ public record AutomationConfig(
         if (mutation && executionMode != ExecutionMode.NONPROD_APPROVED) {
             throw new IllegalStateException("Mutations require NONPROD_APPROVED mode and an approved non-production target.");
         }
-        if (!baseUrl.startsWith("http://192.168.0.229:8000/")) {
-            throw new IllegalStateException("The configured target is not an approved Raddatz local origin.");
+        boolean isApprovedLocalOrigin = baseUrl.startsWith("http://192.168.1.6:8000/")
+                || baseUrl.startsWith("http://192.168.1.7:8000/")
+                || baseUrl.startsWith("http://192.168.0.229:8000/")
+                || baseUrl.matches("^http://192\\.168\\.\\d+\\.\\d+:8000/.*")
+                || baseUrl.startsWith("http://localhost:8000/")
+                || baseUrl.startsWith("http://127.0.0.1:8000/");
+        if (!isApprovedLocalOrigin) {
+            throw new IllegalStateException("The configured target is not an approved Raddatz local origin: " + baseUrl);
         }
     }
 

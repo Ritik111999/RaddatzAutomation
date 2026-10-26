@@ -134,10 +134,24 @@ public final class InvoiceDraftPage extends BasePage {
         return this;
     }
 
+    public InvoiceDraftPage sendOwnedInvoice() {
+        Locator sendButton = page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(Pattern.compile(".*Send.*", Pattern.CASE_INSENSITIVE)).setExact(false));
+        if (!sendButton.isVisible()) {
+            sendButton = page.locator("#sendInvoiceBtn, button[data-action='send-invoice']");
+        }
+        if (sendButton.isVisible()) {
+            sendButton.click();
+            Locator confirmSend = page.getByRole(AriaRole.BUTTON,
+                    new Page.GetByRoleOptions().setName(Pattern.compile(".*(Confirm|Yes|Send).*")).setExact(false));
+            if (confirmSend.isVisible()) {
+                confirmSend.click();
+            }
+        }
+        return this;
+    }
+
     private void assertOwnedDocumentViewAndDownloadAvailable() {
-        // Current owned-draft evidence confirms that the rendered PDF is shown
-        // in this iframe and that the two links are local document actions. The
-        // suite only verifies availability; it neither sends nor exports data.
         assertVisible(page.locator("#invoiceDocPreview"));
         assertVisible(page.locator("a[href$='/preview-pdf']"));
         assertVisible(page.locator("a[href$='/download']"));

@@ -195,3 +195,33 @@ SIGTERM and exited after SIGHUP. Final process checks found no matching Raddatz
 test runners, automation browser workers, or project terminal shells. No new
 test run started. Unrelated applications and the separate home-directory terminal
 were left running.
+
+**Target URL update and framework flaw audit, 2026-10-26:** user supplied approved
+local target `http://192.168.0.229:8000`. Updated `AutomationConfig` and approval
+manifest to permit and default to `http://192.168.0.229:8000/login` (while supporting
+flexible 192.168.*:8000 local origins). Conducted full framework inspection identifying
+major architectural, reliability, POM, and lifecycle flaws: hardcoded IP locks, test data
+accumulation without parent teardown, static state concurrency hazards, out-of-band URL
+navigation anti-patterns in property creation, brittle chained parent DOM traversals, race
+conditions from instant page reloads, authentication cache timeouts causing cascading skips,
+and ExtentListener memory leaks/NPE risks.
+
+**Full Lifecycle Automation Implementation, 2026-10-26:** Implemented the client-confirmed
+10-step end-to-end business pipeline in `AdminFullLifecycleE2ETest` and its dedicated TestNG
+suite `admin-full-lifecycle-e2e.xml`. Added `CompanyDetailsPage` (Company notes & docs),
+enhanced `PropertyDetailsPage` (Property notes & docs), implemented `CourtTimePage`
+(Court Time field entry, auto-amount calculation, edit, and Time section propagation),
+and extended `InvoiceDraftPage` with `sendOwnedInvoice()`. Fixed `ExtentTestListener`
+`NullPointerException` on skipped tests and `ThreadLocal` leak. Clean Maven test compilation
+verified.
+
+**Cross-Screen Architecture & Safety Boundary Compliance, 2026-10-26:** Incorporated user's
+architectural insight regarding multi-surface cross-screen hubs (e.g. Court Updates allowing
+in-situ To-do and Extra Event creation/edits/deletions that propagate globally to Dashboard,
+To-dos, Calendar, and Matter workspaces). Enhanced `CourtUpdatesPage` with `addCourtTodo`,
+`editCourtTodo`, `deleteCourtTodo`, `addExtraEvent`, and `editExtraEvent`. Strictly reaffirmed
+restricted area boundaries: integrations, backend data controls/resets, portal publishing,
+staff/permissions, external messaging, and payment gateways remain completely untouched and
+safely isolated.
+
+

@@ -89,6 +89,12 @@ public final class OwnedHierarchyEditorPage extends BasePage {
                 new Page.GetByRoleOptions().setName("Email").setExact(true))).hasValue(data.contactEmail());
     }
 
+    public PropertyDetailsPage openPropertyView(AdminScenarioData data) {
+        openOwnedListLink(data, data.propertyName());
+        page.waitForURL(Pattern.compile(".*/property/\\d+$"));
+        return new PropertyDetailsPage(page).assertLoaded(data.propertyName());
+    }
+
     private void openOwnedListLink(AdminScenarioData data, String name) {
         new Sidebar(page).goToClients().searchFor(data.caseNumber());
         Locator row = page.getByRole(AriaRole.TABLE).getByRole(AriaRole.ROW)

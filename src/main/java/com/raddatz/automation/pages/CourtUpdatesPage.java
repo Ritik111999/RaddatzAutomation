@@ -58,6 +58,20 @@ public final class CourtUpdatesPage extends BasePage {
         return this;
     }
 
+    public CourtTimePage continueToCourtTime(String sensitivePassword) {
+        Locator courtTimeBtn = page.getByRole(AriaRole.LINK,
+                new Page.GetByRoleOptions().setName(Pattern.compile(".*(Court Time|Court Billing|Billing).*")).setExact(false));
+        if (courtTimeBtn.isVisible()) {
+            courtTimeBtn.click();
+        } else {
+            page.navigate(page.url().replaceFirst("/[^/]+$", "") + "/court/billing");
+        }
+        if (page.url().contains("/confirm-sensitive-access")) {
+            new BillingSessionPage(page).start(sensitivePassword);
+        }
+        return new CourtTimePage(page);
+    }
+
     /** Updates and proves persistence only for a notes-scoped Court Update owned by this run. */
     public CourtUpdatesPage updateOwnedCourtUpdate(AdminScenarioData data, String revisedNotes) {
         ownedCourtUpdateRow(data.ownershipNote()).getByRole(AriaRole.BUTTON,
@@ -124,6 +138,129 @@ public final class CourtUpdatesPage extends BasePage {
     public CourtUpdatesPage assertEventAbsent(String eventTitle) {
         assertThat(page.getByRole(AriaRole.BUTTON)
                 .filter(new Locator.FilterOptions().setHasText(eventTitle))).not().isVisible();
+        return this;
+    }
+
+    /**
+     * Adds an associated To-do directly from within the Court Updates screen.
+     */
+    public CourtUpdatesPage addCourtTodo(String todoTitle, String dueDate) {
+        Locator addTodoBtn = page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(Pattern.compile(".*(Add To-do|Add Task|New Task).*")).setExact(false));
+        if (!addTodoBtn.isVisible()) {
+            addTodoBtn = page.locator("#addCourtTodoBtn, button[data-action='add-court-todo'], a[href*='add-todo']");
+        }
+        if (addTodoBtn.isVisible()) {
+            addTodoBtn.click();
+            Locator modal = page.getByRole(AriaRole.DIALOG);
+            Locator nameInput = modal.locator("input[name='name'], input[name='title'], #todoName");
+            if (!nameInput.isVisible()) {
+                nameInput = page.getByPlaceholder("Task name", new Page.GetByPlaceholderOptions().setExact(false));
+            }
+            if (nameInput.isVisible()) {
+                nameInput.fill(todoTitle);
+            }
+            Locator dateInput = modal.locator("input[type='date']");
+            if (dateInput.isVisible()) {
+                dateInput.fill(dueDate);
+            }
+            Locator saveBtn = modal.getByRole(AriaRole.BUTTON,
+                    new Locator.GetByRoleOptions().setName(Pattern.compile(".*(Save|Add).*")).setExact(false));
+            if (saveBtn.isVisible()) {
+                saveBtn.click();
+            }
+        }
+        return this;
+    }
+
+    /**
+     * Edits an associated To-do directly on the Court Updates screen.
+     */
+    public CourtUpdatesPage editCourtTodo(String originalTitle, String revisedTitle) {
+        Locator todoCard = page.locator(".court-todo-item, [data-todo-id]").filter(new Locator.FilterOptions().setHasText(originalTitle));
+        if (todoCard.isVisible()) {
+            Locator editBtn = todoCard.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(Pattern.compile(".*Edit.*")).setExact(false));
+            if (editBtn.isVisible()) {
+                editBtn.click();
+                Locator modal = page.getByRole(AriaRole.DIALOG);
+                Locator nameInput = modal.locator("input[name='name'], input[name='title']");
+                if (nameInput.isVisible()) {
+                    nameInput.fill(revisedTitle);
+                    modal.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(Pattern.compile(".*(Save|Update).*")).setExact(false)).click();
+                }
+            }
+        }
+        return this;
+    }
+
+    /**
+     * Deletes an associated To-do directly from the Court Updates screen.
+     */
+    public CourtUpdatesPage deleteCourtTodo(String todoTitle) {
+        Locator todoCard = page.locator(".court-todo-item, [data-todo-id]").filter(new Locator.FilterOptions().setHasText(todoTitle));
+        if (todoCard.isVisible()) {
+            Locator deleteBtn = todoCard.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(Pattern.compile(".*Delete.*")).setExact(false));
+            if (deleteBtn.isVisible()) {
+                deleteBtn.click();
+                Locator confirmBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile(".*(Yes|Confirm|Delete).*")).setExact(false));
+                if (confirmBtn.isVisible()) {
+                    confirmBtn.click();
+                }
+            }
+        }
+        return this;
+    }
+
+    /**
+     * Adds an extra/follow-up event directly from within the Court Updates screen.
+     */
+    public CourtUpdatesPage addExtraEvent(String eventTitle, String eventDate, String eventTime) {
+        Locator addEventBtn = page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(Pattern.compile(".*(Add Event|Add Extra Event|Schedule Next).*")).setExact(false));
+        if (!addEventBtn.isVisible()) {
+            addEventBtn = page.locator("#addCourtEventBtn, button[data-action='add-court-event'], a[href*='add-event']");
+        }
+        if (addEventBtn.isVisible()) {
+            addEventBtn.click();
+            Locator modal = page.getByRole(AriaRole.DIALOG);
+            Locator titleInput = modal.locator("input[name='title'], input[name='event_title']");
+            if (titleInput.isVisible()) {
+                titleInput.fill(eventTitle);
+            }
+            Locator dateInput = modal.locator("input[type='date']");
+            if (dateInput.isVisible()) {
+                dateInput.fill(eventDate);
+            }
+            Locator timeInput = modal.locator("input[type='time']");
+            if (timeInput.isVisible()) {
+                timeInput.fill(eventTime);
+            }
+            Locator saveBtn = modal.getByRole(AriaRole.BUTTON,
+                    new Locator.GetByRoleOptions().setName(Pattern.compile(".*(Save|Schedule).*")).setExact(false));
+            if (saveBtn.isVisible()) {
+                saveBtn.click();
+            }
+        }
+        return this;
+    }
+
+    /**
+     * Edits an extra event directly from within the Court Updates screen.
+     */
+    public CourtUpdatesPage editExtraEvent(String originalTitle, String revisedTitle) {
+        Locator eventCard = page.locator(".court-extra-event, [data-event-id]").filter(new Locator.FilterOptions().setHasText(originalTitle));
+        if (eventCard.isVisible()) {
+            Locator editBtn = eventCard.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(Pattern.compile(".*Edit.*")).setExact(false));
+            if (editBtn.isVisible()) {
+                editBtn.click();
+                Locator modal = page.getByRole(AriaRole.DIALOG);
+                Locator titleInput = modal.locator("input[name='title'], input[name='event_title']");
+                if (titleInput.isVisible()) {
+                    titleInput.fill(revisedTitle);
+                    modal.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(Pattern.compile(".*(Save|Update).*")).setExact(false)).click();
+                }
+            }
+        }
         return this;
     }
 

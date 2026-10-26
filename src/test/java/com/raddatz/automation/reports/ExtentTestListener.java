@@ -41,21 +41,40 @@ public final class ExtentTestListener implements ITestListener, IExecutionListen
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        CURRENT_TEST.get().pass("Passed");
+        ExtentTest test = CURRENT_TEST.get();
+        if (test != null) {
+            test.pass("Passed");
+        }
         record(result, "PASS");
+        CURRENT_TEST.remove();
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        CURRENT_TEST.get().skip(result.getThrowable());
+        ExtentTest test = CURRENT_TEST.get();
+        if (test == null && reportRun != null) {
+            test = reportRun.extent().createTest(result.getMethod().getMethodName(), result.getMethod().getDescription());
+        }
+        if (test != null) {
+            test.skip(result.getThrowable());
+        }
         record(result, "SKIP");
+        CURRENT_TEST.remove();
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        CURRENT_TEST.get().fail(result.getThrowable());
+        ExtentTest test = CURRENT_TEST.get();
+        if (test == null && reportRun != null) {
+            test = reportRun.extent().createTest(result.getMethod().getMethodName(), result.getMethod().getDescription());
+            CURRENT_TEST.set(test);
+        }
+        if (test != null) {
+            test.fail(result.getThrowable());
+        }
         record(result, "FAIL");
         attachScreenshot(result);
+        CURRENT_TEST.remove();
     }
 
     @Override

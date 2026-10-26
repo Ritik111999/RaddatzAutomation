@@ -62,6 +62,16 @@ public final class ClientMatterListPage extends BasePage {
         return this;
     }
 
+    public CompanyDetailsPage openOwnedCompany(String companyName) {
+        searchFor(companyName);
+        Locator link = page.getByRole(AriaRole.LINK,
+                new Page.GetByRoleOptions().setName(companyName).setExact(true));
+        assertVisible(link);
+        link.click();
+        page.waitForURL(Pattern.compile(".*/client-and-matter/client/\\d+/view"));
+        return new CompanyDetailsPage(page).assertLoaded(companyName);
+    }
+
     /** Confirms the Matter is displayed below the exact owned Company and Property branch. */
     public ClientMatterListPage assertOwnedMatterHierarchy(AdminScenarioData data) {
         searchFor(data.caseNumber());

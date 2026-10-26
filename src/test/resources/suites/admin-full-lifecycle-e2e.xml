@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz Full Business Lifecycle E2E" parallel="none">
+    <listeners><listener class-name="com.raddatz.automation.reports.ExtentTestListener"/></listeners>
+    <test name="Full Raddatz E2E Journey">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminFullLifecycleE2ETest"/>
+        </classes>
+    </test>
+</suite>
