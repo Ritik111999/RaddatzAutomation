@@ -1,5 +1,6 @@
 package com.raddatz.automation.tests;
 
+import com.raddatz.automation.core.reporting.TestMetadata;
 import com.raddatz.automation.pages.Sidebar;
 import com.raddatz.automation.pages.ObservedFieldConstraint;
 import com.raddatz.automation.pages.SearchFilterPage;
@@ -14,6 +15,21 @@ import static org.testng.Assert.assertFalse;
  * never fills a field, chooses a parent, uploads, or submits.
  */
 public final class AdminFormContractObservationTest extends ReadOnlyTestBase {
+
+    @TestMetadata(
+            module = "NegativeAndValidation",
+            scenarioId = "RAD-NEG-001",
+            title = "Hierarchy Form Field Contracts and Mandatory Constraints Observation",
+            testType = TestMetadata.TestType.READ_ONLY,
+            expectedResult = "Company, Property, and Matter forms expose defined input controls and native validation rules without submission.",
+            preconditions = "Active administrative session.",
+            testSteps = {
+                    "Open Add Company modal and assert observed field contract",
+                    "Open Add Property modal and assert observed field contract",
+                    "Open Add Matter modal and assert observed field contract"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.LOW
+    )
     @Test(groups = {"admin-readonly", "field-contract"}, description = "Observe Company, Property, and Matter field contracts without entering or saving data.")
     public void hierarchyFormFieldContractsAreObservedWithoutMutation() {
         new Sidebar(currentPage()).goToClients().openAddCompany().assertObservedFieldContract();
@@ -21,6 +37,21 @@ public final class AdminFormContractObservationTest extends ReadOnlyTestBase {
         new Sidebar(currentPage()).goToClients().openAddMatter().assertObservedFieldContract();
     }
 
+    @TestMetadata(
+            module = "NegativeAndValidation",
+            scenarioId = "RAD-NEG-002",
+            title = "Hierarchy Validation Constraints and Attribute Audit",
+            testType = TestMetadata.TestType.READ_ONLY,
+            expectedResult = "Captured HTML5 and ARIA constraints on Company, Property, and Matter inputs enforce mandatory fields and limits.",
+            preconditions = "Active administrative session.",
+            testSteps = {
+                    "Audit validation constraints on Company form controls",
+                    "Audit validation constraints on Property form controls",
+                    "Audit validation constraints on Matter form controls",
+                    "Log type, required, min, max, maxlength, pattern attributes"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.LOW
+    )
     @Test(groups = {"admin-readonly", "field-contract"}, description = "Capture native hierarchy-field constraints without form submission.")
     public void hierarchyValidationConstraintsAreObservedWithoutSubmission() {
         Map<String, ObservedFieldConstraint> company = new Sidebar(currentPage()).goToClients().openAddCompany()
@@ -38,6 +69,21 @@ public final class AdminFormContractObservationTest extends ReadOnlyTestBase {
         logConstraints("Matter", matter);
     }
 
+    @TestMetadata(
+            module = "NegativeAndValidation",
+            scenarioId = "RAD-NEG-003",
+            title = "Operational Controls Validation Constraints (Task, Event, Template)",
+            testType = TestMetadata.TestType.READ_ONLY,
+            expectedResult = "Task, Event, and Template form controls exhibit expected required attributes and boundary constraints.",
+            preconditions = "Active administrative session.",
+            testSteps = {
+                    "Open Add Task modal and observe validation constraints",
+                    "Open Add Event modal and observe validation constraints",
+                    "Open Create Document Template and observe validation constraints",
+                    "Verify controls exist and log constraints"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.LOW
+    )
     @Test(groups = {"admin-readonly", "field-contract"}, description = "Capture task, event, and template native constraints without submission.")
     public void operationalValidationConstraintsAreObservedWithoutSubmission() {
         Map<String, ObservedFieldConstraint> task = dashboard().openAddTask().observeValidationConstraints();
@@ -57,6 +103,20 @@ public final class AdminFormContractObservationTest extends ReadOnlyTestBase {
         logConstraints("Template", template);
     }
 
+    @TestMetadata(
+            module = "NegativeAndValidation",
+            scenarioId = "RAD-NEG-004",
+            title = "Court Update Hearing Form Blank Validation Attributes",
+            testType = TestMetadata.TestType.READ_ONLY,
+            expectedResult = "Court Update outcome form enforces mandatory event selection and required outcome fields before submission.",
+            preconditions = "Active administrative session.",
+            testSteps = {
+                    "Navigate to Court Updates view",
+                    "Observe validation constraints on hearing update controls",
+                    "Verify non-empty constraints and log attributes"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.LOW
+    )
     @Test(groups = {"admin-readonly", "field-contract"}, description = "Capture blank Court Update validation attributes without selecting an Event or submitting.")
     public void courtUpdateValidationConstraintsAreObservedWithoutSubmission() {
         Map<String, ObservedFieldConstraint> courtUpdate = new Sidebar(currentPage()).goToCourtUpdates()
@@ -64,6 +124,7 @@ public final class AdminFormContractObservationTest extends ReadOnlyTestBase {
         assertFalse(courtUpdate.isEmpty(), "Court Update contract should expose visible controls");
         logConstraints("CourtUpdate", courtUpdate);
     }
+
 
     private void logConstraints(String form, Map<String, ObservedFieldConstraint> constraints) {
         constraints.forEach((name, observed) -> logger.info(

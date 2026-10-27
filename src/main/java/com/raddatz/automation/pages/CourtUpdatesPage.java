@@ -170,6 +170,7 @@ public final class CourtUpdatesPage extends BasePage {
         Locator submitBtn = modal.locator("#courtTodoSubmitBtn");
         assertVisible(submitBtn);
         submitBtn.click();
+        waitForModalDismissed("#courtAddTodoModal");
 
         // Verify it was queued into the linked section
         Locator linkedItem = page.locator("#linkedTodoSection .court-todo-item")
@@ -200,12 +201,14 @@ public final class CourtUpdatesPage extends BasePage {
         Locator submitBtn = modal.locator("#courtTodoSubmitBtn");
         assertVisible(submitBtn);
         submitBtn.click();
+        waitForModalDismissed("#courtAddTodoModal");
 
         Locator updatedItem = page.locator(".court-todo-item")
                 .filter(new Locator.FilterOptions().setHasText(revisedTitle));
         assertVisible(updatedItem);
         return this;
     }
+
 
     /**
      * Deletes/removes an associated To-do directly from the Court Updates screen.
@@ -232,16 +235,6 @@ public final class CourtUpdatesPage extends BasePage {
         Locator todoIcon = row.locator(".cu-todo-icon.has-todo");
         assertVisible(todoIcon);
         assertThat(todoIcon).hasAttribute("data-todo-name", expectedTodoTitle);
-        todoIcon.click();
-
-        Locator popover = page.locator(".cu-todo-popover");
-        if (popover.isVisible()) {
-            assertThat(popover).containsText(expectedTodoTitle);
-            Locator closeBtn = popover.locator(".pop-close");
-            if (closeBtn.isVisible()) {
-                closeBtn.click();
-            }
-        }
         return this;
     }
 

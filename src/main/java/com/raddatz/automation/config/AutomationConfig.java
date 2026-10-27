@@ -24,7 +24,7 @@ public record AutomationConfig(
     public static AutomationConfig load() {
         return new AutomationConfig(
                 ExecutionMode.from(value("raddatz.execution.mode", "RADDATZ_EXECUTION_MODE", "DOCS_ONLY")),
-                value("raddatz.base.url", "RADDATZ_BASE_URL", "http://192.168.0.229:8000/login"),
+                value("raddatz.base.url", "RADDATZ_BASE_URL", "http://192.168.1.10:8000/login"),
                 value("raddatz.username", "RADDATZ_USERNAME", ""),
                 value("raddatz.password", "RADDATZ_PASSWORD", ""),
                 value("raddatz.browser", "RADDATZ_BROWSER", "chromium").toLowerCase(Locale.ROOT),

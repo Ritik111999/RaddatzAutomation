@@ -100,4 +100,26 @@ public final class EventFormPage extends BasePage {
         page.waitForURL(Pattern.compile(".*/calendar/\\d+$"));
         return new EventDetailsPage(page).assertLoaded(data.revisedEventTitle());
     }
+
+    /**
+     * Submits follow-up court date when invoked from Court Updates with return_to routing.
+     */
+    public CourtUpdatesPage scheduleCourtDateFromCourtUpdates(String eventTitle, String eventDate) {
+        Locator titleBox = page.locator("textarea[name*='event_title'], textarea.court-event-title, textarea[name*='title']").first();
+        if (titleBox.isVisible()) {
+            titleBox.fill(eventTitle);
+        }
+        Locator dateBox = page.locator("input[name*='event_date'], input[type='date']").first();
+        if (dateBox.isVisible()) {
+            dateBox.fill(eventDate);
+        }
+        Locator submitBtn = page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Schedule Court Date").setExact(true));
+        if (!submitBtn.isVisible()) {
+            submitBtn = page.locator("button:has-text('Schedule Court Date')");
+        }
+        submitBtn.click();
+        page.waitForURL(Pattern.compile(".*/court[/\\-]updates.*"));
+        return new CourtUpdatesPage(page).assertLoaded();
+    }
 }

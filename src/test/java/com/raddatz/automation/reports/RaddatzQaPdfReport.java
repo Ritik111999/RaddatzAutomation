@@ -1,6 +1,7 @@
 package com.raddatz.automation.reports;
 
 import com.raddatz.automation.config.AutomationConfig;
+import com.raddatz.automation.core.reporting.TestMetadata;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -101,10 +102,14 @@ final class RaddatzQaPdfReport {
     }
 
     private static void appendScenarioDetail(StringBuilder body, Scenario scenario) {
-        Narrative narrative = narrativeFor(scenario.name(), scenario.description());
-        body.append("<article class='scenario'><h3>").append(escape(idFor(scenario.name()))).append(" - ").append(escape(narrative.title())).append(" ")
-                .append(badge(scenario.status())).append("</h3><p><b>Module:</b> ").append(escape(moduleFor(scenario)))
-                .append(" &nbsp; <b>Type:</b> ").append(scenario.name().startsWith("administrator") ? "Positive lifecycle" : "Read-only observation")
+        Narrative narrative = narrativeFor(scenario);
+        String scenarioId = idFor(scenario);
+        String module = moduleFor(scenario);
+        String testType = scenario.metadata() != null ? scenario.metadata().testType().label() : (scenario.name().startsWith("administrator") ? "Positive lifecycle" : "Read-only observation");
+
+        body.append("<article class='scenario'><h3>").append(escape(scenarioId)).append(" - ").append(escape(narrative.title())).append(" ")
+                .append(badge(scenario.status())).append("</h3><p><b>Module:</b> ").append(escape(module))
+                .append(" &nbsp; <b>Type:</b> ").append(escape(testType))
                 .append(" &nbsp; <b>Duration:</b> ").append(escape(format(scenario.duration())))
                 .append("</p><p><b>Preconditions:</b> ").append(escape(narrative.preconditions())).append("</p><p><b>Test Steps:</b></p><ol>");
         for (String step : narrative.steps()) body.append("<li>").append(escape(step)).append("</li>");
@@ -112,6 +117,16 @@ final class RaddatzQaPdfReport {
                 .append(escape("PASS".equals(scenario.status()) ? "All implemented assertions completed: " + narrative.expected() : "Scenario stopped before all expected checks completed. Later steps have not been verified."))
                 .append("</p><p><b>Failure classification:</b> ").append(escape(scenario.failure()))
                 .append("</p><p><b>Evidence:</b> TestNG method ").append(escape(scenario.name())).append("; underlying TestNG and Extent results retained with the source execution.</p></article>");
+    }
+
+    private static Narrative narrativeFor(Scenario scenario) {
+        if (scenario.metadata() != null) {
+            List<String> steps = scenario.metadata().testSteps() != null && scenario.metadata().testSteps().length > 0
+                    ? List.of(scenario.metadata().testSteps())
+                    : List.of("Execute scenario Playwright assertions against approved target");
+            return new Narrative(scenario.metadata().title(), scenario.metadata().preconditions(), steps, scenario.metadata().expectedResult());
+        }
+        return narrativeFor(scenario.name(), scenario.description());
     }
 
     private static Narrative narrativeFor(String name, String fallback) {
@@ -142,6 +157,13 @@ final class RaddatzQaPdfReport {
     private static Narrative n(String title, String preconditions, String... details) {
         List<String> all = List.of(details);
         return new Narrative(title, preconditions, all.subList(0, all.size() - 1), all.getLast());
+    }
+
+    private static String idFor(Scenario scenario) {
+        if (scenario.metadata() != null && !scenario.metadata().scenarioId().isBlank()) {
+            return scenario.metadata().scenarioId();
+        }
+        return idFor(scenario.name());
     }
 
     private static String idFor(String name) {
@@ -178,6 +200,9 @@ final class RaddatzQaPdfReport {
     }
 
     private static String moduleFor(Scenario scenario) {
+        if (scenario.metadata() != null && !scenario.metadata().module().isBlank()) {
+            return scenario.metadata().module();
+        }
         String name = scenario.name().toLowerCase(java.util.Locale.ROOT);
         if (name.contains("invoice") || name.contains("timeentry") || name.contains("expense")) return "Billing";
         if (name.contains("document") || name.contains("template")) return "Documents & Templates";
@@ -197,9 +222,13 @@ final class RaddatzQaPdfReport {
         return value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
     }
 
-    record Scenario(String name, String description, String status, Duration duration, String failure) {
+    record Scenario(String name, String description, String status, Duration duration, String failure, TestMetadata metadata) {
+        Scenario(String name, String description, String status, Duration duration, String failure) {
+            this(name, description, status, duration, failure, null);
+        }
     }
 
     private record Narrative(String title, String preconditions, List<String> steps, String expected) {
     }
 }
+

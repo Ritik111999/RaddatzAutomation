@@ -24,6 +24,11 @@
             <class name="com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest"/>
             <class name="com.raddatz.automation.tests.AdminMultiTenantMatterTest"/>
             <class name="com.raddatz.automation.tests.AdminOwnedHierarchyEditTest"/>
+            <class name="com.raddatz.automation.tests.AdminCrossScreenWorkflowTest"/>
+            <class name="com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest"/>
+            <class name="com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest"/>
+            <class name="com.raddatz.automation.tests.AdminDocumentVariableGenerationTest"/>
         </classes>
     </test>
+
 </suite>

@@ -282,3 +282,39 @@ Executed the full parallel mutation regression suite (`admin-parallel-mutation.x
   - `TimeEntryPage`: Matter autocomplete resolution via placeholder locator and dual search fallback.
   - `ExpensePage`: Clean form submit navigation handling and direct row action handler for deletion.
   - Strictly respected law firm confidentiality and safety boundaries: restricted integrations, backend data control, portal access, permissions, and payment gateways were left completely untouched.
+
+**ToolTrader Parity Alignment & Master Comprehensive QA Suite, 2026-10-27:**
+- **Target Endpoint:** Updated base URL to `http://192.168.1.10:8000/login` across `AutomationConfig` and tests.
+- **DOM Mapping:** Completed capture of 15 key DOM screens and modals cataloged in `dom-maps/INDEX.md` and `docs/dom-maps/INDEX.md`.
+- **ToolTrader Architectural Parity:**
+  - Created `@TestMetadata` annotation (`com.raddatz.automation.core.reporting.TestMetadata`) tracking module, scenarioId, title, testType, expectedResult, preconditions, testSteps, defectSeverity.
+  - Created `docs/CROSS_SCREEN_WORKFLOWS.md` with multi-surface entrypoint matrix and cross-hub propagation flows.
+  - Created `docs/RADDATZ_PWA_POM_CATALOG.md` documenting all 29 POM classes.
+  - Created `docs/MODULE_PROCEDURES.md` mapping step-by-step procedures for every module flow.
+  - Implemented `AdminCrossScreenWorkflowTest` (`RAD-CROSS-001` Court Updates To-Do inline popover & `/todos` propagation; `RAD-CROSS-002` Extra Event scheduling from Court Updates to `/calendar`).
+- **Master Comprehensive Full QA Suite (`comprehensive-full-qa.xml`):**
+  - Arranged all automation tests in 8 sequential stages representing authentic legal workflow progression:
+    1. Stage 1: System Preflight & Read-Only Navigation (`ReadOnlySmokeTest`, `AdminSearchFilterTest`).
+    2. Stage 2: Form Field Contracts & Negative Constraints Audit (`AdminFormContractObservationTest`).
+    3. Stage 3: Client Portfolio Hierarchy Lifecycle (`AdminCompanyCreationTest`, `AdminPropertyCreationTest`, `AdminMatterCreationTest`, `AdminMultiTenantMatterTest`, `AdminOwnedHierarchyEditTest`).
+    4. Stage 4: Matter 360 Operations & Case Evidence (`AdminTaskLifecycleTest`, `AdminEventLifecycleTest`, `AdminMatterNoteLifecycleTest`, `AdminMatterDocumentLifecycleTest`).
+    5. Stage 5: Cross-Screen Workflows & Multi-Hub Propagation (`AdminCrossScreenWorkflowTest`).
+    6. Stage 6: Legal Document Template Engine & Variable Generation (`AdminDocumentTemplateMetadataLifecycleTest`, `AdminDocumentVariableGenerationTest`).
+    7. Stage 7: Court Updates & Financial Billing Pipeline (`AdminCourtUpdateLifecycleTest`, `AdminOwnedTimeEntryLifecycleTest`, `AdminOwnedExpenseLifecycleTest`, `AdminTimeEntryInvoicePropagationTest`, `AdminOwnedInvoiceDraftTest`).
+    8. Stage 8: Master End-to-End Business Journey (`AdminFullLifecycleE2ETest`).
+- **Target Instance Connectivity:** Server at `http://192.168.1.10:8000` is configured in `AutomationConfig`. Verified that backend Laravel instance currently throws an unhandled database exception on authentication (`Sign in unsuccessful. An unexpected error occurred. Please try again.`) and the `artisan serve` process needs MySQL/SQLite active on that machine.
+- **100% TestMetadata Rollout & Executive Reporting Engine:**
+  - Annotated all 26 test methods across every test class with structured `@TestMetadata` (Scenario IDs, titles, test types, preconditions, test steps, expected results, defect severity).
+  - Enhanced `ExtentTestListener` to automatically assign categories, log test steps, preconditions, expected results, and defect severity into the Extent Report HTML.
+  - Enhanced `RaddatzQaPdfReport` to render executive summary cards and per-scenario detail articles dynamically extracted from `@TestMetadata` into the consolidated PDF report.
+  - Updated `admin-parallel-mutation.xml` and `admin-regression-serial.xml` to include all mutation suites including cross-screen touchpoints, document variable generation, and draft invoice propagation.
+- **Full Automation Hardening & Suite Reorganization (2026-10-27 Update):**
+  - **100% `@TestMetadata` Verification:** Validated that all 34 `@Test` methods across all 20 test classes have complete, structured `@TestMetadata` annotations (modules, scenario IDs, titles, test types, expected results, preconditions, ordered test steps, defect severities).
+  - **Fail-Fast Authentication:** Hardened `LoginPage.java` to detect `.auth-feedback-error` and `[role='alert']` within 800ms and fail fast with the exact server error message rather than hanging on Playwright's 30s URL timeout.
+  - **Suite Reorganization into 8-Stage Legal Progression:**
+    - `comprehensive-full-qa.xml`: Expanded to include `AdminPortfolioHierarchyTest` in Stage 3 and `AdminTaskAndEventCreationTest` in Stage 4, covering all foundational and operational lifecycle tests.
+    - `admin-regression-serial.xml`: Restructured into the identical 8 sequential stages matching authentic law practice operations (Preflight -> Field Contracts -> Portfolio Hierarchy -> Matter 360 -> Cross-Screen -> Templates -> Accounting & Billing -> Master E2E).
+    - `admin-discovery-inspection.xml`: Created dedicated deep inspection suite grouping `ReadOnlySmokeTest`, `AdminSearchFilterTest`, `AdminFullSystemInspectionTest`, and `AdminCrossScreenAffordanceInspectionTest`.
+    - `admin-parallel-mutation.xml`: Encompasses all 17 mutation classes configured for thread-isolated parallel execution.
+  - **Compilation & Parity Status:** `mvn clean test-compile` passes cleanly (BUILD SUCCESS, exit code 0). ToolTrader parity is fully achieved across DOM catalogs, POM hierarchy, paired positive/negative tests, cross-screen data propagation, and executive dual-format reporting (Extent HTML + Executive QA PDF).
+  - **Target Host Status:** Target URL is `http://192.168.1.10:8000/login`. The Laravel application is active and serving HTTP requests (`/up` returns 200 OK), but attempts to query the database (`POST /login`, `POST /forgot-password`) return `Sign in unsuccessful. An unexpected error occurred` because MySQL on `192.168.1.10:3306` is currently refused. As soon as MySQL is started on the target host, the suites are ready for 100% automated execution.

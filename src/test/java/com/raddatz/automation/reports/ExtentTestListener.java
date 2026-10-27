@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.microsoft.playwright.Page;
 import com.raddatz.automation.config.AutomationConfig;
+import com.raddatz.automation.core.reporting.TestMetadata;
 import com.raddatz.automation.tests.HasPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,26 @@ public final class ExtentTestListener implements ITestListener, IExecutionListen
 
     @Override
     public void onTestStart(ITestResult result) {
-        ExtentTest test = reportRun.extent().createTest(result.getMethod().getMethodName(), result.getMethod().getDescription());
+        TestMetadata meta = extractMetadata(result);
+        String testName = meta != null ? "[" + meta.scenarioId() + "] " + meta.title() : result.getMethod().getMethodName();
+        String description = meta != null ? meta.expectedResult() : result.getMethod().getDescription();
+        ExtentTest test = reportRun.extent().createTest(testName, description);
+        if (meta != null) {
+            test.assignCategory(meta.module());
+            test.info("<b>Type:</b> " + meta.testType().label());
+            if (!meta.preconditions().isBlank()) {
+                test.info("<b>Preconditions:</b> " + meta.preconditions());
+            }
+            if (meta.testSteps().length > 0) {
+                StringBuilder stepsHtml = new StringBuilder("<b>Test Steps:</b><ol>");
+                for (String step : meta.testSteps()) {
+                    stepsHtml.append("<li>").append(step).append("</li>");
+                }
+                stepsHtml.append("</ol>");
+                test.info(stepsHtml.toString());
+            }
+            test.info("<b>Expected Result:</b> " + meta.expectedResult());
+        }
         CURRENT_TEST.set(test);
     }
 
@@ -53,7 +73,9 @@ public final class ExtentTestListener implements ITestListener, IExecutionListen
     public void onTestSkipped(ITestResult result) {
         ExtentTest test = CURRENT_TEST.get();
         if (test == null && reportRun != null) {
-            test = reportRun.extent().createTest(result.getMethod().getMethodName(), result.getMethod().getDescription());
+            TestMetadata meta = extractMetadata(result);
+            String testName = meta != null ? "[" + meta.scenarioId() + "] " + meta.title() : result.getMethod().getMethodName();
+            test = reportRun.extent().createTest(testName, result.getMethod().getDescription());
         }
         if (test != null) {
             test.skip(result.getThrowable());
@@ -66,10 +88,16 @@ public final class ExtentTestListener implements ITestListener, IExecutionListen
     public void onTestFailure(ITestResult result) {
         ExtentTest test = CURRENT_TEST.get();
         if (test == null && reportRun != null) {
-            test = reportRun.extent().createTest(result.getMethod().getMethodName(), result.getMethod().getDescription());
+            TestMetadata meta = extractMetadata(result);
+            String testName = meta != null ? "[" + meta.scenarioId() + "] " + meta.title() : result.getMethod().getMethodName();
+            test = reportRun.extent().createTest(testName, result.getMethod().getDescription());
             CURRENT_TEST.set(test);
         }
         if (test != null) {
+            TestMetadata meta = extractMetadata(result);
+            if (meta != null && meta.reportDefectOnFailure()) {
+                test.info("<span style='color:red;font-weight:bold;'>Defect Severity: " + meta.defectSeverity().label() + "</span>");
+            }
             test.fail(result.getThrowable());
         }
         record(result, "FAIL");
@@ -89,13 +117,23 @@ public final class ExtentTestListener implements ITestListener, IExecutionListen
 
     private void record(ITestResult result, String status) {
         String description = result.getMethod().getDescription();
+        TestMetadata meta = extractMetadata(result);
         scenarios.add(new RaddatzQaPdfReport.Scenario(result.getMethod().getMethodName(),
                 description == null ? "" : description,
                 status,
                 Duration.ofMillis(Math.max(0, result.getEndMillis() - result.getStartMillis())),
                 result.getThrowable() == null ? "None recorded" : result.getThrowable().getClass().getSimpleName()
-                        + " (cause requires triage; confidential exception content omitted)"));
+                        + " (cause requires triage; confidential exception content omitted)",
+                meta));
     }
+
+    private TestMetadata extractMetadata(ITestResult result) {
+        if (result == null || result.getMethod() == null || result.getMethod().getConstructorOrMethod() == null) {
+            return null;
+        }
+        return result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(TestMetadata.class);
+    }
+
 
     private void attachScreenshot(ITestResult result) {
         Object instance = result.getInstance();

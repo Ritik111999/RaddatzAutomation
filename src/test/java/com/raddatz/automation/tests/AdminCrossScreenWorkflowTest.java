@@ -103,10 +103,8 @@ public final class AdminCrossScreenWorkflowTest extends ReadOnlyTestBase {
                 .assertTaskListed(courtTodoTitle);
 
         logger.info("=== STEP 6: VERIFY PROPAGATION TO MATTER WORKSPACE TODO TAB ===");
-        sidebar.goToClients();
-        page.getByRole(AriaRole.LINK,
-                new Page.GetByRoleOptions().setName(data.tenantName()).setExact(false)).click();
-        new MatterWorkspacePage(page).assertLoaded(data.tenantName())
+        sidebar.goToClients()
+                .openOwnedMatter(data.tenantName(), data.caseNumber())
                 .openTodoTab();
         assertThat(page.locator("body")).containsText(courtTodoTitle);
 
@@ -173,22 +171,7 @@ public final class AdminCrossScreenWorkflowTest extends ReadOnlyTestBase {
         EventFormPage extraEventForm = courtUpdates.openExtraEventForm();
         String extraEventTitle = "Extra Hearing " + data.reference();
         String extraEventDate = LocalDate.now().plusDays(4).toString();
-        extraEventForm.createOwnedEvent(new AdminScenarioData(
-                data.reference(), data.companyName(), data.contactName(), data.contactTitle(), data.contactEmail(),
-                data.officePhone(), data.mobilePhone(), data.companyStreetAddress(), data.companySuite(), data.companyCity(),
-                data.companyState(), data.companyZipCode(), data.propertyName(), data.propertyType(), data.rentalOfficeAddress(),
-                data.businessLicenseDescriptor(), data.businessLicenseNumber(), data.radDescriptor(), data.radNumber(),
-                data.radExpirationDate(), data.totalUnits(), data.propertyHourlyRate(), data.tenantName(), data.tenantStreetAddress(),
-                data.tenantQuadrant(), data.tenantUnitNumber(), data.tenantCity(), data.tenantZipCode(), data.tenantPhone(),
-                data.tenantEmail(), data.caseNumber(), data.caseType(), data.caseStatus(), data.matterPlan(), data.casePriority(),
-                data.openingDate(), data.taskName(), data.taskDescription(), data.taskDueDate(), extraEventTitle, extraEventDate,
-                "14:00", data.eventDuration(), data.eventCourtRoom(), data.eventType(), data.eventCategory(), data.eventJudgeName(),
-                data.eventNotes(), data.ownershipNote()
-        ));
-
-        // Assert return redirect to Court Updates
-        page.waitForURL(Pattern.compile(".*/court-updates.*"));
-        courtUpdates.assertLoaded();
+        extraEventForm.scheduleCourtDateFromCourtUpdates(extraEventTitle, extraEventDate);
 
         logger.info("=== CROSS-SCREEN EXTRA EVENT SCHEDULING VERIFIED SUCCESSFULLY ===");
     }

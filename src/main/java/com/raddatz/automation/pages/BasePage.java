@@ -35,6 +35,30 @@ public abstract class BasePage {
         assertThat(locator).isVisible(new com.microsoft.playwright.assertions.LocatorAssertions.IsVisibleOptions().setTimeout(15000));
     }
 
+    protected void waitForModalDismissed(String modalSelector) {
+        Locator modal = page.locator(modalSelector);
+        if (modal.count() > 0) {
+            assertThat(modal).isHidden(new com.microsoft.playwright.assertions.LocatorAssertions.IsHiddenOptions().setTimeout(10000));
+        }
+        Locator backdrop = page.locator(".modal-backdrop");
+        if (backdrop.count() > 0) {
+            assertThat(backdrop).hasCount(0, new com.microsoft.playwright.assertions.LocatorAssertions.HasCountOptions().setTimeout(10000));
+        }
+    }
+
+    protected void waitForSpinnerDismissed() {
+        Locator spinner = page.locator("#rz-loading, .rz-loading-overlay, .loading-spinner");
+        if (spinner.count() > 0) {
+            assertThat(spinner.first()).isHidden(new com.microsoft.playwright.assertions.LocatorAssertions.IsHiddenOptions().setTimeout(15000));
+        }
+    }
+
+    protected void safeClick(Locator locator) {
+        assertVisible(locator);
+        locator.scrollIntoViewIfNeeded();
+        locator.click();
+    }
+
     /** Reads only rendered control metadata; it never focuses, fills, or submits the control. */
     protected ObservedFieldConstraint observeConstraint(String control, Locator locator) {
         assertVisible(locator);
@@ -53,3 +77,4 @@ public abstract class BasePage {
         return value == null ? "" : value;
     }
 }
+

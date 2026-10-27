@@ -2,6 +2,7 @@ package com.raddatz.automation.tests;
 
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.raddatz.automation.core.reporting.TestMetadata;
 import com.raddatz.automation.data.AdminScenarioData;
 import com.raddatz.automation.data.TemplateSourceFixture;
 import com.raddatz.automation.pages.*;
@@ -15,6 +16,22 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public final class AdminDocumentVariableGenerationTest extends ReadOnlyTestBase {
     @Override protected boolean requiresMutationPermission() { return true; }
 
+    @TestMetadata(
+            module = "DocumentEngine",
+            scenarioId = "RAD-TMPL-002",
+            title = "Legal Notice Document Generation and Word XML Custom Variable Substitution",
+            testType = TestMetadata.TestType.INTEGRATION,
+            expectedResult = "Document template generates personalized Word DOCX document with runtime variable substituted and raw placeholder removed from XML.",
+            preconditions = "An owned Template with custom variable token and Matter case exist.",
+            testSteps = {
+                    "Create template with custom variable token in Settings",
+                    "Create parent Company, Property, and Matter case",
+                    "Open Matter Workspace documents tab and select template for generation",
+                    "Input runtime variable instructions and submit generation",
+                    "Download generated Word document and inspect XML for substituted text and absence of token"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.CRITICAL
+    )
     @Test(groups="admin-mutation", description="Generate an owned Word document and verify a custom variable is replaced in its downloaded XML.")
     public void administratorGeneratesOwnedVariableDocument() {
         AdminScenarioData data = AdminScenarioData.create(Clock.systemUTC());

@@ -1,0 +1,78 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz Comprehensive Full QA Automation Suite" verbose="2" parallel="none">
+    <parameter name="reuseBrowser" value="true"/>
+    <listeners>
+        <listener class-name="com.raddatz.automation.reports.ExtentTestListener"/>
+    </listeners>
+
+    <!-- STAGE 1: Preflight Verification & Read-Only Navigation -->
+    <test name="Stage 1 - System Preflight &amp; Read-Only Navigation" preserve-order="true">
+        <classes>
+            <class name="com.raddatz.automation.tests.ReadOnlySmokeTest"/>
+            <class name="com.raddatz.automation.tests.AdminSearchFilterTest"/>
+        </classes>
+    </test>
+
+    <!-- STAGE 2: Form Field Contracts & Negative Constraints Audit -->
+    <test name="Stage 2 - Form Field Contracts &amp; Boundary Constraints" preserve-order="true">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminFormContractObservationTest"/>
+        </classes>
+    </test>
+
+    <!-- STAGE 3: Client Portfolio Hierarchy (Foundational Entities) -->
+    <test name="Stage 3 - Client Portfolio Hierarchy Lifecycle" preserve-order="true">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminCompanyCreationTest"/>
+            <class name="com.raddatz.automation.tests.AdminPropertyCreationTest"/>
+            <class name="com.raddatz.automation.tests.AdminMatterCreationTest"/>
+            <class name="com.raddatz.automation.tests.AdminMultiTenantMatterTest"/>
+            <class name="com.raddatz.automation.tests.AdminOwnedHierarchyEditTest"/>
+            <class name="com.raddatz.automation.tests.AdminPortfolioHierarchyTest"/>
+        </classes>
+    </test>
+
+    <!-- STAGE 4: Matter 360 Operations (Tasks, Events, Notes, Documents) -->
+    <test name="Stage 4 - Matter 360 Operations &amp; Case Evidence" preserve-order="true">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminTaskLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminEventLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminTaskAndEventCreationTest"/>
+            <class name="com.raddatz.automation.tests.AdminMatterNoteLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminMatterDocumentLifecycleTest"/>
+        </classes>
+    </test>
+
+    <!-- STAGE 5: Cross-Screen Touchpoints & Multi-Hub Propagation -->
+    <test name="Stage 5 - Cross-Screen Workflows &amp; Multi-Hub Propagation" preserve-order="true">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminCrossScreenWorkflowTest"/>
+        </classes>
+    </test>
+
+    <!-- STAGE 6: Legal Document Template Engine & Variable Generation -->
+    <test name="Stage 6 - Document Template Metadata &amp; Variable Generation" preserve-order="true">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminDocumentTemplateMetadataLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminDocumentVariableGenerationTest"/>
+        </classes>
+    </test>
+
+    <!-- STAGE 7: Court Updates & Financial Pipeline (Time, Expenses, Invoices) -->
+    <test name="Stage 7 - Court Updates &amp; Financial Billing Pipeline" preserve-order="true">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest"/>
+            <class name="com.raddatz.automation.tests.AdminOwnedInvoiceDraftTest"/>
+        </classes>
+    </test>
+
+    <!-- STAGE 8: Master End-to-End Business Journey -->
+    <test name="Stage 8 - Master End-to-End Business Journey" preserve-order="true">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminFullLifecycleE2ETest"/>
+        </classes>
+    </test>
+</suite>

@@ -1,5 +1,7 @@
 package com.raddatz.automation.tests;
 
+import com.raddatz.automation.core.reporting.TestMetadata;
+
 import com.raddatz.automation.data.AdminScenarioData;
 import com.raddatz.automation.pages.ClientMatterListPage;
 import com.raddatz.automation.pages.Sidebar;
@@ -17,6 +19,22 @@ public final class AdminCompanyCreationTest extends ReadOnlyTestBase {
         return true;
     }
 
+    @TestMetadata(
+            module = "PortfolioHierarchy",
+            scenarioId = "RAD-COMP-001",
+            title = "Create and Locate Owned Legal Client Company",
+            testType = TestMetadata.TestType.POSITIVE,
+            expectedResult = "New property management Company is persisted with realistic business details and listed in client directory.",
+            preconditions = "Approved non-production environment.",
+            testSteps = {
+                    "Navigate to Clients & Matters directory",
+                    "Open Add Company form modal",
+                    "Fill company name, authorized contacts, address, and ownership reference",
+                    "Submit company creation",
+                    "Search client directory and assert company is listed in table"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.HIGH
+    )
     @Test(groups = "admin-mutation", description = "Administrator creates and locates an owned Company with field-appropriate data.")
     public void administratorCreatesOwnedCompany() {
         AdminScenarioData data = AdminScenarioData.create(Clock.systemUTC());

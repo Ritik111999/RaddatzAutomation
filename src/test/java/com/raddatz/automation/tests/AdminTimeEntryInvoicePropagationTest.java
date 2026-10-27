@@ -1,5 +1,6 @@
 package com.raddatz.automation.tests;
 
+import com.raddatz.automation.core.reporting.TestMetadata;
 import com.raddatz.automation.data.AdminScenarioData;
 import com.raddatz.automation.pages.InvoiceDraftPage;
 import com.raddatz.automation.pages.Sidebar;
@@ -18,6 +19,21 @@ public final class AdminTimeEntryInvoicePropagationTest extends ReadOnlyTestBase
         return true;
     }
 
+    @TestMetadata(
+            module = "FinancialPipeline",
+            scenarioId = "RAD-PROP-002",
+            title = "Billable Time Entry Modification and Draft Invoice Line-Item Propagation",
+            testType = TestMetadata.TestType.INTEGRATION,
+            expectedResult = "Revised description on billable time entry propagates into draft invoice line item table without data loss.",
+            preconditions = "An owned Matter case, billable time entry, and billing session exist.",
+            testSteps = {
+                    "Create parent Company, Property, and Matter chain",
+                    "Record billable time entry and update description",
+                    "Open Invoices and initiate new Draft Invoice for owned Matter",
+                    "Assert revised billable time description is present in draft line items"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.HIGH
+    )
     @Test(groups = "admin-mutation", description = "Updated owned time entry is reloaded and reflected in its owned draft invoice.")
     public void administratorSeesUpdatedOwnedTimeEntryInDraftInvoice() {
         AdminScenarioData data = AdminScenarioData.create(Clock.systemUTC());

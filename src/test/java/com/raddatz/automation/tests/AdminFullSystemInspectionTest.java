@@ -3,6 +3,7 @@ package com.raddatz.automation.tests;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.raddatz.automation.core.reporting.TestMetadata;
 import com.raddatz.automation.pages.BillingSessionPage;
 import com.raddatz.automation.pages.SearchFilterPage;
 import com.raddatz.automation.pages.Sidebar;
@@ -25,6 +26,21 @@ public final class AdminFullSystemInspectionTest extends ReadOnlyTestBase {
     private final Path screenshotDir = Paths.get("target", "automation-artifacts", "exploration");
 
     @Test(groups = "admin-readonly", description = "Physically inspect and screenshot all screens across Raddatz to map cross-screen capabilities.")
+    @TestMetadata(
+            module = "SystemDiscovery",
+            scenarioId = "RAD-SYS-001",
+            title = "Full System Read-Only Screen & Navigation Inspection",
+            testType = TestMetadata.TestType.READ_ONLY,
+            expectedResult = "All 15 screens loaded without HTTP error, screenshots saved in exploration directory.",
+            preconditions = "Valid administrative session in read-only mode.",
+            testSteps = {
+                    "Navigate to Dashboard and capture screenshot",
+                    "Navigate to Clients & Matters and inspect Company/Property/Matter views",
+                    "Navigate to Court Updates, Todos, Calendar, Billing/Time, Expenses, Invoices, Templates, and Reports",
+                    "Verify navigation links and interactive controls without mutating data"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.LOW
+    )
     public void physicallyInspectAllRaddatzScreens() throws IOException {
         Files.createDirectories(screenshotDir);
         Page page = currentPage();

@@ -3,6 +3,7 @@ package com.raddatz.automation.tests;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.raddatz.automation.core.reporting.TestMetadata;
 import com.raddatz.automation.pages.BillingSessionPage;
 import com.raddatz.automation.pages.Sidebar;
 import org.testng.annotations.Test;
@@ -23,6 +24,23 @@ public final class AdminCrossScreenAffordanceInspectionTest extends ReadOnlyTest
     private final Path domDir = Paths.get("target", "automation-artifacts", "dom-maps");
 
     @Test(groups = "admin-readonly", description = "Physically inspect all cross-cutting multi-entrypoint screens and capture DOM maps.")
+    @TestMetadata(
+            module = "CrossScreenAffordance",
+            scenarioId = "RAD-CROSS-003",
+            title = "Cross-Screen Affordance & DOM Map Capture",
+            testType = TestMetadata.TestType.READ_ONLY,
+            expectedResult = "DOM snapshots saved in dom-maps/ directory and controls logged for multi-entrypoint propagation.",
+            preconditions = "Valid administrative session in read-only exploration mode.",
+            testSteps = {
+                    "Inspect Court Updates To-dos & Events modal affordances",
+                    "Inspect Matter Workspace Task/Note/Doc/Billing tabs",
+                    "Inspect Calendar navigation and views",
+                    "Inspect Todos screen and filters",
+                    "Inspect Time Entry and Expense modal affordances",
+                    "Inspect Invoice Drafts and sensitive billing access"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.LOW
+    )
     public void inspectCrossScreenAffordances() throws IOException {
         Files.createDirectories(domDir);
         Page page = currentPage();

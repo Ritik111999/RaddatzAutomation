@@ -1,5 +1,7 @@
 package com.raddatz.automation.tests;
 
+import com.raddatz.automation.core.reporting.TestMetadata;
+
 import com.raddatz.automation.data.AdminScenarioData;
 import com.raddatz.automation.data.UploadFixtures;
 import com.raddatz.automation.pages.DocumentTemplatesPage;
@@ -21,6 +23,23 @@ public final class AdminDocumentTemplateMetadataLifecycleTest extends ReadOnlyTe
         return true;
     }
 
+    @TestMetadata(
+            module = "DocumentEngine",
+            scenarioId = "RAD-TMPL-001",
+            title = "Document Template Metadata Configuration, Variable Definition, and Lifecycle",
+            testType = TestMetadata.TestType.POSITIVE,
+            expectedResult = "Template is configured with custom variables, uploaded DOCX source, persists metadata updates, and deletes cleanly.",
+            preconditions = "Controlled DOCX source fixture exists.",
+            testSteps = {
+                    "Navigate to Settings -> Document Templates",
+                    "Open Create Template form modal",
+                    "Populate template name, category, custom variable definition, and attach DOCX source",
+                    "Assert template appears in templates directory with View and Download actions",
+                    "Download source document and edit template description",
+                    "Delete template and verify absence from template list"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.HIGH
+    )
     @Test(groups = "admin-mutation", description = "Administrator creates, uploads, edits, and downloads an owned document template without generation or billing side effects.")
     public void administratorMaintainsOwnedDocumentTemplateMetadata() {
         AdminScenarioData data = AdminScenarioData.create(Clock.systemUTC());

@@ -50,7 +50,10 @@ public @interface TestMetadata {
 
     enum TestType {
         POSITIVE("Positive"),
-        NEGATIVE("Negative");
+        NEGATIVE("Negative"),
+        INTEGRATION("Integration"),
+        E2E("End-to-End"),
+        READ_ONLY("Read-Only");
 
         private final String label;
 
@@ -62,4 +65,5 @@ public @interface TestMetadata {
             return label;
         }
     }
+
 }

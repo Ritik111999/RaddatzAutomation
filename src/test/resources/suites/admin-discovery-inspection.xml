@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz Read-Only Discovery and Inspection Suite" parallel="none">
+    <parameter name="reuseBrowser" value="true"/>
+    <listeners>
+        <listener class-name="com.raddatz.automation.reports.ExtentTestListener"/>
+    </listeners>
+    <test name="Read-Only Discovery and Affordance Mapping" preserve-order="true">
+        <classes>
+            <class name="com.raddatz.automation.tests.ReadOnlySmokeTest"/>
+            <class name="com.raddatz.automation.tests.AdminSearchFilterTest"/>
+            <class name="com.raddatz.automation.tests.AdminFullSystemInspectionTest"/>
+            <class name="com.raddatz.automation.tests.AdminCrossScreenAffordanceInspectionTest"/>
+        </classes>
+    </test>
+</suite>

@@ -17,7 +17,11 @@ public final class LoginPage extends BasePage {
         page.getByLabel("Email address", new Page.GetByLabelOptions().setExact(true)).fill(username);
         page.getByLabel("Password", new Page.GetByLabelOptions().setExact(true)).fill(password);
         button("Sign In").click();
-        page.waitForTimeout(500);
+        page.waitForTimeout(800);
+        if (page.locator(".auth-feedback-error, [role='alert']").isVisible()) {
+            String errorMsg = page.locator(".auth-feedback-error, [role='alert']").innerText().replaceAll("\\s+", " ").trim();
+            throw new IllegalStateException("Login rejected by server: " + errorMsg);
+        }
         if (page.locator("text='Too many attempts'").isVisible() || page.locator("text='Unable to complete your request'").isVisible()) {
             throw new IllegalStateException("Login throttled by server: Too many login attempts in a short period. Please wait 60 seconds.");
         }

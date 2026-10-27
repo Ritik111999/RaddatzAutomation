@@ -1,5 +1,6 @@
 package com.raddatz.automation.tests;
 
+import com.raddatz.automation.core.reporting.TestMetadata;
 import com.raddatz.automation.data.AdminScenarioData;
 import com.raddatz.automation.data.UploadFixtures;
 import com.raddatz.automation.pages.*;
@@ -27,8 +28,30 @@ public final class AdminFullLifecycleE2ETest extends ReadOnlyTestBase {
         return true;
     }
 
+    @TestMetadata(
+            module = "MasterE2E",
+            scenarioId = "RAD-E2E-001",
+            title = "Authoritative Full Raddatz Legal and Billing Lifecycle Journey",
+            testType = TestMetadata.TestType.E2E,
+            expectedResult = "Full portfolio hierarchy, case management artifacts, court hearings, time entries, expenses, and PDF invoice draft are created, verified, and linked across all subsystems.",
+            preconditions = "Approved non-production environment with active administrative session.",
+            testSteps = {
+                    "Create automation-owned Company portfolio with unique scenario reference",
+                    "Add owned Property building below Company",
+                    "Open new legal Matter (case) with primary tenant below Property",
+                    "Upload case evidence document and add timestamped audit note to Matter",
+                    "Create Matter task and verify persistence on To-dos table",
+                    "Schedule Calendar hearing event for the Matter",
+                    "Submit Court Update with hearing notes from scheduled event",
+                    "Record billable Court Time (1.50 hrs) and verify automatic calculation",
+                    "Verify propagation to Time section and create $75 case Expense",
+                    "Generate Draft Invoice aggregating time + expense, download verified PDF, and execute modal send confirmation"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.CRITICAL
+    )
     @Test(groups = "admin-mutation", description = "Executes the authoritative full Raddatz business lifecycle end-to-end.")
     public void administratorExecutesFullLifecycleJourney() {
+
         AdminScenarioData data = AdminScenarioData.create(Clock.systemUTC());
         Path documentFixture = UploadFixtures.copyInspectionMemorandum(data.ownedDocumentFileName(), config.artifactDirectory());
         Path downloadedInvoice = config.artifactDirectory().resolve("downloads")
