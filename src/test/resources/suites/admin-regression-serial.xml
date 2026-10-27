@@ -40,9 +40,10 @@
         </classes>
     </test>
 
-    <test name="Stage 5 - Cross-Screen Workflows and Multi-Hub Propagation" preserve-order="true">
+    <test name="Stage 5 - Cross-Screen Workflows, Client Portal and Multi-Hub Propagation" preserve-order="true">
         <classes>
             <class name="com.raddatz.automation.tests.AdminCrossScreenWorkflowTest"/>
+            <class name="com.raddatz.automation.tests.AdminClientPortalAndWorkflowTest"/>
         </classes>
     </test>
 

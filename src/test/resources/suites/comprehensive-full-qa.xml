@@ -45,9 +45,10 @@
     </test>
 
     <!-- STAGE 5: Cross-Screen Touchpoints & Multi-Hub Propagation -->
-    <test name="Stage 5 - Cross-Screen Workflows &amp; Multi-Hub Propagation" preserve-order="true">
+    <test name="Stage 5 - Cross-Screen Workflows, Client Portal &amp; Multi-Hub Propagation" preserve-order="true">
         <classes>
             <class name="com.raddatz.automation.tests.AdminCrossScreenWorkflowTest"/>
+            <class name="com.raddatz.automation.tests.AdminClientPortalAndWorkflowTest"/>
         </classes>
     </test>
 

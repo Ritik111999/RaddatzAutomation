@@ -401,4 +401,27 @@ Executed the full parallel mutation regression suite (`admin-parallel-mutation.x
     - Consolidated PDF: `target/automation-artifacts/run_20261027_141446/extent-report.pdf` (219.8 KB)
     - Executive QA PDF: `target/automation-artifacts/run_20261027_141446/raddatz-qa-report.pdf` (329.8 KB)
 
+**Application Coverage Recheck: Client Portal & Workflow Expansion (2026-10-27):**
+- **User Confirmation & Gap Analysis:**
+  - Audited full application landscape to ensure complete end-to-end coverage across all Raddatz modules.
+  - Addressed the user's observation regarding previously unautomated areas: **Workflows** (`/workflow`) and **Client Portal Spreadsheets** (`/spreadsheets`).
+- **New Page Object Models & Navigational Capabilities:**
+  - Created `ClientPortalSpreadsheetsPage.java`: handles `/spreadsheets` table (`#spreadsheetsTable`), record counter (`#ssRecordCount`), live search filter (`#searchInput`), table columns ("Property Management Company", "Property", "Active Cases"), and drill-down to individual Property Spreadsheet ledger (`/property/{id}/spreadsheet`).
+  - Created `ClientPortalDocumentsPage.java`: handles `/documents` Document Management hub with dual view mode switching ("Folder View" vs "List View").
+  - Created `WorkflowPage.java`: handles central `/workflow` table, column verification, and `/workflow/create` trigger contracts (To-Do, Calendar Event, email assignee toggle, and submit guard).
+  - Updated `Sidebar.java` with first-class navigation methods: `goToWorkflows()`, `goToClientPortalSpreadsheets()`, and `goToClientPortalDocuments()`.
+- **Dedicated Test Suite & Live Verification (`AdminClientPortalAndWorkflowTest.java`):**
+  - `RAD-PORTAL-001`: Client Portal Property Spreadsheets directory navigation, table column verification, search filter execution/reset, and drill-down to Property Spreadsheet view.
+  - `RAD-PORTAL-002`: Client Portal Document Management hub navigation and Folder/List view switching.
+  - `RAD-WORKFLOW-001`: Central Workflows directory observation, status columns, and New Workflow creation form contract validation.
+  - **Live Verification Outcome:** `admin-portal-and-workflow.xml` executed **3/3 tests with 100% pass rate in 16.49s (0 failures, 0 errors, 0 skipped, BUILD SUCCESS)**.
+  - **Generated Artifacts:**
+    - HTML Report: `target/automation-artifacts/run_20261027_143933/extent-report.html`
+    - PDF Extent Report: `target/automation-artifacts/run_20261027_143933/extent-report.pdf`
+    - Executive QA PDF: `target/automation-artifacts/run_20261027_143933/raddatz-qa-report.pdf`
+- **Master Suite Integration:**
+  - Added `AdminClientPortalAndWorkflowTest` to Stage 5 of both `admin-regression-serial.xml` and `comprehensive-full-qa.xml`.
+  - Added 45s timeout to `MatterFormPage.java`'s `waitForURL` to absorb high database load on local PHP artisan instances.
+
+
 

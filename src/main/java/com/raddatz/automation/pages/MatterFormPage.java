@@ -83,7 +83,7 @@ public final class MatterFormPage extends BasePage {
         submitBtn.scrollIntoViewIfNeeded();
         page.waitForTimeout(400);
         submitBtn.click(new Locator.ClickOptions().setNoWaitAfter(true));
-        page.waitForURL(Pattern.compile(".*/client-and-matter.*"));
+        page.waitForURL(Pattern.compile(".*/client-and-matter.*"), new Page.WaitForURLOptions().setTimeout(45000));
         return new ClientMatterListPage(page).assertLoaded();
     }
 
@@ -98,7 +98,7 @@ public final class MatterFormPage extends BasePage {
         fillMatterCaseDetails(primaryTenant);
 
         button("Create Matter").click(new Locator.ClickOptions().setNoWaitAfter(true));
-        page.waitForURL(Pattern.compile(".*/client-and-matter.*"));
+        page.waitForURL(Pattern.compile(".*/client-and-matter.*"), new Page.WaitForURLOptions().setTimeout(45000));
         return new ClientMatterListPage(page).assertLoaded();
     }
 

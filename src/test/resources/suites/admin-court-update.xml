@@ -3,5 +3,6 @@
     <listeners><listener class-name="com.raddatz.automation.reports.ExtentTestListener"/></listeners>
     <test name="Owned Court Update"><classes>
         <class name="com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest"/>
+        <class name="com.raddatz.automation.tests.AdminCourtUpdateBillingE2ETest"/>
     </classes></test>
 </suite>

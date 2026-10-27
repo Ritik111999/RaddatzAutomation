@@ -41,6 +41,26 @@ public final class Sidebar extends BasePage {
         return new CalendarPage(page);
     }
 
+    public WorkflowPage goToWorkflows() {
+        navigationLink("Workflows").click();
+        page.waitForURL("**/workflow");
+        return new WorkflowPage(page).assertLoaded();
+    }
+
+    public ClientPortalSpreadsheetsPage goToClientPortalSpreadsheets() {
+        page.locator("[data-module='client-portal'] .nav-tab-dropdown-toggle").click();
+        page.locator("a[href*='/spreadsheets']").click();
+        page.waitForURL("**/spreadsheets");
+        return new ClientPortalSpreadsheetsPage(page).assertLoaded();
+    }
+
+    public ClientPortalDocumentsPage goToClientPortalDocuments() {
+        page.locator("[data-module='client-portal'] .nav-tab-dropdown-toggle").click();
+        page.locator("a[href*='/documents']").click();
+        page.waitForURL("**/documents");
+        return new ClientPortalDocumentsPage(page).assertLoaded();
+    }
+
     private Locator navigationLink(String name) {
         return page.locator("#navbarTabs").getByRole(com.microsoft.playwright.options.AriaRole.LINK,
                 new Locator.GetByRoleOptions().setName(name).setExact(true));
