@@ -35,8 +35,8 @@ public abstract class ReadOnlyTestBase implements HasPage {
             config.requireApprovedMutationScenario(getClass().getName(), testMethod.getName());
         }
         config.requireLocalCredentials();
-        boolean reuseBrowser = Boolean.parseBoolean(System.getProperty("raddatz.reuse.browser", "true"))
-                || Boolean.parseBoolean(testContext.getSuite().getParameter("reuseBrowser"));
+        boolean reuseBrowser = Boolean.parseBoolean(System.getProperty("raddatz.reuse.browser",
+                testContext.getSuite().getParameter("reuseBrowser") != null ? testContext.getSuite().getParameter("reuseBrowser") : "false"));
         PlaywrightSession session = PlaywrightSession.start(config, reuseBrowser);
         CURRENT_SESSION.set(session);
         logger.info("Launching local {} scenario against {} on thread [{}]",

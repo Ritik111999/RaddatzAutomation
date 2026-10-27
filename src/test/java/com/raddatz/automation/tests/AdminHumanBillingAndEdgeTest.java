@@ -74,18 +74,12 @@ public final class AdminHumanBillingAndEdgeTest extends ReadOnlyTestBase {
         logger.info("=== STEP 3: CREATE EXPENSE WITH $0.00 COURTESY FEE ===");
         Locator matterSearch = page.locator("#expenseMatterSearch");
         matterSearch.click();
-        matterSearch.fill(data.tenantName());
+        matterSearch.fill(data.caseNumber());
         page.waitForTimeout(600);
-        Locator ownedSuggestion = page.locator(".matter-option")
-                .filter(new Locator.FilterOptions().setHasText(data.tenantName())).first();
-        if (!ownedSuggestion.isVisible()) {
-            matterSearch.fill(data.caseNumber());
-            page.waitForTimeout(600);
-            ownedSuggestion = page.locator(".matter-option")
-                    .filter(new Locator.FilterOptions().setHasText(data.caseNumber())).first();
-        }
+        Locator ownedSuggestion = page.getByText(data.caseNumber(), new Page.GetByTextOptions().setExact(false)).first();
         assertThat(ownedSuggestion).isVisible();
         ownedSuggestion.click();
+        assertThat(page.locator("#expenseMatterIdInput")).not().hasValue("");
 
         page.locator("#expenseUserId").selectOption(new SelectOption().setLabel("Mark Lee"));
         page.locator("#expenseDateInput").fill(data.openingDate());

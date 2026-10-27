@@ -78,8 +78,9 @@ public final class InvoiceDraftPage extends BasePage {
         assertThat(dialog.locator("#draft_property_id")).not().hasValue("");
         assertThat(dialog.locator("#draft_matter_id")).not().hasValue("");
         assertThat(dialog.locator("#draft_tenant_id")).not().hasValue("");
-        dialog.locator("input[name='from_date']").fill(data.openingDate());
-        dialog.locator("input[name='to_date']").fill(data.openingDate());
+        java.time.LocalDate invoiceDate = java.time.LocalDate.now();
+        dialog.locator("input[name='from_date']").fill(invoiceDate.minusDays(7).toString());
+        dialog.locator("input[name='to_date']").fill(invoiceDate.plusDays(7).toString());
         dialog.locator("input[name='invoice_date']").fill(data.openingDate());
         assertThat(dialog.locator("#draft_submit_btn")).isEnabled();
         dialog.locator("#draft_submit_btn").click();

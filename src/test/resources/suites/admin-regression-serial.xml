@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Raddatz Local Admin Regression Suite - Serial Execution" parallel="none" thread-count="1">
-    <parameter name="reuseBrowser" value="true"/>
+    <parameter name="reuseBrowser" value="false"/>
     <listeners>
         <listener class-name="com.raddatz.automation.reports.ExtentTestListener"/>
     </listeners>
