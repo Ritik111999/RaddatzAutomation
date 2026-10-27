@@ -72,32 +72,7 @@ public final class AdminHumanBillingAndEdgeTest extends ReadOnlyTestBase {
         ExpensePage expensePage = new ExpensePage(page).assertLoaded();
 
         logger.info("=== STEP 3: CREATE EXPENSE WITH $0.00 COURTESY FEE ===");
-        Locator matterSearch = page.locator("#expenseMatterSearch");
-        matterSearch.click();
-        matterSearch.fill(data.caseNumber());
-        page.waitForTimeout(600);
-        Locator ownedSuggestion = page.getByText(data.caseNumber(), new Page.GetByTextOptions().setExact(false)).first();
-        assertThat(ownedSuggestion).isVisible();
-        ownedSuggestion.click();
-        assertThat(page.locator("#expenseMatterIdInput")).not().hasValue("");
-
-        page.locator("#expenseUserId").selectOption(new SelectOption().setLabel("Mark Lee"));
-        page.locator("#expenseDateInput").fill(data.openingDate());
-        page.locator("#expenseCodeSelect").selectOption(new SelectOption().setLabel("JFGTJ - Expense Code TEST Description"));
-        page.locator("#descriptionInput").fill(data.initialExpenseDescription());
-        page.locator("#quantityInput").fill("1.00");
-        page.locator("#pricePerUnitInput").fill("0.00");
-        page.locator("#pricePerUnitInput").dispatchEvent("input");
-        page.locator("#pricePerUnitInput").dispatchEvent("change");
-
-        // Assert dynamic form calculation reflects $0.00
-        assertThat(page.locator("#totalAmount")).hasValue("$0.00");
-
-        page.locator("#saveExpenseBtn").click();
-        page.waitForTimeout(1000);
-        page.reload(new Page.ReloadOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.DOMCONTENTLOADED));
-        expensePage.assertLoaded();
-
+        expensePage.createOwnedExpense(data, "1.00", "0.00");
         Locator ownedRow = expensePage.ownedExpenseRow(data.caseNumber());
         assertThat(ownedRow).isVisible();
         logger.info("Initial $0.00 expense successfully created");

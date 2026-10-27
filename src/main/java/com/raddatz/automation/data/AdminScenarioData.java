@@ -102,9 +102,12 @@ public record AdminScenarioData(
         };
         String[] contactGivenNames = {"Nina", "Marcus", "Danielle", "Avery", "Rachel", "Darius", "Monica", "Elliot"};
         String[] contactFamilyNames = {"Caldwell", "Ellison", "Porter", "Monroe", "Graves", "Holland", "Sullivan", "Whitaker"};
-        String[] tenantGivenNames = {"Olivia", "Ethan", "Maya", "Jordan", "Naomi", "Caleb", "Sofia", "Adrian"};
-        String[] tenantMiddleNames = {"Claire", "James", "Renee", "Michael", "Elise", "Grant", "Louise", "Nathan"};
-        String[] tenantFamilyNames = {"Bennett", "Wallace", "Franklin", "Avery", "Hughes", "Mercer", "Dalton", "Sinclair"};
+        String[] tenantGivenNames = {"Olivia", "Ethan", "Maya", "Jordan", "Naomi", "Caleb", "Sofia", "Adrian",
+                "Lucas", "Emma", "Liam", "Ava", "Noah", "Isabella", "Mason", "Mia", "Oliver", "Harper", "Elijah", "Evelyn"};
+        String[] tenantMiddleNames = {"Claire", "James", "Renee", "Michael", "Elise", "Grant", "Louise", "Nathan",
+                "Grace", "Alexander", "Rose", "Benjamin", "Faith", "Samuel", "Joy", "Daniel", "Brooke", "Joseph", "Paige", "David"};
+        String[] tenantFamilyNames = {"Bennett", "Wallace", "Franklin", "Avery", "Hughes", "Mercer", "Dalton", "Sinclair",
+                "Montgomery", "Vance", "Pemberton", "Harrington", "Ellington", "Whitmore", "Prescott", "Stratford", "Kensington", "Winslow", "Bradford", "Sterling"};
         int buildingNumber = 100 + (int) (nonce % 800);
         int suiteNumber = 100 + (int) ((nonce / 10) % 800);
         int unitNumber = 100 + (int) ((nonce / 100) % 800);
@@ -133,8 +136,7 @@ public record AdminScenarioData(
                 + tenantMiddleNames[(int) ((nonce / tenantGivenNames.length) % tenantMiddleNames.length)]
                 + " "
                 + tenantFamilyNames[(int) ((nonce / (tenantGivenNames.length * tenantMiddleNames.length))
-                % tenantFamilyNames.length)]
-                + " " + sequence;
+                % tenantFamilyNames.length)];
 
         return new AdminScenarioData(
                 reference,

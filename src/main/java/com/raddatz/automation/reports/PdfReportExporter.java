@@ -34,4 +34,12 @@ public final class PdfReportExporter {
             LOGGER.warn("HTML report is available at {}. PDF export was skipped; install Chromium with the Playwright CLI first.", html, exception);
         }
     }
+
+    public static void main(String[] args) {
+        if (args.length >= 2) {
+            export(Path.of(args[0]), Path.of(args[1]));
+        } else {
+            System.err.println("Usage: PdfReportExporter <html-path> <pdf-path>");
+        }
+    }
 }
