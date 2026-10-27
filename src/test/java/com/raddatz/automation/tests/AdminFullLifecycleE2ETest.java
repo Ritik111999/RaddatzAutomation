@@ -32,7 +32,7 @@ public final class AdminFullLifecycleE2ETest extends ReadOnlyTestBase {
     @TestMetadata(
             module = "MasterE2E",
             scenarioId = "RAD-E2E-001",
-            title = "Authoritative Full Raddatz Legal and Billing Lifecycle Journey",
+            title = "Authoritative Full Happy Path: End-to-End Legal and Financial Lifecycle Journey",
             testType = TestMetadata.TestType.E2E,
             expectedResult = "Full portfolio hierarchy, case management artifacts, court hearings, time entries, expenses, and PDF invoice draft are created, verified, and linked across all subsystems.",
             preconditions = "Approved non-production environment with active administrative session.",

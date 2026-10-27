@@ -8,7 +8,7 @@ public final class LoginPage extends BasePage {
     }
 
     public LoginPage open(String baseUrl) {
-        page.navigate(baseUrl, new Page.NavigateOptions().setTimeout(45000).setWaitUntil(com.microsoft.playwright.options.WaitUntilState.DOMCONTENTLOADED));
+        page.navigate(baseUrl, new Page.NavigateOptions().setTimeout(30000).setWaitUntil(com.microsoft.playwright.options.WaitUntilState.DOMCONTENTLOADED));
         assertVisible(page.getByLabel("Email address", new Page.GetByLabelOptions().setExact(true)));
         return this;
     }
@@ -25,7 +25,7 @@ public final class LoginPage extends BasePage {
         if (page.locator("text='Too many attempts'").isVisible() || page.locator("text='Unable to complete your request'").isVisible()) {
             throw new IllegalStateException("Login throttled by server: Too many login attempts in a short period. Please wait 60 seconds.");
         }
-        page.waitForURL("**/dashboard");
+        page.waitForURL("**/dashboard", new Page.WaitForURLOptions().setTimeout(20000));
         return new DashboardPage(page);
     }
 }
