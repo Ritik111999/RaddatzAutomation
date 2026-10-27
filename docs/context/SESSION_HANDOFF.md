@@ -423,5 +423,20 @@ Executed the full parallel mutation regression suite (`admin-parallel-mutation.x
   - Added `AdminClientPortalAndWorkflowTest` to Stage 5 of both `admin-regression-serial.xml` and `comprehensive-full-qa.xml`.
   - Added 45s timeout to `MatterFormPage.java`'s `waitForURL` to absorb high database load on local PHP artisan instances.
 
+**ToolTrader QA Report Format Parity & Native Negative Validation (2026-10-27):**
+- **Format Inspection & Parity Audit:**
+  - Audited `/Users/ritik/Documents/ToolTrader_App_PWA_Automation/ToolTrader_PWA_QA_Report.html` and `.pdf` to align Raddatz reporting 1-to-1 with ToolTrader's gold-standard executive report format.
+  - Implemented exact visual hierarchy, CSS layout, typography (`-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif`), and page margins.
+  - Formatted the cover page, 7-card dashboard container (`Total`, `Positive Passed`, `Negative Validated`, `Defects Found`, `Automation Failures`, `Environment Failures`, `Skipped / N/A`), Execution Environment Metadata table (`.env-table`), Automation Environment Hygiene table (Pre/Post-Suite cleanup lifecycle tracking), 9-column Module Summary table, and scenario detail cards (`.scenario`).
+  - Implemented standard negative condition wording for actual results: `"Negative condition validated successfully — application correctly blocked/rejected the invalid operation (<expected result>)."`.
+- **Live Verification Runs & Report Regeneration:**
+  - Executed `admin-portal-and-workflow.xml`: 3/3 passed in 15.92s (100% success rate, BUILD SUCCESS).
+    - Generated HTML: `target/automation-artifacts/run_20261027_150613/raddatz-qa-report.html`
+    - Generated PDF: `target/automation-artifacts/run_20261027_150613/raddatz-qa-report.pdf`
+  - Rebuilt & verified negative suite execution (`AdminDomainIntegrityNegativeTest`): 13/13 passed (7 Positive Passed, 6 Negative Validated, 0 Failures, 100% success rate).
+    - Generated HTML: `target/automation-artifacts/run_20261027_150800/raddatz-qa-report.html`
+    - Generated PDF: `target/automation-artifacts/run_20261027_150800/raddatz-qa-report.pdf`
+
+
 
 
