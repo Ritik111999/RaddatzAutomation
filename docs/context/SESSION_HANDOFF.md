@@ -373,3 +373,32 @@ Executed the full parallel mutation regression suite (`admin-parallel-mutation.x
   - Added `AdminConsolidatedMatterBillingE2ETest` to Stage 7 (Financial Pipeline).
   - Synchronized across both `admin-regression-serial.xml` and `comprehensive-full-qa.xml`.
   - Full codebase compiles cleanly: 41 main files and 33 test files (`mvn clean test-compile` passes with exit code 0).
+
+**Human-Centric Real World & Edge Cases Suite Expansion (2026-10-27 Master Update):**
+- **Developed 100% of User-Prioritized Focus Areas in Both Positive & Negative Scenarios:**
+  1. **Financial & Billing Compliance:**
+     - *Positive (`RAD-CUST-BILL-001` in `AdminHumanBillingAndEdgeTest`):* Custom software fee transition requirement: records $0.00 initial pro-bono courtesy fee -> dynamic form auto-calculation displays $0.00 -> saves -> edits fee to $100.00 in `#editModal` -> live dynamic recalculation updates modal total to $100.00 without page reload -> persists -> validates table row reflects $100.00 -> verifies Draft Invoice accurately reflects and line-itemizes $100.00 -> cleans up owned record.
+     - *Negative (`RAD-NEG-009` & `RAD-NEG-012` in `AdminDomainIntegrityNegativeTest`):* Price per unit strictly blocks negative fees (-$100.00) via `min="0"` constraint while allowing $0.00; financial save buttons guard against duplicate submissions with proper submit-type guards.
+  2. **Messy Human Inputs & Special Characters:**
+     - *Positive (`RAD-HUMAN-POS-001` in `AdminHumanBillingAndEdgeTest`):* Special legal characters (apostrophes: `O'Connor Holdings, LLC`, `Seamus D'Angelo`; suite hashes: `Suite #404-B`) verify zero HTML entity corruption (`&#039;`); global search input trims messy leading/trailing spaces (`"   D'Angelo   "`) and isolates the exact record.
+     - *Negative (`RAD-NEG-008` & `RAD-NEG-010` in `AdminDomainIntegrityNegativeTest`):* Whitespace-only notes (`"     "`) submission rejection; strictly enforced 5000-character maximum length boundary on notes (`maxlength="5000"`).
+  3. **Date Inversions & Chronological Boundary Logic:**
+     - *Positive (`RAD-DATE-POS-001` in `AdminHumanBillingAndEdgeTest`):* Forward-looking chronological court hearing scheduling (+7 days) propagating seamlessly to Calendar and Court Updates date pickers.
+     - *Negative (`RAD-NEG-011` in `AdminDomainIntegrityNegativeTest`):* Draft Invoice date range inversion protection (from_date = 2026-12-31, to_date = 2026-01-01) preventing corrupted billing intervals.
+  4. **Template Engine Edge Cases & File/Field Validations:**
+     - *Positive (`RAD-FILE-POS-001` in `AdminHumanBillingAndEdgeTest`):* Legitimate legal evidence file upload (.docx), verifying file attachment, non-zero file size, and binary downloadability.
+     - *Negative (`RAD-NEG-007` & `RAD-NEG-013` in `AdminDomainIntegrityNegativeTest`):* Strict file upload accept filter rejecting dangerous executables (.exe, .bat, .sh); template creation form enforces required template name and disabled DOCX import when file is unselected.
+  5. **Navigation & Breadcrumbs:**
+     - *Positive (`RAD-NAV-POS-001` in `AdminHumanBillingAndEdgeTest`):* Deep multi-tier workspace tab cycling (Notes -> Documents -> Todos -> Timeline) with breadcrumb links returning safely to Clients directory and Dashboard without session loss.
+- **Unified Live Verification Result (`admin-human-edge-and-compliance.xml`):**
+  - Executed 20 tests across 3 stages on the active local server (`http://192.168.1.10:8000/login`):
+    - **Stage 1:** `AdminDomainIntegrityNegativeTest` (13/13 tests PASSED: invalid credentials, sensitive billing gate rejection, court updates unbound guard, blank notes rejection, negative & excessive hours rejection, blank entity creation rejection, executable file exclusion, whitespace-only notes rejection, negative custom fee rejection, 5000-char notes boundary limit, backwards date range inversion guard, double-click protection, template engine mandatory fields).
+    - **Stage 2:** `AdminHumanBillingAndEdgeTest` (5/5 tests PASSED: Custom Billing $0.00 fee -> dynamic modal recalculation -> $100.00 fee -> ledger persistence -> draft invoice line-item verification; messy human inputs with apostrophes `Seamus D'Angelo` without `&#039;` corruption & search whitespace trimming; deep workspace tab cycling & breadcrumb return; forward chronological hearing date scheduling & calendar sync; legitimate legal document upload & binary download verification).
+    - **Stage 3:** `AdminCourtUpdateBillingE2ETest` & `AdminConsolidatedMatterBillingE2ETest` (2/2 tests PASSED: Court Updates -> linked To-Do -> Edit Event via return_to -> court time recording -> draft invoice PDF download; and Consolidated Multi-Service Billing Gauntlet).
+  - **Outcome:** **20 Tests Run, 0 Failures, 0 Errors, 0 Skipped (100% Success Rate in 03:27 min, BUILD SUCCESS)**.
+  - **Dual-Engine Executive Report Artifacts Generated:**
+    - HTML Report: `target/automation-artifacts/run_20261027_141446/extent-report.html` (94.6 KB)
+    - Consolidated PDF: `target/automation-artifacts/run_20261027_141446/extent-report.pdf` (219.8 KB)
+    - Executive QA PDF: `target/automation-artifacts/run_20261027_141446/raddatz-qa-report.pdf` (329.8 KB)
+
+

@@ -65,6 +65,7 @@
             <class name="com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest"/>
             <class name="com.raddatz.automation.tests.AdminCourtUpdateBillingE2ETest"/>
             <class name="com.raddatz.automation.tests.AdminConsolidatedMatterBillingE2ETest"/>
+            <class name="com.raddatz.automation.tests.AdminHumanBillingAndEdgeTest"/>
             <class name="com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest"/>
             <class name="com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest"/>
             <class name="com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest"/>

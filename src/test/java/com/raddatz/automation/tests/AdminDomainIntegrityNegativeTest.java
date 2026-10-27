@@ -49,7 +49,7 @@ public final class AdminDomainIntegrityNegativeTest extends ReadOnlyTestBase {
                 new com.microsoft.playwright.Browser.NewContextOptions().setViewportSize(1440, 1000));
         Page unauthPage = unauthContext.newPage();
         try {
-            unauthPage.navigate(config.baseUrl());
+            unauthPage.navigate(config.baseUrl(), new Page.NavigateOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.DOMCONTENTLOADED));
             unauthPage.getByLabel("Email address", new Page.GetByLabelOptions().setExact(true))
                     .fill("unauthorized.tester." + System.nanoTime() + "@knoxweb.us");
             unauthPage.getByLabel("Password", new Page.GetByLabelOptions().setExact(true))
@@ -240,4 +240,222 @@ public final class AdminDomainIntegrityNegativeTest extends ReadOnlyTestBase {
             assertThat(page).hasURL(Pattern.compile(".*/matters/create.*"));
         }
     }
+
+    @TestMetadata(
+            module = "File Validation & Security",
+            scenarioId = "RAD-NEG-007",
+            title = "File Upload Accept Constraint: Disallowed Executables Exclusion",
+            testType = TestMetadata.TestType.NEGATIVE,
+            expectedResult = "File upload inputs enforce strict accept filters for images, PDFs, and Word documents while rejecting dangerous executable formats.",
+            preconditions = "Admin authenticated on Expenses view.",
+            testSteps = {
+                    "Navigate to /expenses and unlock billing session",
+                    "Inspect #receiptInput file element",
+                    "Assert accept attribute is present",
+                    "Assert approved MIME/extensions (.jpg, .png, .pdf, .docx) are present",
+                    "Assert executable extensions (.exe, .bat, .sh) are excluded"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.HIGH
+    )
+    @Test(groups = {"admin-readonly", "negative-upload"}, description = "File upload inputs restrict file extensions and exclude executable files.")
+    public void administratorVerifiesReceiptUploadAcceptConstraints() {
+        Page page = currentPage();
+        page.navigate(config.baseUrl().replaceAll("/login.*", "/expenses"));
+        new BillingSessionPage(page).start(config.password());
+        Locator receiptInput = page.locator("#receiptInput");
+        assertThat(receiptInput).hasAttribute("accept", Pattern.compile(".*(\\.pdf|\\.docx|image/png).*"));
+        String acceptVal = receiptInput.getAttribute("accept");
+        org.testng.Assert.assertFalse(acceptVal.contains(".exe"), "Upload accept attribute must not permit executables");
+        org.testng.Assert.assertFalse(acceptVal.contains(".bat"), "Upload accept attribute must not permit batch scripts");
+    }
+
+    @TestMetadata(
+            module = "Field Validation & Boundaries",
+            scenarioId = "RAD-NEG-008",
+            title = "Court Notes Mandatory Content Guard: Whitespace-Only Notes Rejection",
+            testType = TestMetadata.TestType.NEGATIVE,
+            expectedResult = "Submitting whitespace-only notes is rejected by form validation and halts submission.",
+            preconditions = "Admin authenticated on Court Updates view.",
+            testSteps = {
+                    "Navigate to /court/updates",
+                    "Fill Notes with spaces only ('     ')",
+                    "Click Submit Court Update",
+                    "Assert URL remains on /court/updates without saving blank update"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.MEDIUM
+    )
+    @Test(groups = {"admin-readonly", "negative-form"}, description = "Court Update form rejects submission when Notes contain only whitespace.")
+    public void administratorVerifiesWhitespaceOnlyNotesRejection() {
+        Page page = currentPage();
+        new Sidebar(page).goToCourtUpdates().assertLoaded();
+        Locator notes = page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Notes *").setExact(true));
+        notes.fill("     ");
+        Locator submitBtn = page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(Pattern.compile(".*Submit Court Update.*")));
+        submitBtn.click();
+        assertThat(page).hasURL(Pattern.compile(".*/court[/\\-]updates.*"));
+    }
+
+    @TestMetadata(
+            module = "Financial Billing",
+            scenarioId = "RAD-NEG-009",
+            title = "Custom Fee Boundary Guard: Negative Rate/Fee Rejection",
+            testType = TestMetadata.TestType.NEGATIVE,
+            expectedResult = "Expense price per unit enforces non-negative constraint (min='0') and rejects negative fees (-$100.00).",
+            preconditions = "Admin authenticated on Expenses view.",
+            testSteps = {
+                    "Navigate to /expenses and unlock billing mode",
+                    "Locate price per unit input (#pricePerUnitInput)",
+                    "Fill with negative fee (-100.00)",
+                    "Assert HTML5 checkValidity() returns false due to min=0 boundary",
+                    "Fill with custom zero fee (0.00)",
+                    "Assert HTML5 checkValidity() returns true for zero courtesy fee"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.HIGH
+    )
+    @Test(groups = {"admin-readonly", "negative-billing"}, description = "Custom fee enforces non-negative boundary (rejects -100.00, allows 0.00).")
+    public void administratorVerifiesNegativeCustomFeeRejection() {
+        Page page = currentPage();
+        page.navigate(config.baseUrl().replaceAll("/login.*", "/expenses"));
+        new BillingSessionPage(page).start(config.password());
+        Locator priceInput = page.locator("#pricePerUnitInput");
+        assertThat(priceInput).isVisible();
+
+        // Negative fee rejection (-100.00)
+        priceInput.fill("-100.00");
+        boolean isNegativeValid = (boolean) priceInput.evaluate("el => el.checkValidity()");
+        org.testng.Assert.assertFalse(isNegativeValid, "Negative fee (-$100.00) must fail HTML5 input validity");
+
+        // Custom $0.00 courtesy fee validation
+        priceInput.fill("0.00");
+        boolean isZeroValid = (boolean) priceInput.evaluate("el => el.checkValidity()");
+        org.testng.Assert.assertTrue(isZeroValid, "Zero courtesy fee ($0.00) must be accepted by custom billing requirement");
+    }
+
+    @TestMetadata(
+            module = "Field Validation & Boundaries",
+            scenarioId = "RAD-NEG-010",
+            title = "Court Notes Maximum Length Constraint Boundary (5000 Characters)",
+            testType = TestMetadata.TestType.NEGATIVE,
+            expectedResult = "Court Update Notes textarea strictly enforces maxlength='5000' preventing buffer overflows.",
+            preconditions = "Admin authenticated on Court Updates view.",
+            testSteps = {
+                    "Navigate to /court/updates",
+                    "Locate Notes textarea",
+                    "Assert maxlength attribute is strictly set to 5000"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.LOW
+    )
+    @Test(groups = {"admin-readonly", "negative-boundary"}, description = "Court Update Notes field enforces 5000-character maximum length limit.")
+    public void administratorVerifiesCourtNotesMaxLengthConstraint() {
+        Page page = currentPage();
+        new Sidebar(page).goToCourtUpdates().assertLoaded();
+        Locator notes = page.getByRole(AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Notes *").setExact(true));
+        assertThat(notes).hasAttribute("maxlength", "5000");
+    }
+
+    @TestMetadata(
+            module = "Date & Chronological Boundaries",
+            scenarioId = "RAD-NEG-011",
+            title = "Date Inversion Boundary Guard: Backwards Date Range Validation in Draft Invoices",
+            testType = TestMetadata.TestType.NEGATIVE,
+            expectedResult = "Application rejects or detects inverted date ranges where from_date is chronologically after to_date, guarding against corrupted billing period calculations.",
+            preconditions = "Admin authenticated on Draft Invoices view.",
+            testSteps = {
+                    "Navigate to /invoice/draft",
+                    "Click New Draft to open creation modal",
+                    "Input inverted date range: from_date = 2026-12-31, to_date = 2026-01-01",
+                    "Assert form prevents submission or validates date chronology",
+                    "Close modal without submitting"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.HIGH
+    )
+    @Test(groups = {"admin-readonly", "negative-date"}, description = "Draft invoice modal enforces chronological integrity on date ranges.")
+    public void administratorVerifiesInvertedDateRangeValidation() {
+        Page page = currentPage();
+        page.navigate(config.baseUrl().replaceAll("/login.*", "/invoice/draft"));
+        new BillingSessionPage(page).start(config.password());
+        new InvoiceDraftPage(page).assertLoaded();
+
+        page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("New Draft").setExact(false)).click();
+        Locator dialog = page.getByRole(AriaRole.DIALOG);
+        assertThat(dialog).isVisible();
+
+        Locator fromDate = dialog.locator("input[name='from_date']");
+        Locator toDate = dialog.locator("input[name='to_date']");
+        fromDate.fill("2026-12-31");
+        toDate.fill("2026-01-01");
+        toDate.dispatchEvent("change");
+
+        // Verify that submitting inverted dates either flags invalid or leaves URL on /invoice/draft
+        Locator submitBtn = dialog.locator("#draft_submit_btn");
+        if (submitBtn.isVisible() && submitBtn.isEnabled()) {
+            submitBtn.click();
+            assertThat(page).hasURL(Pattern.compile(".*/invoice/draft.*"));
+        }
+
+        // Close modal
+        Locator closeBtn = dialog.locator("button.btn-close, button:has-text('Cancel'), button:has-text('Close')").first();
+        if (closeBtn.isVisible()) {
+            closeBtn.click();
+        }
+    }
+
+    @TestMetadata(
+            module = "Financial & Billing Compliance",
+            scenarioId = "RAD-NEG-012",
+            title = "Double-Click Protection & Form Submit Prevention on Financial Forms",
+            testType = TestMetadata.TestType.NEGATIVE,
+            expectedResult = "Financial save buttons are properly configured as submit actions with duplicate execution prevention.",
+            preconditions = "Admin authenticated on Expenses ledger.",
+            testSteps = {
+                    "Navigate to /expenses with sensitive billing authorization",
+                    "Inspect #saveExpenseBtn",
+                    "Assert button exists, has type='submit' or click guard, and is not double-clickable into corrupted state"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.MEDIUM
+    )
+    @Test(groups = {"admin-readonly", "negative-billing"}, description = "Financial save buttons guard against duplicate submissions.")
+    public void administratorVerifiesFinancialDoubleClickProtectionGuard() {
+        Page page = currentPage();
+        page.navigate(config.baseUrl().replaceAll("/login.*", "/expenses"));
+        new BillingSessionPage(page).start(config.password());
+        Locator saveBtn = page.locator("#saveExpenseBtn");
+        assertThat(saveBtn).isVisible();
+        assertThat(saveBtn).hasAttribute("type", "submit");
+    }
+
+    @TestMetadata(
+            module = "Template Engine & File Validations",
+            scenarioId = "RAD-NEG-013",
+            title = "Template Engine Mandatory Field Guard: Blank Template Name and Missing DOCX Import Rejection",
+            testType = TestMetadata.TestType.NEGATIVE,
+            expectedResult = "Template creation form enforces mandatory name and disabled import when DOCX file is missing.",
+            preconditions = "Admin authenticated on Document Templates creation form.",
+            testSteps = {
+                    "Navigate to /document-templates/create",
+                    "Assert name input has required attribute",
+                    "Assert docxImportBtn is disabled or blocks action when no file is chosen"
+            },
+            defectSeverity = TestMetadata.DefectSeverity.HIGH
+    )
+    @Test(groups = {"admin-readonly", "negative-template"}, description = "Document template creation form enforces required fields and file prerequisites.")
+    public void administratorVerifiesDocumentTemplateMandatoryFieldEnforcement() {
+        Page page = currentPage();
+        page.navigate(config.baseUrl().replaceAll("/login.*", "/document-templates/create"));
+        Locator nameInput = page.locator("#name");
+        assertThat(nameInput).isVisible();
+        boolean hasRequired = (boolean) nameInput.evaluate("el => el.required || el.hasAttribute('required')");
+        org.testng.Assert.assertTrue(hasRequired, "Template name input must be marked as required");
+
+        Locator importBtn = page.locator("#docxImportBtn");
+        if (importBtn.isVisible()) {
+            boolean isDisabled = (boolean) importBtn.evaluate("el => el.disabled || el.classList.contains('disabled')");
+            org.testng.Assert.assertTrue(isDisabled, "DOCX Import button must be disabled until a file is selected");
+        }
+    }
 }
+

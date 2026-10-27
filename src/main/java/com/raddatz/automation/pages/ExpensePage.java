@@ -88,7 +88,7 @@ public final class ExpensePage extends BasePage {
         return this;
     }
 
-    private Locator ownedExpenseRow(String caseNumber) {
+    public Locator ownedExpenseRow(String caseNumber) {
         // Expense descriptions are intentionally clipped in the grid. The unique
         // Matter's displayed case number stays available as the row's ownership scope.
         return page.getByTitle(caseNumber, new Page.GetByTitleOptions().setExact(false))

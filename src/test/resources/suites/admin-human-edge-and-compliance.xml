@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Raddatz Human Compliance and Custom Billing Suite" parallel="none" thread-count="1">
+    <parameter name="reuseBrowser" value="true"/>
+    <listeners>
+        <listener class-name="com.raddatz.automation.reports.ExtentTestListener"/>
+    </listeners>
+
+    <test name="Stage 1 - Domain Integrity and Negative Boundary Validations" preserve-order="true">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminDomainIntegrityNegativeTest"/>
+        </classes>
+    </test>
+
+    <test name="Stage 2 - Human Centric Real World and Custom Billing Lifecycle" preserve-order="true">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminHumanBillingAndEdgeTest"/>
+        </classes>
+    </test>
+
+    <test name="Stage 3 - Court Updates and Financial Billing Pipeline" preserve-order="true">
+        <classes>
+            <class name="com.raddatz.automation.tests.AdminCourtUpdateBillingE2ETest"/>
+            <class name="com.raddatz.automation.tests.AdminConsolidatedMatterBillingE2ETest"/>
+        </classes>
+    </test>
+</suite>

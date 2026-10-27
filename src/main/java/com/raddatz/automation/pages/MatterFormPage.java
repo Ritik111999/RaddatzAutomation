@@ -79,7 +79,10 @@ public final class MatterFormPage extends BasePage {
         // The submit causes a full route transition. Do not couple the click
         // itself to the transition; wait for the destination explicitly so a
         // slow local server cannot turn a completed submit into a click timeout.
-        button("Create Matter").click(new Locator.ClickOptions().setNoWaitAfter(true));
+        Locator submitBtn = button("Create Matter");
+        submitBtn.scrollIntoViewIfNeeded();
+        page.waitForTimeout(400);
+        submitBtn.click(new Locator.ClickOptions().setNoWaitAfter(true));
         page.waitForURL(Pattern.compile(".*/client-and-matter.*"));
         return new ClientMatterListPage(page).assertLoaded();
     }

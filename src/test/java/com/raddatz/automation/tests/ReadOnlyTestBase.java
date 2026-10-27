@@ -44,7 +44,8 @@ public abstract class ReadOnlyTestBase implements HasPage {
         try {
             DashboardPage dashboard;
             if (session.hasRestoredAuthentication()) {
-                currentPage().navigate(config.baseUrl().replaceFirst("/login$", "/dashboard"));
+                currentPage().navigate(config.baseUrl().replaceFirst("/login$", "/dashboard"),
+                        new Page.NavigateOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.DOMCONTENTLOADED));
                 try {
                     currentPage().waitForURL(Pattern.compile(".*/dashboard.*"), new Page.WaitForURLOptions().setTimeout(5000));
                     dashboard = new DashboardPage(currentPage());

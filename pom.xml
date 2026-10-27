@@ -81,6 +81,9 @@
                         <raddatz.browser>${raddatz.browser}</raddatz.browser>
                         <raddatz.headless>${raddatz.headless}</raddatz.headless>
                         <raddatz.report.pdf>${raddatz.report.pdf}</raddatz.report.pdf>
+                        <raddatz.username>${raddatz.username}</raddatz.username>
+                        <raddatz.password>${raddatz.password}</raddatz.password>
+                        <raddatz.base.url>${raddatz.base.url}</raddatz.base.url>
                     </systemPropertyVariables>
                     <environmentVariables>
                         <PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD>1</PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD>
