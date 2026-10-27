@@ -40,7 +40,7 @@ public final class TimeEntryPage extends BasePage {
                 new Page.GetByRoleOptions().setName("Save & New").setExact(false)).click();
         assertVisible(page.getByText("Time entry saved successfully!", new Page.GetByTextOptions().setExact(true)));
         // The entry table is populated by a separate request after the save redirect.
-        page.reload();
+        page.reload(new Page.ReloadOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.DOMCONTENTLOADED));
         assertLoaded();
         assertVisible(ownedEntryRow(data.initialTimeEntryDescription()));
         return this;
@@ -58,7 +58,7 @@ public final class TimeEntryPage extends BasePage {
         assertVisible(page.getByText("Time entry updated successfully!", new Page.GetByTextOptions().setExact(true)));
         // The table is refreshed from the server to prove this is not merely
         // the optimistic modal state retained by the client.
-        page.reload();
+        page.reload(new Page.ReloadOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.DOMCONTENTLOADED));
         assertLoaded();
         assertVisible(ownedEntryRow(revisedDescription));
         return this;

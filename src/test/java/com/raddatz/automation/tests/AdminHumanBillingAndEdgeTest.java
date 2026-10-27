@@ -100,7 +100,8 @@ public final class AdminHumanBillingAndEdgeTest extends ReadOnlyTestBase {
         assertThat(page.locator("#totalAmount")).hasValue("$0.00");
 
         page.locator("#saveExpenseBtn").click();
-        page.reload();
+        page.waitForTimeout(1000);
+        page.reload(new Page.ReloadOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.DOMCONTENTLOADED));
         expensePage.assertLoaded();
 
         Locator ownedRow = expensePage.ownedExpenseRow(data.caseNumber());

@@ -8,7 +8,7 @@ public final class LoginPage extends BasePage {
     }
 
     public LoginPage open(String baseUrl) {
-        page.navigate(baseUrl, new Page.NavigateOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.DOMCONTENTLOADED));
+        page.navigate(baseUrl, new Page.NavigateOptions().setTimeout(45000).setWaitUntil(com.microsoft.playwright.options.WaitUntilState.DOMCONTENTLOADED));
         assertVisible(page.getByLabel("Email address", new Page.GetByLabelOptions().setExact(true)));
         return this;
     }

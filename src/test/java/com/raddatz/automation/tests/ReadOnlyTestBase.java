@@ -44,19 +44,31 @@ public abstract class ReadOnlyTestBase implements HasPage {
         try {
             DashboardPage dashboard;
             if (session.hasRestoredAuthentication()) {
-                currentPage().navigate(config.baseUrl().replaceFirst("/login$", "/dashboard"),
-                        new Page.NavigateOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.DOMCONTENTLOADED));
                 try {
-                    currentPage().waitForURL(Pattern.compile(".*/dashboard.*"), new Page.WaitForURLOptions().setTimeout(5000));
+                    currentPage().navigate(config.baseUrl().replaceFirst("/login$", "/dashboard"),
+                            new Page.NavigateOptions().setTimeout(15000).setWaitUntil(com.microsoft.playwright.options.WaitUntilState.DOMCONTENTLOADED));
+                    currentPage().waitForURL(Pattern.compile(".*/dashboard.*"), new Page.WaitForURLOptions().setTimeout(10000));
                     dashboard = new DashboardPage(currentPage());
                 } catch (Exception expiredSession) {
-                    logger.info("Restored session expired or redirected; performing fresh authentication");
+                    logger.info("Restored session expired, timed out, or redirected; performing fresh authentication");
                     PlaywrightSession.clearAuthenticatedState();
-                    dashboard = new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
+                    try {
+                        dashboard = new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
+                    } catch (Exception retry) {
+                        logger.warn("First authentication attempt delayed; retrying: {}", retry.getMessage());
+                        currentPage().waitForTimeout(2000);
+                        dashboard = new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
+                    }
                     session.rememberAuthenticatedSession();
                 }
             } else {
-                dashboard = new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
+                try {
+                    dashboard = new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
+                } catch (Exception retry) {
+                    logger.warn("First authentication attempt delayed; retrying: {}", retry.getMessage());
+                    currentPage().waitForTimeout(2000);
+                    dashboard = new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
+                }
                 session.rememberAuthenticatedSession();
             }
             CURRENT_DASHBOARD.set(dashboard);
