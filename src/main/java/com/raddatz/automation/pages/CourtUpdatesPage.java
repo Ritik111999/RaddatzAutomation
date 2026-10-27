@@ -38,17 +38,34 @@ public final class CourtUpdatesPage extends BasePage {
     }
 
     public CourtUpdatesPage selectCalendarDate(String date) {
-        page.locator("#courtUpdatesCalendarDate").fill(date);
+        Locator dateInput = page.locator("#courtUpdatesCalendarDate");
+        String currentVal = dateInput.inputValue();
+        if (date.equals(currentVal) && page.url().contains("calendar_date=" + date)) {
+            return this;
+        }
+        dateInput.fill(date);
+        dateInput.dispatchEvent("change");
         page.waitForURL(Pattern.compile(".*calendar_date=" + date + ".*"));
         return this;
     }
 
-    public CourtUpdatesPage createOwnedCourtUpdate(AdminScenarioData data) {
-        // Each calendar entry is a button; scope it by this run's unique hearing title.
-        Locator ownedEvent = page.getByRole(AriaRole.BUTTON)
-                .filter(new Locator.FilterOptions().setHasText(data.eventTitle()));
+    public CourtUpdatesPage selectCalendarEvent(String eventTitle) {
+        Locator ownedEvent = page.locator(".js-calendar-prefill")
+                .filter(new Locator.FilterOptions().setHasText(eventTitle));
+        if (!ownedEvent.isVisible()) {
+            ownedEvent = page.getByRole(AriaRole.BUTTON)
+                    .filter(new Locator.FilterOptions().setHasText(eventTitle));
+        }
         assertVisible(ownedEvent);
         ownedEvent.click();
+        assertThat(ownedEvent).hasClass(Pattern.compile(".*is-selected.*"));
+        assertThat(page.locator("#calendar_event_id_hidden")).not().hasValue("");
+        assertThat(page.locator("#matter_id_hidden")).not().hasValue("");
+        return this;
+    }
+
+    public CourtUpdatesPage createOwnedCourtUpdate(AdminScenarioData data) {
+        selectCalendarEvent(data.eventTitle());
         page.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Notes *").setExact(true)).fill(data.ownershipNote());
         page.locator("#case_status").selectOption("active");
@@ -56,6 +73,33 @@ public final class CourtUpdatesPage extends BasePage {
                 new Page.GetByRoleOptions().setName(Pattern.compile(".*Submit Court Update.*"))).click();
         assertVisible(ownedCourtUpdateRow(data.ownershipNote()));
         return this;
+    }
+
+    public EventFormPage openEditEventForm() {
+        Locator editEventBtn = page.locator("#addCourtDateRowBtn");
+        assertVisible(editEventBtn);
+        editEventBtn.click();
+        page.waitForURL(Pattern.compile(".*/calendar/add-event.*"));
+        return new EventFormPage(page);
+    }
+
+    public CourtTimePage openCourtBillingForRow(String notes, String sensitivePassword) {
+        Locator row = ownedCourtUpdateRow(notes);
+        Locator billingBtn = row.locator("a[title*='Court Time'], a[href*='/court/billing']");
+        String billingUrl = null;
+        if (billingBtn.isVisible()) {
+            billingUrl = billingBtn.getAttribute("href");
+        }
+        if (billingUrl != null && !billingUrl.isBlank()) {
+            page.navigate(billingUrl);
+        } else {
+            return continueToCourtTime(sensitivePassword);
+        }
+        if (page.url().contains("/confirm-sensitive-access")) {
+            new BillingSessionPage(page).start(sensitivePassword);
+        }
+        page.waitForURL(Pattern.compile(".*/court/billing.*"));
+        return new CourtTimePage(page).assertLoaded();
     }
 
     public CourtTimePage continueToCourtTime(String sensitivePassword) {
@@ -120,8 +164,12 @@ public final class CourtUpdatesPage extends BasePage {
 
     /** Verifies the selected Event has propagated to Court Updates before opening its own detail route. */
     public EventDetailsPage openOwnedEventDetails(String eventTitle) {
-        Locator ownedEvent = page.getByRole(AriaRole.BUTTON)
+        Locator ownedEvent = page.locator(".js-calendar-prefill")
                 .filter(new Locator.FilterOptions().setHasText(eventTitle));
+        if (!ownedEvent.isVisible()) {
+            ownedEvent = page.getByRole(AriaRole.BUTTON)
+                    .filter(new Locator.FilterOptions().setHasText(eventTitle));
+        }
         assertVisible(ownedEvent);
         ownedEvent.click();
         Locator viewEvent = page.getByRole(AriaRole.LINK,
@@ -138,7 +186,7 @@ public final class CourtUpdatesPage extends BasePage {
 
     /** Confirms an owned Event is no longer exposed on the selected Court Updates date. */
     public CourtUpdatesPage assertEventAbsent(String eventTitle) {
-        assertThat(page.getByRole(AriaRole.BUTTON)
+        assertThat(page.locator(".js-calendar-prefill")
                 .filter(new Locator.FilterOptions().setHasText(eventTitle))).not().isVisible();
         return this;
     }

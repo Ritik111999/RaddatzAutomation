@@ -47,13 +47,18 @@ public final class CourtTimePage extends BasePage {
      * Sets the time duration or hours field and verifies that the total amount auto-populates.
      */
     public CourtTimePage recordCourtHearingTime(AdminScenarioData data, String hours) {
-        assertLoaded();
-        Locator searchInput = page.locator("input[placeholder*='Search entries'], input[type='search']");
-        if (searchInput.isVisible()) {
-            searchInput.fill(data.caseNumber());
-            page.waitForTimeout(500);
+        Locator row = page.getByRole(AriaRole.ROW).filter(new Locator.FilterOptions().setHasText(data.tenantName())).first();
+        if (!row.isVisible()) {
+            row = page.getByRole(AriaRole.ROW).filter(new Locator.FilterOptions().setHasText(data.caseNumber())).first();
         }
-        Locator row = page.getByRole(AriaRole.ROW).filter(new Locator.FilterOptions().setHasText(data.caseNumber())).first();
+        if (!row.isVisible()) {
+            Locator searchInput = page.locator("input[placeholder*='Search entries'], input[type='search']");
+            if (searchInput.isVisible()) {
+                searchInput.fill(data.tenantName());
+                page.waitForTimeout(500);
+            }
+            row = page.getByRole(AriaRole.ROW).filter(new Locator.FilterOptions().setHasText(data.tenantName())).first();
+        }
         assertVisible(row);
 
         Locator hoursInput = row.locator("input[type='number'], input[type='text']").first();

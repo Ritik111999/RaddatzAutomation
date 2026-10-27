@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterSuite;
 
 import java.lang.reflect.Method;
+import java.util.regex.Pattern;
 
 public abstract class ReadOnlyTestBase implements HasPage {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
@@ -44,8 +45,15 @@ public abstract class ReadOnlyTestBase implements HasPage {
             DashboardPage dashboard;
             if (session.hasRestoredAuthentication()) {
                 currentPage().navigate(config.baseUrl().replaceFirst("/login$", "/dashboard"));
-                currentPage().waitForURL("**/dashboard");
-                dashboard = new DashboardPage(currentPage());
+                try {
+                    currentPage().waitForURL(Pattern.compile(".*/dashboard.*"), new Page.WaitForURLOptions().setTimeout(5000));
+                    dashboard = new DashboardPage(currentPage());
+                } catch (Exception expiredSession) {
+                    logger.info("Restored session expired or redirected; performing fresh authentication");
+                    PlaywrightSession.clearAuthenticatedState();
+                    dashboard = new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
+                    session.rememberAuthenticatedSession();
+                }
             } else {
                 dashboard = new LoginPage(currentPage()).open(config.baseUrl()).signIn(config.username(), config.password());
                 session.rememberAuthenticatedSession();

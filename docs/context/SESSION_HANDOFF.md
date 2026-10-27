@@ -318,3 +318,58 @@ Executed the full parallel mutation regression suite (`admin-parallel-mutation.x
     - `admin-parallel-mutation.xml`: Encompasses all 17 mutation classes configured for thread-isolated parallel execution.
   - **Compilation & Parity Status:** `mvn clean test-compile` passes cleanly (BUILD SUCCESS, exit code 0). ToolTrader parity is fully achieved across DOM catalogs, POM hierarchy, paired positive/negative tests, cross-screen data propagation, and executive dual-format reporting (Extent HTML + Executive QA PDF).
   - **Target Host Status:** Target URL is `http://192.168.1.10:8000/login`. The Laravel application is active and serving HTTP requests (`/up` returns 200 OK), but attempts to query the database (`POST /login`, `POST /forgot-password`) return `Sign in unsuccessful. An unexpected error occurred` because MySQL on `192.168.1.10:3306` is currently refused. As soon as MySQL is started on the target host, the suites are ready for 100% automated execution.
+
+**Court Updates & Billing Lifecycle Completion & Verification (2026-10-27 Update):**
+- **Root Cause of "NO EVENT PRESENT" Identified & Resolved:**
+  - `/court/updates` defaults to current date (`calendar_date=today`).
+  - Previously, `AdminScenarioData.create(clock)` defaulted `eventDate` to `LocalDate.now(clock).plusDays(14)`. When visiting `/court/updates`, today's view had no events present.
+  - Updated `AdminScenarioData.java` so `eventDate` defaults to `LocalDate.now(clock).toString()` (`today`). Every event created by automation is now immediately visible under Calendar Entries on `/court/updates`.
+- **Complete End-to-End Court Updates & Billing Workflow (`AdminCourtUpdateBillingE2ETest`):**
+  - Implemented the exact user-specified flow:
+    1. Create owned Company, Property, and Matter.
+    2. Schedule initial hearing event for today's date so it appears immediately on `/court/updates`.
+    3. Navigate to Court Updates and select that particular event (`.js-calendar-prefill`), confirming `.is-selected`, `#calendar_event_id_hidden`, and `#matter_id_hidden`.
+    4. Add linked To-Do via `#addTodoBtn` modal and verify display in `#linkedTodoSection`.
+    5. Edit that event via `#addCourtDateRowBtn` ("Edit Event") with `return_to` routing back to `/court/updates`.
+    6. Save & submit Court Update form, asserting row presence in `#courtUpdatesTable` and `.cu-todo-icon.has-todo` popover badge.
+    7. Open Court Time billing directly from the row action link (`<a title="Open Court Time" href=".../court/billing...">`).
+    8. Authenticate sensitive access with `sR123456`, record 1.50 billable hours, verify auto-calculated billing total ($337.50), and save billing.
+    9. Propagate to Draft Invoices, assert draft line items reflect court hearing time, and download verified PDF invoice.
+  - **Live Verification Result:** `AdminCourtUpdateBillingE2ETest` passed with **100% success rate in 36.29s** (`BUILD SUCCESS`, exit code 0).
+- **POM & Reporting Hardening:**
+  - `CourtUpdatesPage.java`: `selectCalendarDate` checks current value to avoid redundant navigation waits and dispatches `change`; `openOwnedEventDetails` and `assertEventAbsent` use `.js-calendar-prefill` locator.
+  - `MatterFormPage.java`: Replaced rigid `"**/client-and-matter"` glob with `Pattern.compile(".*/client-and-matter.*")`. Confirmed `AdminTaskLifecycleTest` passed in 25.09s.
+  - `ExtentTestListener.java`: Restored `Path screenshot` declaration and applied 3,000ms screenshot timeout to eliminate font loading hangs.
+- **Suite Status:** `AdminCourtUpdateBillingE2ETest` added to Stage 7 in `comprehensive-full-qa.xml` and `admin-regression-serial.xml`, with approval in `local-owned-scenarios.properties`. All 8 stages compile cleanly via `mvn test-compile`.
+
+**Domain Integrity Negative Suite & Positive Financial Gauntlet Verification (2026-10-27 Master Update):**
+- **Domain Integrity Negative Suite (`AdminDomainIntegrityNegativeTest`):**
+  - Resolved session isolation in `RAD-NEG-001` using an isolated unauthenticated browser context (`browser.newContext()`), correctly verifying invalid credentials rejection banner (`.auth-feedback-error`) and login retention.
+  - Hardened sensitive billing access rejection (`RAD-NEG-002`) denying unauthorized entry upon incorrect password.
+  - Verified unbound action toast prevention (`RAD-NEG-003`) on `/court/updates` when no matter/event is selected.
+  - Verified mandatory notes enforcement (`RAD-NEG-004`) preventing empty note submissions.
+  - Implemented and verified `RAD-NEG-005`: Time Entry boundary guard validating that negative billable hours (`-2.00`) and excessive hours (`>24.00`) fail HTML5 constraint validation (`checkValidity() == false`).
+  - Implemented and verified `RAD-NEG-006`: Hierarchy mandatory entity enforcement ensuring blank Company and Matter submissions are blocked by form constraints.
+  - **Live Verification Result:** `AdminDomainIntegrityNegativeTest` executed **6/6 tests with 100% pass rate in 16.59s** (`BUILD SUCCESS`, exit code 0).
+- **Consolidated Multi-Service Billing Gauntlet (`AdminConsolidatedMatterBillingE2ETest`):**
+  - Successfully verified end-to-end multi-service financial consolidation (`RAD-POS-GAUNTLET-001`):
+    1. Created Company, Property, and Matter.
+    2. Scheduled Court Hearing on Calendar for today's date.
+    3. Selected hearing in Court Updates, established appearance record, and launched Court Time.
+    4. Saved 1.50h Court Hearing Time ($337.50) and propagated to Time Entries.
+    5. Added $75.00 Court Filing Fee Expense linked to Matter.
+    6. Generated consolidated Draft Invoice aggregating both Time Entries and Expense.
+    7. Verified line itemization, mathematical totals ($412.50), and downloaded cryptographically verified PDF.
+  - **Live Verification Result:** `AdminConsolidatedMatterBillingE2ETest` passed with **100% success rate in 54.89s** (`BUILD SUCCESS`, exit code 0).
+- **Cross-Screen Touchpoints & Multi-Hub Propagation (`AdminCrossScreenWorkflowTest`):**
+  - Verified `RAD-CROSS-001` (Court Updates To-Do inline popover & `/todos` central propagation & Matter Workspace To-Do tab).
+  - Verified `RAD-CROSS-002` (Extra Event scheduling from Court Updates with `/calendar` full propagation).
+  - **Live Verification Result:** `AdminCrossScreenWorkflowTest` executed **2/2 tests with 100% pass rate in 54.99s** (`BUILD SUCCESS`, exit code 0).
+- **Master Business Lifecycle Journey (`AdminFullLifecycleE2ETest`):**
+  - Verified `RAD-E2E-001`: full business lifecycle across Company, Property, Matter, Notes & Documents at all 3 tiers, Tasks, Events, Court Updates, Court Time Billing, Expenses, and Invoicing.
+  - **Live Verification Result:** `AdminFullLifecycleE2ETest` executed with **100% pass rate in 52.42s** (`BUILD SUCCESS`, exit code 0).
+- **Master Suite Synchronization:**
+  - Added `AdminDomainIntegrityNegativeTest` to Stage 2 (Boundary & Integrity Constraints).
+  - Added `AdminConsolidatedMatterBillingE2ETest` to Stage 7 (Financial Pipeline).
+  - Synchronized across both `admin-regression-serial.xml` and `comprehensive-full-qa.xml`.
+  - Full codebase compiles cleanly: 41 main files and 33 test files (`mvn clean test-compile` passes with exit code 0).

@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import java.nio.file.Path;
 import java.time.Clock;
+import java.time.LocalDate;
 
 /**
  * End-to-end Master Business Lifecycle Test:
@@ -52,7 +53,8 @@ public final class AdminFullLifecycleE2ETest extends ReadOnlyTestBase {
     @Test(groups = "admin-mutation", description = "Executes the authoritative full Raddatz business lifecycle end-to-end.")
     public void administratorExecutesFullLifecycleJourney() {
 
-        AdminScenarioData data = AdminScenarioData.create(Clock.systemUTC());
+        Clock clock = Clock.systemUTC();
+        AdminScenarioData data = AdminScenarioData.create(clock).withEventDate(LocalDate.now(clock).toString());
         Path documentFixture = UploadFixtures.copyInspectionMemorandum(data.ownedDocumentFileName(), config.artifactDirectory());
         Path downloadedInvoice = config.artifactDirectory().resolve("downloads")
                 .resolve("owned-e2e-invoice-" + data.reference() + ".pdf");

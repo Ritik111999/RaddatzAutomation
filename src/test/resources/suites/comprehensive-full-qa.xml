@@ -17,6 +17,7 @@
     <test name="Stage 2 - Form Field Contracts &amp; Boundary Constraints" preserve-order="true">
         <classes>
             <class name="com.raddatz.automation.tests.AdminFormContractObservationTest"/>
+            <class name="com.raddatz.automation.tests.AdminDomainIntegrityNegativeTest"/>
         </classes>
     </test>
 
@@ -62,6 +63,8 @@
     <test name="Stage 7 - Court Updates &amp; Financial Billing Pipeline" preserve-order="true">
         <classes>
             <class name="com.raddatz.automation.tests.AdminCourtUpdateLifecycleTest"/>
+            <class name="com.raddatz.automation.tests.AdminCourtUpdateBillingE2ETest"/>
+            <class name="com.raddatz.automation.tests.AdminConsolidatedMatterBillingE2ETest"/>
             <class name="com.raddatz.automation.tests.AdminOwnedTimeEntryLifecycleTest"/>
             <class name="com.raddatz.automation.tests.AdminOwnedExpenseLifecycleTest"/>
             <class name="com.raddatz.automation.tests.AdminTimeEntryInvoicePropagationTest"/>

@@ -28,14 +28,21 @@ public final class InvoiceDraftPage extends BasePage {
     }
 
     public InvoiceDraftPage open() {
-        Locator billingBtn = page.locator("#navbarTabs").getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("Billing").setExact(true));
-        if (billingBtn.isVisible()) {
-            billingBtn.click();
-            page.getByRole(AriaRole.LINK,
-                    new Page.GetByRoleOptions().setName("Invoice").setExact(true)).first().click();
+        Locator invoiceLink = page.locator("a[href*='/invoice/draft']");
+        if (invoiceLink.first().isVisible()) {
+            invoiceLink.first().click();
         } else {
-            page.navigate(page.url().replaceAll("(?<=:\\d{1,5})/.*", "/invoice/draft"));
+            Locator billingBtn = page.locator("#navbarTabs").getByRole(AriaRole.BUTTON,
+                    new Locator.GetByRoleOptions().setName("Billing").setExact(true));
+            if (billingBtn.isVisible()) {
+                billingBtn.click();
+                page.waitForTimeout(400);
+            }
+            if (page.locator("a[href*='/invoice/draft']").first().isVisible()) {
+                page.locator("a[href*='/invoice/draft']").first().click();
+            } else {
+                page.navigate(page.url().replaceAll("(?<=:\\d{1,5})/.*", "/invoice/draft"));
+            }
         }
         page.waitForURL("**/invoice/draft");
         return assertLoaded();

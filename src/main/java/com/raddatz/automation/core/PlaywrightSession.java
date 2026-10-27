@@ -122,6 +122,10 @@ public final class PlaywrightSession implements AutoCloseable {
     }
 
     /** Credentials/session state remain in memory only and are shared across worker threads to avoid rate limits. */
+    public static void clearAuthenticatedState() {
+        authenticatedState = null;
+    }
+
     public void rememberAuthenticatedSession() {
         try {
             authenticatedState = context.storageState();

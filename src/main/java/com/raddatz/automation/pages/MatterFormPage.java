@@ -80,7 +80,7 @@ public final class MatterFormPage extends BasePage {
         // itself to the transition; wait for the destination explicitly so a
         // slow local server cannot turn a completed submit into a click timeout.
         button("Create Matter").click(new Locator.ClickOptions().setNoWaitAfter(true));
-        page.waitForURL("**/client-and-matter");
+        page.waitForURL(Pattern.compile(".*/client-and-matter.*"));
         return new ClientMatterListPage(page).assertLoaded();
     }
 
@@ -95,7 +95,7 @@ public final class MatterFormPage extends BasePage {
         fillMatterCaseDetails(primaryTenant);
 
         button("Create Matter").click(new Locator.ClickOptions().setNoWaitAfter(true));
-        page.waitForURL("**/client-and-matter");
+        page.waitForURL(Pattern.compile(".*/client-and-matter.*"));
         return new ClientMatterListPage(page).assertLoaded();
     }
 

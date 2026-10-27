@@ -142,7 +142,10 @@ public final class ExtentTestListener implements ITestListener, IExecutionListen
         }
         try {
             Path screenshot = reportRun.directory().resolve(result.getMethod().getMethodName() + "-failure.png");
-            Page.ScreenshotOptions options = new Page.ScreenshotOptions().setPath(screenshot).setFullPage(true);
+            Page.ScreenshotOptions options = new Page.ScreenshotOptions()
+                    .setPath(screenshot)
+                    .setFullPage(true)
+                    .setTimeout(3000);
             hasPage.currentPage().screenshot(options);
             if (Files.exists(screenshot)) {
                 CURRENT_TEST.get().addScreenCaptureFromPath(screenshot.toString());
